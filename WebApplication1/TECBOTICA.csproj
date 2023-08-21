@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F9EB6F22-44D2-4B93-A483-F634BCAB4B7F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44373</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=5.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.5.2.3\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.4.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Acerca.aspx" />
+    <Content Include="Administracion\Empresas\DetalleEmpresa.aspx" />
+    <Content Include="Administracion\Empresas\Dominios.aspx" />
+    <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
+    <Content Include="Administracion\GestionarEmpresas.aspx" />
+    <Content Include="Administracion\GestionarEstudiantes.aspx" />
+    <Content Include="Administracion\GestionarHorarios.aspx" />
+    <Content Include="Administracion\GestionarTutores.aspx" />
+    <Content Include="BuscarCarreras.aspx" />
+    <Content Include="BuscarCursos.aspx" />
+    <Content Include="Carreras\ConfirmacionInscripcionCarrera.aspx" />
+    <Content Include="Carreras\DetalleCarrera.aspx" />
+    <Content Include="ConsultarTutores.aspx" />
+    <Content Include="Contacto.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Cursos\ConfirmacionInscripcion.aspx" />
+    <Content Include="Cursos\DetalleCurso.aspx" />
+    <Content Include="Cursos\DetalleDictado.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Estudiantes\MisCursadas\Cursada.aspx" />
+    <Content Include="Estudiantes\MisCursadas\Entregas\VerEntrega.aspx" />
+    <Content Include="Estudiantes\MisCursadas\MisCursadas.aspx" />
+    <Content Include="Estudiantes\MisCursadas\Entregas\NuevaEntrega.aspx" />
+    <Content Include="Estudiantes\MisCursadas\VerActividad.aspx" />
+    <Content Include="Estudiantes\MisCursadas\VerMaterial.aspx" />
+    <Content Include="Estudiantes\DetalleInscripcionCarrera.aspx" />
+    <Content Include="Estudiantes\DetalleInscripcionCurso.aspx" />
+    <Content Include="Estudiantes\GestionarInscripciones.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Login\ConfirmarcionRecuperacion.aspx" />
+    <Content Include="Login\Login.aspx" />
+    <Content Include="Login\RecuperarCuenta.aspx" />
+    <Content Include="Registrarse\ConfirmarRegistro.aspx" />
+    <Content Include="Registrarse\Registrarse.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Tutores\Carrera\EditarCarrera.aspx" />
+    <Content Include="Tutores\Carrera\NuevaCarrera.aspx" />
+    <Content Include="Tutores\Curso\EditarCurso.aspx" />
+    <Content Include="Tutores\Dictado\EditarDictado.aspx" />
+    <Content Include="Tutores\Dictado\NuevoDictado1erPaso.aspx" />
+    <Content Include="Tutores\Dictado\NuevoDictado2doPaso.aspx" />
+    <Content Include="Tutores\Dictado\NuevoDictado3erPaso.aspx" />
+    <Content Include="Tutores\GestionCursos.aspx" />
+    <Content Include="Tutores\GestionCarreras.aspx" />
+    <Content Include="Tutores\GestionDictados.aspx" />
+    <Content Include="Tutores\Curso\NuevoCursoGenerico.aspx" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Site.Master" />
+    <Content Include="Tutores\MisDictados\Actividad\EditarActividad.aspx" />
+    <Content Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx" />
+    <Content Include="Tutores\MisDictados\Actividad\NuevaActividad.aspx" />
+    <Content Include="Tutores\MisDictados\Actividad\VerActividad.aspx" />
+    <Content Include="Tutores\MisDictados\Actividad\Entrega\VerEntrega.aspx" />
+    <Content Include="Tutores\MisDictados\Dictado.aspx" />
+    <Content Include="Tutores\MisDictados\Material\EditarMaterial.aspx" />
+    <Content Include="Tutores\MisDictados\Material\NuevoMaterial.aspx" />
+    <Content Include="Tutores\MisDictados\Material\VerMaterial.aspx" />
+    <Content Include="Tutores\MisDictados\MisDictados.aspx" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Bundle.config" />
+    <Content Include="Site.Mobile.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Acerca.aspx.cs">
+      <DependentUpon>Acerca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acerca.aspx.designer.cs">
+      <DependentUpon>Acerca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Empresas\DetalleEmpresa.aspx.cs">
+      <DependentUpon>DetalleEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Empresas\DetalleEmpresa.aspx.designer.cs">
+      <DependentUpon>DetalleEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Empresas\Dominios.aspx.cs">
+      <DependentUpon>Dominios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Empresas\Dominios.aspx.designer.cs">
+      <DependentUpon>Dominios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Empresas\NuevaEmpresa.aspx.cs">
+      <DependentUpon>NuevaEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Empresas\NuevaEmpresa.aspx.designer.cs">
+      <DependentUpon>NuevaEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\GestionarEmpresas.aspx.cs">
+      <DependentUpon>GestionarEmpresas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarEmpresas.aspx.designer.cs">
+      <DependentUpon>GestionarEmpresas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\GestionarEstudiantes.aspx.cs">
+      <DependentUpon>GestionarEstudiantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarEstudiantes.aspx.designer.cs">
+      <DependentUpon>GestionarEstudiantes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\GestionarHorarios.aspx.cs">
+      <DependentUpon>GestionarHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarHorarios.aspx.designer.cs">
+      <DependentUpon>GestionarHorarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\GestionarTutores.aspx.cs">
+      <DependentUpon>GestionarTutores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarTutores.aspx.designer.cs">
+      <DependentUpon>GestionarTutores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BuscarCarreras.aspx.cs">
+      <DependentUpon>BuscarCarreras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscarCarreras.aspx.designer.cs">
+      <DependentUpon>BuscarCarreras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuscarCursos.aspx.cs">
+      <DependentUpon>BuscarCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscarCursos.aspx.designer.cs">
+      <DependentUpon>BuscarCursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Carreras\ConfirmacionInscripcionCarrera.aspx.cs">
+      <DependentUpon>ConfirmacionInscripcionCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carreras\ConfirmacionInscripcionCarrera.aspx.designer.cs">
+      <DependentUpon>ConfirmacionInscripcionCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Carreras\DetalleCarrera.aspx.cs">
+      <DependentUpon>DetalleCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carreras\DetalleCarrera.aspx.designer.cs">
+      <DependentUpon>DetalleCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarTutores.aspx.cs">
+      <DependentUpon>ConsultarTutores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarTutores.aspx.designer.cs">
+      <DependentUpon>ConsultarTutores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos\ConfirmacionInscripcion.aspx.cs">
+      <DependentUpon>ConfirmacionInscripcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cursos\ConfirmacionInscripcion.aspx.designer.cs">
+      <DependentUpon>ConfirmacionInscripcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos\DetalleCurso.aspx.cs">
+      <DependentUpon>DetalleCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cursos\DetalleCurso.aspx.designer.cs">
+      <DependentUpon>DetalleCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cursos\DetalleDictado.aspx.cs">
+      <DependentUpon>DetalleDictado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cursos\DetalleDictado.aspx.designer.cs">
+      <DependentUpon>DetalleDictado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Cursada.aspx.cs">
+      <DependentUpon>Cursada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Cursada.aspx.designer.cs">
+      <DependentUpon>Cursada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Entregas\VerEntrega.aspx.cs">
+      <DependentUpon>VerEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Entregas\VerEntrega.aspx.designer.cs">
+      <DependentUpon>VerEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\MisCursadas.aspx.cs">
+      <DependentUpon>MisCursadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\MisCursadas.aspx.designer.cs">
+      <DependentUpon>MisCursadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Entregas\NuevaEntrega.aspx.cs">
+      <DependentUpon>NuevaEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\Entregas\NuevaEntrega.aspx.designer.cs">
+      <DependentUpon>NuevaEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\VerActividad.aspx.cs">
+      <DependentUpon>VerActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\VerActividad.aspx.designer.cs">
+      <DependentUpon>VerActividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\VerMaterial.aspx.cs">
+      <DependentUpon>VerMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\MisCursadas\VerMaterial.aspx.designer.cs">
+      <DependentUpon>VerMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\DetalleInscripcionCarrera.aspx.cs">
+      <DependentUpon>DetalleInscripcionCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\DetalleInscripcionCarrera.aspx.designer.cs">
+      <DependentUpon>DetalleInscripcionCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\DetalleInscripcionCurso.aspx.cs">
+      <DependentUpon>DetalleInscripcionCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\DetalleInscripcionCurso.aspx.designer.cs">
+      <DependentUpon>DetalleInscripcionCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Estudiantes\GestionarInscripciones.aspx.cs">
+      <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Estudiantes\GestionarInscripciones.aspx.designer.cs">
+      <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ConfirmarcionRecuperacion.aspx.cs">
+      <DependentUpon>ConfirmarcionRecuperacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\ConfirmarcionRecuperacion.aspx.designer.cs">
+      <DependentUpon>ConfirmarcionRecuperacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RecuperarCuenta.aspx.cs">
+      <DependentUpon>RecuperarCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\RecuperarCuenta.aspx.designer.cs">
+      <DependentUpon>RecuperarCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrarse\ConfirmarRegistro.aspx.cs">
+      <DependentUpon>ConfirmarRegistro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registrarse\ConfirmarRegistro.aspx.designer.cs">
+      <DependentUpon>ConfirmarRegistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registrarse\Registrarse.aspx.cs">
+      <DependentUpon>Registrarse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registrarse\Registrarse.aspx.designer.cs">
+      <DependentUpon>Registrarse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Carrera\EditarCarrera.aspx.cs">
+      <DependentUpon>EditarCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Carrera\EditarCarrera.aspx.designer.cs">
+      <DependentUpon>EditarCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Carrera\NuevaCarrera.aspx.cs">
+      <DependentUpon>NuevaCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Carrera\NuevaCarrera.aspx.designer.cs">
+      <DependentUpon>NuevaCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Curso\EditarCurso.aspx.cs">
+      <DependentUpon>EditarCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Curso\EditarCurso.aspx.designer.cs">
+      <DependentUpon>EditarCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarDictado.aspx.cs">
+      <DependentUpon>EditarDictado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarDictado.aspx.designer.cs">
+      <DependentUpon>EditarDictado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado1erPaso.aspx.cs">
+      <DependentUpon>NuevoDictado1erPaso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado1erPaso.aspx.designer.cs">
+      <DependentUpon>NuevoDictado1erPaso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado2doPaso.aspx.cs">
+      <DependentUpon>NuevoDictado2doPaso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado2doPaso.aspx.designer.cs">
+      <DependentUpon>NuevoDictado2doPaso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado3erPaso.aspx.cs">
+      <DependentUpon>NuevoDictado3erPaso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\NuevoDictado3erPaso.aspx.designer.cs">
+      <DependentUpon>NuevoDictado3erPaso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\GestionCursos.aspx.cs">
+      <DependentUpon>GestionCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\GestionCursos.aspx.designer.cs">
+      <DependentUpon>GestionCursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\GestionCarreras.aspx.cs">
+      <DependentUpon>GestionCarreras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\GestionCarreras.aspx.designer.cs">
+      <DependentUpon>GestionCarreras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\GestionDictados.aspx.cs">
+      <DependentUpon>GestionDictados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\GestionDictados.aspx.designer.cs">
+      <DependentUpon>GestionDictados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.cs">
+      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.designer.cs">
+      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\EditarActividad.aspx.cs">
+      <DependentUpon>EditarActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\EditarActividad.aspx.designer.cs">
+      <DependentUpon>EditarActividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx.cs">
+      <DependentUpon>Entregas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx.designer.cs">
+      <DependentUpon>Entregas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\NuevaActividad.aspx.cs">
+      <DependentUpon>NuevaActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\NuevaActividad.aspx.designer.cs">
+      <DependentUpon>NuevaActividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\VerActividad.aspx.cs">
+      <DependentUpon>VerActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\VerActividad.aspx.designer.cs">
+      <DependentUpon>VerActividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\Entrega\VerEntrega.aspx.cs">
+      <DependentUpon>VerEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Actividad\Entrega\VerEntrega.aspx.designer.cs">
+      <DependentUpon>VerEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Dictado.aspx.cs">
+      <DependentUpon>Dictado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Dictado.aspx.designer.cs">
+      <DependentUpon>Dictado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\EditarMaterial.aspx.cs">
+      <DependentUpon>EditarMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\EditarMaterial.aspx.designer.cs">
+      <DependentUpon>EditarMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\NuevoMaterial.aspx.cs">
+      <DependentUpon>NuevoMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\NuevoMaterial.aspx.designer.cs">
+      <DependentUpon>NuevoMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\VerMaterial.aspx.cs">
+      <DependentUpon>VerMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\Material\VerMaterial.aspx.designer.cs">
+      <DependentUpon>VerMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\MisDictados.aspx.cs">
+      <DependentUpon>MisDictados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\MisDictados\MisDictados.aspx.designer.cs">
+      <DependentUpon>MisDictados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Estudiantes\MisCursadas\Material.pdf" />
+    <Content Include="Tutores\MisDictados\Material\Material.pdf" />
+    <Content Include="Tutores\MisDictados\Actividad\Material.pdf" />
+    <Content Include="Tutores\MisDictados\Actividad\Entrega\Material.pdf" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58255</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44373/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
