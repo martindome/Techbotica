@@ -576,7 +576,7 @@ INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [
 (1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No')
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa) VALUES 
-(1, '@example.com', 1),
-(2, '@gmail.com',1)
+(1, 'example.com', 1),
+(2, 'gmail.com',1)
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica')

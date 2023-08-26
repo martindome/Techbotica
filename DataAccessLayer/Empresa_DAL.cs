@@ -53,7 +53,7 @@ namespace DataAccessLayer
         {
             e.IdEmpresa = Convert.ToInt32(reg["id"].ToString());
             e.Nombre = reg["nombre"].ToString();
-            e.Descripcion = reg["decripcion"].ToString();
+            e.Descripcion = reg["descripcion"].ToString();
         }
 
         private void mappear_dominio(DataRow reg,  Dominio_BE e)
