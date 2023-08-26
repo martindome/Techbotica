@@ -504,7 +504,7 @@ GO
 Create procedure [dbo].[listar_empresas]
 as 
 begin
-select e.id, e.nombre, e.descripcion
+select e.id, e.nombre, e.descripcion, e.telefono, e.email
 from Empresa e
 end 
 GO
@@ -518,7 +518,7 @@ Create procedure [dbo].[listar_dominios_empresa]
 @id_empresa varchar(100)
 as 
 begin
-select d.id, d.sufijo, d.id_empresa
+select d.id, d.sufijo, d.id_empresa, d.borrado
 from Dominio d
 inner join Empresa e on e.id = d.id_empresa
 where e.id = @id_empresa
@@ -537,27 +537,29 @@ GO
 /************************************************************************************************/
 /************************************************************************************************/
 GO
+INSERT [dbo].[Familia] ([id], [familia]) VALUES (1, N'Webmaster')
+INSERT [dbo].[Familia] ([id], [familia]) VALUES (2, N'Estudiante')
+INSERT [dbo].[Familia] ([id], [familia]) VALUES (3, N'Tutor')
+INSERT [dbo].[Familia] ([id], [familia]) VALUES (4, N'Administrador')
+GO
 INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa], id_especialidad) VALUES 
 (1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No', 0, 0),
 (2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 1, 0),
 (3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No', 0, 1 );
 GO
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'Administrador')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (2, N'BackupRestore')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (3, N'CrearUsuario')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'AdministrarUsuarios')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'AdministrarPerfiles')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'Compras')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'Stock')
-GO
-INSERT [dbo].[Familia] ([id], [familia]) VALUES (1, N'Administrador')
-INSERT [dbo].[Familia] ([id], [familia]) VALUES (2, N'Estudiante')
-INSERT [dbo].[Familia] ([id], [familia]) VALUES (3, N'Tutor')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'MenuAdministracion')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (2, N'MenuTutores')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (3, N'MenuEstudiantes')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'MenuBusqueda')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'/Administracion/GestionarEmpresas')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarEstudiantes')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarTutores')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (3, 3, 3)
 GO
+--permisos web master
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (2, 1, 2)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (3, 1, 3)
@@ -565,17 +567,13 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (4, 1, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (5, 1, 5)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (6, 1, 6)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (7, 1, 7)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (8, 2, 6)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (9, 3, 7)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (10, 4, 1)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 4, 4)
 GO
 INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
 (1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No')
 GO
-INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa) VALUES 
-(1, 'example.com', 1),
-(2, 'gmail.com',1)
+INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
+(1, 'example.com', 1, 'No'),
+(2, 'gmail.com',1, 'No')
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')

@@ -22,6 +22,10 @@ namespace WebApplication1.Registarse
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Visible = false;
+            if (Session["usuario"] != null)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cierre sesion para registrar un nuevo usuario');window.location.href = '/Default.aspx'", true);
+            }
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)

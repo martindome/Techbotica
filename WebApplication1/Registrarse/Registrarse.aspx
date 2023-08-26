@@ -30,6 +30,7 @@
         <div class="form-group">
             <label for="empresa">Empresa</label>
             <asp:TextBox ID="empresa" CssClass="form-control" runat="server"></asp:TextBox>
+            <br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmpresa" runat="server" Display="None" ControlToValidate="Empresa" CssClass="text-danger" ErrorMessage="Debe indicar la empresa"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmpresa" Display="None" runat="server" ControlToValidate="empresa" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre de empresa valido" ValidationExpression="^(?=.{1,50}$)[a-zA-Z-]+(?: [a-zA-Z-]+)*$"></asp:RegularExpressionValidator>
         </div>

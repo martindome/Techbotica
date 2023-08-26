@@ -12,6 +12,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var location = HttpContext.Current.Request.Url.AbsolutePath;
             if (!IsPostBack)
             {
                 FillSpecialities();

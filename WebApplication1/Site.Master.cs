@@ -23,21 +23,25 @@ namespace WebApplication1
             HtmlGenericControl contact = (HtmlGenericControl)this.FindControl("contact");
             contact.Visible = true;
             HtmlGenericControl busqueda = (HtmlGenericControl)this.FindControl("dropBusquedaDeOferta");
-            busqueda.Visible = true;
+            busqueda.Visible = false;
             HtmlGenericControl tutores = (HtmlGenericControl)this.FindControl("dropTutores");
-            tutores.Visible = true;
+            tutores.Visible = false;
             HtmlGenericControl estudiantes = (HtmlGenericControl)this.FindControl("dropEstudiantes");
-            estudiantes.Visible = true;
+            estudiantes.Visible = false;
+            HtmlGenericControl administracion = (HtmlGenericControl)this.FindControl("dropAdministracion");
+            administracion.Visible = false;
             HtmlGenericControl userhtml = (HtmlGenericControl)this.FindControl("user");
-            userhtml.Visible = true;
+            userhtml.Visible = false;
+
+
+            botonlogin.Visible = true;
+            botonregistrarse.Visible = true;
 
             if (Session["usuario"] == null)
             {
                 userhtml.Visible = false;
                 botonlogin.Visible = true;
                 botonregistrarse.Visible = true;
-
-                
             }
             else
             {
@@ -46,6 +50,24 @@ namespace WebApplication1
                 userhtml.Visible = true;
                 botonlogin.Visible = false;
                 botonregistrarse.Visible = false;
+
+                //Permisos
+                if ((usuario.Familia.listaPatentes.Any(item => ((Patente_BE)item).detalle == "MenuAdministracion")))
+                {
+                    administracion.Visible = true;
+                }
+                if ((usuario.Familia.listaPatentes.Any(item => ((Patente_BE)item).detalle == "MenuTutores")))
+                {
+                    tutores.Visible = true;
+                }
+                if ((usuario.Familia.listaPatentes.Any(item => ((Patente_BE)item).detalle == "MenuEstudiantes")))
+                {
+                    estudiantes.Visible = true;
+                }
+                if ((usuario.Familia.listaPatentes.Any(item => ((Patente_BE)item).detalle == "MenuBusqueda")))
+                {
+                    busqueda.Visible = true;
+                }
             }
         }
 

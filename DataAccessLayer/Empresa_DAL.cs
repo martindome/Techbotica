@@ -23,6 +23,11 @@ namespace DataAccessLayer
             {
                 Empresa_BE empresaBE = new Empresa_BE();
                 mappear_empresa(reg,empresaBE);
+                List<Dominio_BE> dominios = listar_dominios_empresa(empresaBE.IdEmpresa);
+                foreach (Dominio_BE dominioBE in dominios)
+                {
+                    empresaBE.Dominios.Add(dominioBE);
+                }
                 empresas.Add(empresaBE);
             }
             return empresas;
@@ -49,11 +54,19 @@ namespace DataAccessLayer
             return dominios;
         }
 
+        public void nueva_empresa(Empresa_BE empresa)
+        {
+
+        }
+
         private void mappear_empresa(DataRow reg, Empresa_BE e)
         {
             e.IdEmpresa = Convert.ToInt32(reg["id"].ToString());
             e.Nombre = reg["nombre"].ToString();
             e.Descripcion = reg["descripcion"].ToString();
+            e.Telefono = reg["telefono"].ToString();
+            e.Email = reg["email"].ToString();
+            e.Dominios = new List<Dominio_BE>();
         }
 
         private void mappear_dominio(DataRow reg,  Dominio_BE e)

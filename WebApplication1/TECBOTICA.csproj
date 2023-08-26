@@ -109,7 +109,6 @@
     <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
     <Content Include="Administracion\GestionarEmpresas.aspx" />
     <Content Include="Administracion\GestionarEstudiantes.aspx" />
-    <Content Include="Administracion\GestionarHorarios.aspx" />
     <Content Include="Administracion\GestionarTutores.aspx" />
     <Content Include="BuscarCarreras.aspx" />
     <Content Include="BuscarCursos.aspx" />
@@ -279,13 +278,6 @@
     </Compile>
     <Compile Include="Administracion\GestionarEstudiantes.aspx.designer.cs">
       <DependentUpon>GestionarEstudiantes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administracion\GestionarHorarios.aspx.cs">
-      <DependentUpon>GestionarHorarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administracion\GestionarHorarios.aspx.designer.cs">
-      <DependentUpon>GestionarHorarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\GestionarTutores.aspx.cs">
       <DependentUpon>GestionarTutores.aspx</DependentUpon>

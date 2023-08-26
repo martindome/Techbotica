@@ -7,21 +7,22 @@
         <asp:TextBox ID="SearchCompanyByDescTextBox" runat="server" CssClass="form-control mt-2" Placeholder="Buscar empresas por descripción"></asp:TextBox>
         <asp:Button ID="SearchCompanyButton" runat="server" Text="Buscar" CssClass="btn btn-primary mt-2 mb-2" />
 
-        <asp:GridView ID="CompaniesGrid" CssClass="table" runat="server" AutoGenerateColumns="false" OnRowDeleting="CompaniesGrid_RowDeleting" OnRowEditing="CompaniesGrid_RowEditing">
+        <asp:GridView ID="CompaniesGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdEmpresa">
             <Columns>
-                <asp:BoundField DataField="CompanyName" HeaderText="Nombre de la Empresa" />
-                <asp:BoundField DataField="CompanyDesc" HeaderText="Descripción" />
-                <asp:BoundField DataField="CompanyEmail" HeaderText="Email" />
-                <asp:BoundField DataField="CompanyPhone" HeaderText="Teléfono" />
+                <asp:BoundField DataField="IdEmpresa" HeaderText="Id" Visible="false" />
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                       <asp:Button runat="server" ID="botoneditar" ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-secondary" OnClick="botoneditar_Click"/>
+                       <asp:Button runat="server" ID="botoneditar" ButtonType="Button" CommandName="Edit" Text="Editar" ControlStyle-CssClass="btn btn-secondary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="botoneditar_Click"/>
                     </ItemTemplate>
                 </asp:TemplateField>
 
                 <asp:TemplateField>
                     <ItemTemplate>
-                       <asp:Button runat="server" id="botoneliminar" ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-danger" OnClick="botoneliminar_Click"/>
+                       <asp:Button runat="server" id="botoneliminar" ButtonType="Button" CommandName="Delete" Text="Eliminar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' ControlStyle-CssClass="btn btn-danger" OnClick="botoneliminar_Click"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

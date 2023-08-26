@@ -18,6 +18,8 @@ namespace WebApplication1.Login
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Page.Form.DefaultButton = btnLogin.UniqueID;
+            this.Page.Form.DefaultFocus = btnLogin.ClientID;
             if (Session["usuario"] != null)
             {
                 Session["usuario"] = null;
