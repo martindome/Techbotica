@@ -5,25 +5,40 @@
         <div class="form-group">
             <label for="nombre">Nombre</label>
             <asp:TextBox ID="nombre" CssClass="form-control" runat="server"></asp:TextBox>
+            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidatorNombre" runat="server" ControlToValidate="nombre" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre para continuar"></asp:RequiredFieldValidator>
+            <br /><asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" runat="server" ControlToValidate="nombre" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
             <label for="apellido">Apellido</label>
             <asp:TextBox ID="apellido" CssClass="form-control" runat="server"></asp:TextBox>
+            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidatorApellido" runat="server" ControlToValidate="apellido" CssClass="text-danger" ErrorMessage="Debe ingresar un apellido para continuar"></asp:RequiredFieldValidator>
+           <br /><asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="apellido" CssClass="text-danger" ErrorMessage="Debe ingresar un apellido valido" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
             <label for="telefono">Teléfono</label>
             <asp:TextBox ID="telefono" CssClass="form-control" runat="server"></asp:TextBox>
+            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidatorTelefono" runat="server" ControlToValidate="telefono" CssClass="text-danger" ErrorMessage="Debe ingresar un telefono para continuar"></asp:RequiredFieldValidator>
+            <br /><asp:RegularExpressionValidator ID="RegularExpressionValidatorTelefono" runat="server" ControlToValidate="telefono" CssClass="text-danger" ErrorMessage="Debe ingresar un numero telefonico valido" ValidationExpression="^[\d-]{7,15}$"></asp:RegularExpressionValidator>
+
         </div>
         <div class="form-group">
             <label for="correoElectronico">Correo Electrónico</label>
             <asp:TextBox ID="correoElectronico" CssClass="form-control" runat="server"></asp:TextBox>
+            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidatorCorreo" runat="server" ControlToValidate="correoElectronico" CssClass="text-danger" ErrorMessage="Debe ingresar un correo para continuar"></asp:RequiredFieldValidator>
+            <br /><asp:RegularExpressionValidator ID="RegularExpressionValidatorCorreo" runat="server" ControlToValidate="correoElectronico" CssClass="text-danger" ErrorMessage="Debe ingresar una casilla de email valida" ValidationExpression="^[a-zA-Z0-9+_.-]{1,50}@[a-zA-Z0-9.-]{1,49}$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
-            <label for="contrasenia">Contraseña</label>
-            <asp:TextBox ID="contrasenia" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
+            <label for="empresa">Empresa</label>
+            <asp:TextBox ID="empresa" CssClass="form-control" runat="server"></asp:TextBox>
+            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidatorEmpresa" runat="server" ControlToValidate="Empresa" CssClass="text-danger" ErrorMessage="Debe indicar la empresa"></asp:RequiredFieldValidator>
+            <br /><asp:RegularExpressionValidator ID="RegularExpressionValidatorEmpresa" runat="server" ControlToValidate="empresa" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre de empresa valido" ValidationExpression="^(?=.{1,50}$)[a-zA-Z-]+(?: [a-zA-Z-]+)*$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
             <asp:Button ID="btnRegistrar" CssClass="btn btn-primary" Text="Registrar" runat="server" OnClick="btnRegistrar_Click"/>
+            <br />
+        </div>
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="" Class="text-danger"></asp:Label>
         </div>
     </div>
 </asp:Content>

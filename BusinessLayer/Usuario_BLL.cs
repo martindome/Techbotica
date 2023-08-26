@@ -54,9 +54,9 @@ namespace BusinessLayer
             return mapper.validar_usuario_sin_password(usuario);
         }
 
-        public void RegistarCliente(Usuario_BE usuarioBE)
+        public void RegistrarEstudiante(Usuario_BE usuarioBE)
         {
-            mapper.registrar_usuario_cliente(usuarioBE);
+            mapper.registrar_usuario_estudiante(usuarioBE);
         }
 
         public void RegistarUsuarioAdmin(Usuario_BE usuarioBE)
@@ -102,6 +102,11 @@ namespace BusinessLayer
         public void RestaurarUsuario(Usuario_BE usuario)
         {
             mapper.restaurar_usuario(usuario);
+        }
+
+        public Usuario_BE VerificarUsuarioEmail(string email)
+        {
+            return mapper.validar_usuario_email(email);
         }
     }
 }

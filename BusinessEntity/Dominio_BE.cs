@@ -10,6 +10,7 @@ namespace BusinessEntity
     {
         public int IdDominio { get; set; }
         public string Sufijo { get; set; }
+        public int IdEmpresa { get; set; }
         public string Borrado { get; set; }
     }
 }

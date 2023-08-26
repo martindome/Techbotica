@@ -14,7 +14,7 @@
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
-    <li runat="server" nk href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <style>
         .ui-datepicker {

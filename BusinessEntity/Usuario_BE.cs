@@ -17,6 +17,7 @@ namespace BusinessEntity
         public string Apellido { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
+        public int Empresa { get; set; }
         public string Borrado { get; set; }
         // Agregado para el bloqueo por reintentos
         public int Bloqueado { get; set; }

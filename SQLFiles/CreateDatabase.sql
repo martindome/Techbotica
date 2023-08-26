@@ -153,6 +153,8 @@ CREATE TABLE [dbo].[Usuario](
 	[email] [varchar](100) NULL,
     [bloqueado] [int] NULL,
 	[borrado] [varchar](100) NULL,
+    [id_especialidad] [int] NULL,
+    [id_empresa] [int] NULL,
 ) ON [PRIMARY]
 GO
 
@@ -165,6 +167,7 @@ CREATE TABLE [dbo].[Empresa](
 	[id] [int] NULL,
 	[nombre] [varchar](100) NULL,
     [descripcion] [varchar](MAX) NULL,
+    [email] [varchar](100) NULL,
     [telefono] [varchar](100) NULL,
     [borrado] [varchar](100) NULL,
 ) ON [PRIMARY]
@@ -472,6 +475,54 @@ end
 select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
+/****** Object:  StoredProcedure [dbo].[validar_usuario_email]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[validar_usuario_email]
+@email varchar(100)
+as 
+begin
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.apellido, a.telefono, a.bloqueado, a.borrado, b.id_familia as familia, c.familia as detalle
+from Usuario a 
+inner join Familia_Usuario b 
+on a.id = b.id_usuario
+Inner join Familia c 
+on c.id = b.id_familia
+where a.email = @email
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_empresas]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_empresas]
+as 
+begin
+select e.id, e.nombre, e.descripcion
+from Empresa e
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_dominios_empresa]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_dominios_empresa]
+@id_empresa varchar(100)
+as 
+begin
+select d.id, d.sufijo, d.id_empresa
+from Dominio d
+inner join Empresa e on e.id = d.id_empresa
+where e.id = @id_empresa
+end 
+GO
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -484,9 +535,13 @@ GO
 /************************************************************************************************/
 /************************************************************************************************/
 GO
-INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado]) VALUES 
-(1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No'),    
-(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No'),    
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
+(1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No', 1)
+GO
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_especialidad]) VALUES 
+(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 1)
+GO
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado]) VALUES  
 (3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No');
 GO
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'Administrador')
@@ -517,8 +572,11 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (9, 3, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (10, 4, 1)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 4, 4)
 GO
-INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [telefono], [borrado]) VALUES  
-(1, 'example', 'Esta es una empresa de ejemplo', '555-1234', 'No')
+INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
+(1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No')
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa) VALUES 
-(1, '@example.com', 1)
+(1, '@example.com', 1),
+(2, '@gmail.com',1)
+INSERT into Especialidad (id, nombre, descripcion) VALUES
+(1, 'Robotica', 'Especialista en Robotica')

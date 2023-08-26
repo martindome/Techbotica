@@ -26,6 +26,8 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
                 usuarioBE.Bloqueado = int.Parse(reg["bloqueado"].ToString());
@@ -58,6 +60,8 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
                 usuarioBE.Bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
@@ -92,6 +96,8 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
                 usuarioBE.Bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
@@ -133,6 +139,8 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
                 usuarioBE.Bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
@@ -224,7 +232,7 @@ namespace DataAccessLayer
 
         public void update_usuario(Usuario_BE usuario)
         {
-            SqlParameter[] parametros = new SqlParameter[5];
+            SqlParameter[] parametros = new SqlParameter[7];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@usu";
             parametros[0].DbType = DbType.String;
@@ -241,25 +249,35 @@ namespace DataAccessLayer
             parametros[2].Value = usuario.Nombre;
 
             parametros[3] = new SqlParameter();
-            parametros[3].ParameterName = "@borrado";
+            parametros[3].ParameterName = "@apellido";
             parametros[3].DbType = DbType.String;
-            parametros[3].Value = usuario.Borrado;
+            parametros[3].Value = usuario.Apellido;
 
             parametros[4] = new SqlParameter();
-            parametros[4].ParameterName = "@bloqueado";
+            parametros[4].ParameterName = "@telefono";
             parametros[4].DbType = DbType.String;
-            parametros[4].Value = usuario.Bloqueado;
+            parametros[4].Value = usuario.Telefono;
+
+            parametros[5] = new SqlParameter();
+            parametros[5].ParameterName = "@borrado";
+            parametros[5].DbType = DbType.String;
+            parametros[5].Value = usuario.Borrado;
+
+            parametros[6] = new SqlParameter();
+            parametros[6].ParameterName = "@bloqueado";
+            parametros[6].DbType = DbType.String;
+            parametros[6].Value = usuario.Bloqueado;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("update_usuario", parametros);
 
         }
 
 
-        public void registrar_usuario_cliente(Usuario_BE usuario)
+        public void registrar_usuario_estudiante(Usuario_BE usuario)
         {
             string password = Servicio.Encriptacion.Calcular_HashSHA256(usuario.Contraseña);
 
-            SqlParameter[] parametros = new SqlParameter[6];
+            SqlParameter[] parametros = new SqlParameter[8];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@usu";
             parametros[0].DbType = DbType.String;
@@ -280,15 +298,25 @@ namespace DataAccessLayer
             parametros[3].DbType = DbType.String;
             parametros[3].Value = usuario.Email;
 
-            parametros[5] = new SqlParameter();
-            parametros[5].ParameterName = "@borrado";
-            parametros[5].DbType = DbType.String;
-            parametros[5].Value = usuario.Borrado;
-
             parametros[4] = new SqlParameter();
-            parametros[4].ParameterName = "@tipo";
-            parametros[4].DbType = DbType.Int32;
-            parametros[4].Value = 2;
+            parametros[4].ParameterName = "@apellido";
+            parametros[4].DbType = DbType.String;
+            parametros[4].Value = usuario.Apellido;
+
+            parametros[5] = new SqlParameter();
+            parametros[5].ParameterName = "@telefono";
+            parametros[5].DbType = DbType.String;
+            parametros[5].Value = usuario.Telefono;
+
+            parametros[6] = new SqlParameter();
+            parametros[6].ParameterName = "@borrado";
+            parametros[6].DbType = DbType.String;
+            parametros[6].Value = usuario.Borrado;
+
+            parametros[7] = new SqlParameter();
+            parametros[7].ParameterName = "@tipo";
+            parametros[7].DbType = DbType.Int32;
+            parametros[7].Value = 2;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("registrar_usuario", parametros);
         }
@@ -315,6 +343,8 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
                 Familia_BE tipoUsuario = new Familia_BE();
@@ -424,6 +454,41 @@ namespace DataAccessLayer
             parametros[0].Value = usuario.Usuario;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("restaurar_usuario", parametros);
+        }
+
+        public Usuario_BE validar_usuario_email(string email)
+        {
+
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@email";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = email;
+
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("validar_usuario_email", parametros);
+
+            Usuario_BE usuarioBE = new Usuario_BE();
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+
+                usuarioBE.Usuario = reg["usuario"].ToString();
+                usuarioBE.Contraseña = reg["contraseña"].ToString();
+                usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
+                usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Telefono = reg["telefono"].ToString();
+                usuarioBE.Email = email;
+                usuarioBE.Borrado = reg["borrado"].ToString();
+                Familia_BE tipoUsuario = new Familia_BE();
+                tipoUsuario.id = Convert.ToInt32(reg["familia"].ToString());
+                tipoUsuario.familia = reg["detalle"].ToString();
+                usuarioBE.Familia = tipoUsuario;
+                usuarioBE.Bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
+
+            }
+            return usuarioBE;
         }
 
         #region private functions
