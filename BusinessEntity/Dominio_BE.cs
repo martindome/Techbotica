@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-    public class Class1
+    public class Dominio_BE
     {
+        public int IdDominio { get; set; }
+        public string Sufijo { get; set; }
     }
 }

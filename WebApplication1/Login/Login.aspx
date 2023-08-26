@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebApplication1.Login.Login" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebApplication1.Login.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
@@ -21,8 +21,9 @@
                     </div>
                     <div class="text-center">
                         <asp:HyperLink ID="btnRegister" CssClass="btn btn-link" NavigateUrl="~/Registrarse/Registrarse.aspx" Text="Registrarse" runat="server" />
-                        <asp:HyperLink ID="btnRecover" CssClass="btn btn-link" NavigateUrl="~/Login/RecuperarCuenta.aspx" Text="Recuperar cuenta" runat="server" />
+                        <asp:HyperLink ID="btnRecover" CssClass="btn btn-link" NavigateUrl="~/Login/RecuperarCuenta.aspx" Text="Recuperar cuenta" runat="server" />               
                     </div>
+                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 </div>
             </div>
         </div>

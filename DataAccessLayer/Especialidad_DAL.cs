@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer
+namespace DataAccessLayer
 {
-    public class Class1
+    internal class Especialidad_DAL
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicio
+namespace DataAccessLayer
 {
-    public class Class1
+    internal class Empresa_DAL
     {
     }
 }
