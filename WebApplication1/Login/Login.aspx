@@ -25,6 +25,11 @@
                     </div>
                     <div class="text-center">
                         <asp:Label ID="Label1" Class="text-danger" runat="server" Text=""></asp:Label>
+                        <asp:RequiredFieldValidator cssClass="hiddenValidator" ID="RequiredFieldValidatorCorreo" Display="None" runat="server" ControlToValidate="username" ErrorMessage="Debe ingresar un correo para continuar"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator cssClass="hiddenValidator" ID="RegularExpressionValidatorCorreo" Display="None" runat="server" ControlToValidate="username"  ErrorMessage="Debe ingresar una casilla de email valida" ValidationExpression="^[a-zA-Z0-9+_.-]{1,50}@[a-zA-Z0-9.-]{1,49}$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator cssClass="hiddenValidator" ID="RequiredFieldValidatorPass" Display="None" runat="server" ControlToValidate="password"  ErrorMessage="Debe ingresar su password para continuar"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator cssClass="hiddenValidator" ID="RegularExpressionValidatorPass" Display="None" runat="server" ControlToValidate="password"  ErrorMessage="La clave no excede 50 caracteres" ValidationExpression="^.{1,50}$"></asp:RegularExpressionValidator>
+                        <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
                     </div>
                     
                 </div>

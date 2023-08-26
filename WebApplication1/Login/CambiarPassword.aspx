@@ -13,15 +13,16 @@
                         <asp:Label runat="server" AssociatedControlID="TextBoxPassActual" CssClass="col-md-2 control-label">Clave Actual</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox ID="TextBoxPassActual" runat="server" class="form-group" TextMode="Password"></asp:TextBox>
-                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxPassActual" CssClass="text-danger" ErrorMessage="Debe ingresar la clave actual para continuar"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxPassActual" CssClass="text-danger" ErrorMessage="Debe ingresar la clave actual para continuar"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator cssClass="hiddenValidator" ID="RegularExpressionValidatorPass" Display="None" runat="server" ControlToValidate="TextBoxPassActual"  ErrorMessage="La clave no excede 50 caracteres" ValidationExpression="^.{1,50}$"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                     <div class="form-group" id="Password">
                         <asp:Label runat="server" AssociatedControlID="TextBoxPassword" CssClass="col-md-2 control-label">Nueva Clave</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox ID="TextBoxPassword" runat="server" class="form-group" TextMode="Password"></asp:TextBox>
-                            <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Debe ingresar una contraseña para continuar"></asp:RequiredFieldValidator>
-                            <br /><asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Su password debe contener entre 8 y 20 caracteres, al menos 1 numero y 1 caracter especial" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator Display="None" ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Debe ingresar una contraseña para continuar"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator Display="None" ID="RegularExpressionValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Su password debe contener entre 8 y 20 caracteres, al menos 1 numero y 1 caracter especial" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                     <div class="form-group">
@@ -30,6 +31,7 @@
                             <asp:Button ID="btnUnenroll" CausesValidation="false" CssClass="btn btn-danger" Text="Cancelar" runat="server" OnClick="btnUnenroll_Click"/>
                         </div>
                         <asp:Label ID="Label1" runat="server" Text="" class="alert-danger"></asp:Label>
+                        <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
                     </div>
                 </div>
             </section>

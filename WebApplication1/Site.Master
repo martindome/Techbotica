@@ -23,6 +23,10 @@
             color: #EEE;
         }
 
+        .hiddenValidator {
+            display: none;
+        }
+
         body {
             background: url(Imagenes/StiloLogoMuyTrasnparente.png)no-repeat center center fixed; 
             background-size: cover;

@@ -21,7 +21,7 @@ namespace BusinessEntity
         public string Borrado { get; set; }
         // Agregado para el bloqueo por reintentos
         public int Bloqueado { get; set; }
-        public Especialidad_BE Especialidad { get; set; }
+        public int Especialidad { get; set; }
         public Familia_BE Familia { get; set; }
         //Composite
         public List<Compuesto_BE> Patentes { get; set; }
