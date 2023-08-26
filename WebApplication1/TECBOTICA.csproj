@@ -149,6 +149,7 @@
     <Content Include="Estudiantes\GestionarInscripciones.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Login\CambiarPassword.aspx" />
     <Content Include="Login\ConfirmarcionRecuperacion.aspx" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\RecuperarCuenta.aspx" />
@@ -430,6 +431,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login\CambiarPassword.aspx.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\CambiarPassword.aspx.designer.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\ConfirmarcionRecuperacion.aspx.cs">
       <DependentUpon>ConfirmarcionRecuperacion.aspx</DependentUpon>

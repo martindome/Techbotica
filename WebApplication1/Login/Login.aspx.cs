@@ -18,8 +18,19 @@ namespace WebApplication1.Login
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["usuario"] != null)
+            {
+                Session["usuario"] = null;
+                Session["carrito"] = null;
+                Session["PaginaProductos"] = null;
+                Session["BusquedaProductos"] = null;
+                //ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Sesion cerrada correctamente');", true);
+                //System.Threading.Thread.Sleep(5);
+                //Response.Redirect("../Stilo.aspx");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('La sesion ha sido cerrada');window.location.href = '/Default.aspx'", true);
+            }
         }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             usuarioBE = usuarioBLL.VerificarUsuarioSinPassword(username.Text.ToString());

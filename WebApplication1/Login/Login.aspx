@@ -23,7 +23,10 @@
                         <asp:HyperLink ID="btnRegister" CssClass="btn btn-link" NavigateUrl="~/Registrarse/Registrarse.aspx" Text="Registrarse" runat="server" />
                         <asp:HyperLink ID="btnRecover" CssClass="btn btn-link" NavigateUrl="~/Login/RecuperarCuenta.aspx" Text="Recuperar cuenta" runat="server" />               
                     </div>
-                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <div class="text-center">
+                        <asp:Label ID="Label1" Class="text-danger" runat="server" Text=""></asp:Label>
+                    </div>
+                    
                 </div>
             </div>
         </div>

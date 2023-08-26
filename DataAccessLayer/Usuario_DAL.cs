@@ -327,39 +327,6 @@ namespace DataAccessLayer
             return usuarioBE;
         }
 
-        public Usuario_BE validar_usuario_email(string email)
-        {
-
-            SqlParameter[] parametros = new SqlParameter[1];
-            parametros[0] = new SqlParameter();
-            parametros[0].ParameterName = "@email";
-            parametros[0].DbType = DbType.String;
-            parametros[0].Value = email;
-
-
-            DataTable Tabla = ac.ejecutar_stored_procedure("validar_usuario_email", parametros);
-
-            Usuario_BE usuarioBE = new Usuario_BE();
-
-            foreach (DataRow reg in Tabla.Rows)
-            {
-
-                usuarioBE.Usuario = reg["usuario"].ToString();
-                usuarioBE.Contraseña = reg["contraseña"].ToString();
-                usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
-                usuarioBE.Nombre = reg["nombre"].ToString();
-                usuarioBE.Email = email;
-                usuarioBE.Borrado = reg["borrado"].ToString();
-                Familia_BE tipoUsuario = new Familia_BE();
-                tipoUsuario.id = Convert.ToInt32(reg["familia"].ToString());
-                tipoUsuario.familia = reg["detalle"].ToString();
-                usuarioBE.Familia = tipoUsuario;
-                usuarioBE.Bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
-
-            }
-            return usuarioBE;
-        }
-
         public void cambiar_familia(int usuario, int perfil)
         {
             SqlParameter[] parametros = new SqlParameter[2];

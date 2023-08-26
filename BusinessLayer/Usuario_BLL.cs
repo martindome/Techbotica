@@ -54,11 +54,6 @@ namespace BusinessLayer
             return mapper.validar_usuario_sin_password(usuario);
         }
 
-        public Usuario_BE VerificarUsuarioEmail(string email)
-        {
-            return mapper.validar_usuario_email(email);
-        }
-
         public void RegistarCliente(Usuario_BE usuarioBE)
         {
             mapper.registrar_usuario_cliente(usuarioBE);

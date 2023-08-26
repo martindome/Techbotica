@@ -46,6 +46,7 @@
     <Compile Include="Dominio_DAL.cs" />
     <Compile Include="Empresa_DAL.cs" />
     <Compile Include="Especialidad_DAL.cs" />
+    <Compile Include="Permisos_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario_DAL.cs" />
   </ItemGroup>

@@ -14,7 +14,7 @@
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <li runat="server" nk href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <style>
         .ui-datepicker {
@@ -64,14 +64,14 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                   <ul class="navbar-nav me-auto">
 
-                    <li class="nav-item">
+                    <li runat="server"  class="nav-item" id="about">
                       <a class="nav-link" href="/Acerca.aspx">Acerca de</a>
                     </li>
-                    <li class="nav-item">
+                    <li runat="server"  class="nav-item" id="contact">
                       <a class="nav-link" href="/Contacto.aspx">Contacto</a>
                     </li>
 
-                     <li id="dropBusqueda" class="nav-item dropdown">
+                     <li runat="server"  id="dropBusquedaDeOferta" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Buscar...</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/BuscarCursos.aspx">Buscar cursos</a>
@@ -81,7 +81,7 @@
                     </li>
 
                     
-                     <li id="dropEstudiantes" class="nav-item dropdown">
+                     <li runat="server"  id="dropEstudiantes" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones</a>
@@ -89,7 +89,7 @@
                       </div>
                     </li>
 
-                     <li id="dropTutores" class="nav-item dropdown">
+                     <li runat="server"  id="dropTutores" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tutores</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/Tutores/Curso/NuevoCursoGenerico.aspx">Nuevo Curso</a>
@@ -103,7 +103,7 @@
                       </div>
                     </li>
                    
-                    <li id="dropAdministracion" class="nav-item dropdown">
+                    <li runat="server"  id="dropAdministracion" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion</a>
                       <div class="dropdown-menu">
                         <%--<a class="dropdown-item" href="/Administracion/GestionarEstudiantes.aspx">Gestionar Estudiantes</a>
@@ -114,12 +114,26 @@
                     </li>
                   </ul>
 
+                  <ul class="navbar-nav ml-auto"> <!-- ml-auto alineará el dropdown a la derecha -->
+                     <li runat="server"  id="user" class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <%: User %> </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/Login/Login.aspx">Cerrar Sesion</a>
+                            <a class="dropdown-item" href="/Login/CambiarPassword.aspx">Cambiar Password</a>
+                          </div>
+                        </li>
+                </ul>
+
                   <div class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Curso o carrera">
                     <asp:button runat="server" class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="BuscarCurso" Text="Buscar"></asp:button>
-                      <asp:Button ID="botonlogin" runat="server" class="btn btn-primary" type="submit" Text="Iniciar Sesion" OnClick="botonlogin_Click"></asp:Button>
-                      <asp:Button id="botonregistrarse" runat="server" class="btn btn-primary" type="submit" Text="Registrarse" OnClick="botonregistrarse_Click" > </asp:button>
+                    <asp:Button ID="botonlogin" runat="server" class="btn btn-primary" type="submit" Text="Iniciar Sesion" OnClick="botonlogin_Click"></asp:Button>
+                    <asp:Button id="botonregistrarse" runat="server" class="btn btn-primary" type="submit" Text="Registrarse" OnClick="botonregistrarse_Click" > </asp:button>
                   </div>
+
+                
+ 
+                  
                 </div>
               </div>
             </nav>
