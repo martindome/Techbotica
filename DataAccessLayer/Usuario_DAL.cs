@@ -285,17 +285,17 @@ namespace DataAccessLayer
             parametros[7] = new SqlParameter();
             parametros[7].ParameterName = "@tipo";
             parametros[7].DbType = DbType.Int32;
-            parametros[7].Value = 1;
+            parametros[7].Value = usuario.Familia.id;
 
             parametros[8] = new SqlParameter();
             parametros[8].ParameterName = "@empresa";
             parametros[8].DbType = DbType.Int32;
-            parametros[8].Value = 0;
+            parametros[8].Value = usuario.Empresa;
 
             parametros[9] = new SqlParameter();
             parametros[9].ParameterName = "@especialidad";
             parametros[9].DbType = DbType.Int32;
-            parametros[9].Value = 0;
+            parametros[9].Value = usuario.Especialidad;
 
 
             DataTable Tabla = ac.ejecutar_stored_procedure("registrar_usuario", parametros);

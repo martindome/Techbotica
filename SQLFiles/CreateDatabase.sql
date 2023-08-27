@@ -356,11 +356,13 @@ CREATE procedure [dbo].[update_usuario]
 @email varchar(100),
 @nombre varchar(100),
 @borrado varchar(100),
+@apellido varchar(100),
+@telefono varchar(100),
 @bloqueado int
 as 
 begin
 UPDATE Usuario
-SET bloqueado = @bloqueado, email=@email, nombre = @nombre
+SET bloqueado = @bloqueado, email=@email, nombre = @nombre, apellido=@apellido, telefono=@telefono, borrado = @borrado
 WHERE usuario = @usu;
 end
 select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
@@ -612,6 +614,55 @@ END
 GO
 
 
+/****** Object:  StoredProcedure [dbo].[listar_especialidades]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_especialidades]
+as 
+begin
+select e.id, e.nombre, e.descripcion
+from Especialidad e
+end 
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_familias]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_familias]
+as 
+begin
+select *
+from Familia
+end
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[update_usuario]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[update_usuario]
+@usu varchar(100),
+@email varchar(100),
+@nombre varchar(100),
+@borrado varchar(100),
+@bloqueado int
+as 
+begin
+
+UPDATE Usuario
+SET bloqueado = @bloqueado, email=@email, nombre = @nombre
+WHERE usuario = @usu;
+end
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+GO
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -639,7 +690,7 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (2, N'MenuTutores')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (3, N'MenuEstudiantes')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'MenuBusqueda')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'/Administracion/GestionarEmpresas')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarEstudiantes')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarUsuarios')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarTutores')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)

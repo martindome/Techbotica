@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Empresa_BLL.cs" />
+    <Compile Include="Especialidad_BLL.cs" />
+    <Compile Include="Permisos_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario_BLL.cs" />
   </ItemGroup>

@@ -108,8 +108,9 @@
     <Content Include="Administracion\Empresas\Dominios.aspx" />
     <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
     <Content Include="Administracion\GestionarEmpresas.aspx" />
-    <Content Include="Administracion\GestionarEstudiantes.aspx" />
+    <Content Include="Administracion\GestionarUsuarios.aspx" />
     <Content Include="Administracion\GestionarTutores.aspx" />
+    <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
     <Content Include="BuscarCarreras.aspx" />
     <Content Include="BuscarCursos.aspx" />
     <Content Include="Carreras\ConfirmacionInscripcionCarrera.aspx" />
@@ -272,12 +273,12 @@
     <Compile Include="Administracion\GestionarEmpresas.aspx.designer.cs">
       <DependentUpon>GestionarEmpresas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\GestionarEstudiantes.aspx.cs">
-      <DependentUpon>GestionarEstudiantes.aspx</DependentUpon>
+    <Compile Include="Administracion\GestionarUsuarios.aspx.cs">
+      <DependentUpon>GestionarUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\GestionarEstudiantes.aspx.designer.cs">
-      <DependentUpon>GestionarEstudiantes.aspx</DependentUpon>
+    <Compile Include="Administracion\GestionarUsuarios.aspx.designer.cs">
+      <DependentUpon>GestionarUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\GestionarTutores.aspx.cs">
       <DependentUpon>GestionarTutores.aspx</DependentUpon>
@@ -285,6 +286,13 @@
     </Compile>
     <Compile Include="Administracion\GestionarTutores.aspx.designer.cs">
       <DependentUpon>GestionarTutores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\CrearUsuario.aspx.cs">
+      <DependentUpon>CrearUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\CrearUsuario.aspx.designer.cs">
+      <DependentUpon>CrearUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
