@@ -31,14 +31,29 @@ namespace WebApplication1.Administracion.Empresas
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa inexistente');window.location.href = '/Default.aspx'", true);
                     }
                     empresabe = (Empresa_BE)mappere.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(Session["id_empresa_editar"].ToString()));
+                    ViewState["empresabe"] = empresabe;
+                    CompanyName.Text = empresabe.Nombre.ToString();
+                    CompanyDesc.Text = empresabe.Descripcion.ToString();
+                    CompanyEmail.Text = empresabe.Email.ToString();
+                    CompanyPhone.Text = empresabe.Telefono.ToString();
                 }
             }
         }
 
         protected void btnEditCompany_Click(object sender, EventArgs e)
         {
-            Session["id_empresa_editar"] = null;
-            Response.Redirect("~/Administracion/GestionarEmpresas.aspx");
+            if (IsValid)
+            {
+                empresabe = (Empresa_BE)ViewState["empresabe"];
+                Session["id_empresa_editar"] = null;
+                empresabe.Nombre = CompanyName.Text;
+                empresabe.Descripcion = CompanyDesc.Text;
+                empresabe.Email = CompanyEmail.Text;
+                empresabe.Telefono = CompanyPhone.Text;
+                empresabe.Borrado = "No";
+                mappere.ActualizarEmpresa(empresabe);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa editada con exito');window.location.href = '/Administracion/GestionarEmpresas.aspx'", true);
+            }
         }
 
         protected void btnEditDomains_Click(object sender, EventArgs e)

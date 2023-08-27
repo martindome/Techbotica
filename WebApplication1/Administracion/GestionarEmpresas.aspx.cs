@@ -77,8 +77,22 @@ namespace WebApplication1.Administracion
 
         protected void botoneliminar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Administracion/GestionarEmpresas.aspx");
-            
+            // Obteniendo el botón que desencadenó el evento
+            Button btn = (Button)sender;
+
+            // Recuperando el índice de la fila desde el CommandArgument del botón
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+
+            // Obteniendo el valor de IdEmpresa usando DataKeys
+            string idEmpresa = CompaniesGrid.DataKeys[rowIndex].Value.ToString();
+
+            Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
+
+            mapper.EliminarEmpresa(empresabe);
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa eliminada con exito')", true);
+
+            actualizar_grid();
         }
 
         protected void SearchCompanyButton_Click(object sender, EventArgs e)

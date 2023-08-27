@@ -504,7 +504,7 @@ GO
 Create procedure [dbo].[listar_empresas]
 as 
 begin
-select e.id, e.nombre, e.descripcion, e.telefono, e.email
+select e.id, e.nombre, e.descripcion, e.telefono, e.email, e.borrado
 from Empresa e
 end 
 GO
@@ -564,6 +564,53 @@ VALUES (@id, @sufijo, @id_empresa, @borrado);
 end
 select u.id as id, u.sufijo as sufijo, u.id_empresa as id_empresa, u.borrado as borrado From Dominio u WHERE u.id = @id
 GO
+
+/****** Object:  StoredProcedure [dbo].[actualizar_empresa]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[actualizar_empresa]
+@nombre varchar(100),
+@descripcion varchar(100),
+@telefono varchar(100),
+@email varchar(100),
+@borrado varchar(100),
+@id int
+as 
+BEGIN
+    UPDATE Empresa 
+    SET nombre = @nombre,
+        descripcion = @descripcion,
+        telefono = @telefono,
+        email = @email,
+        borrado = @borrado
+    WHERE id = @id;
+END
+SELECT u.id AS id, u.nombre AS nombre, u.descripcion AS descripcion, u.telefono AS telefono, u.email AS email, u.borrado AS borrado FROM Empresa u WHERE u.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_dominio]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_dominio
+@idDominio INT
+AS
+BEGIN
+    DELETE FROM Dominio WHERE id = @idDominio;
+
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[eliminar_empresa]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_empresa
+@id INT
+AS
+BEGIN
+    DELETE FROM Empresa WHERE id = @id;
+
+END
+GO
+
 
 /************************************************************************************************/
 /************************************************************************************************/

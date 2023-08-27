@@ -3,10 +3,15 @@
     <div class="container">
         <h2 class="mt-4">Dominios de la Empresa</h2>
 
-        <asp:GridView ID="DomainsGrid" CssClass="table" runat="server" AutoGenerateColumns="false" >
+        <asp:GridView ID="DomainsGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdDominio">
             <Columns>
-                <asp:BoundField DataField="DomainSuffix" HeaderText="Sufijo del Dominio" />
-                <asp:ButtonField ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-danger"/>
+                 <asp:BoundField DataField="IdDominio" HeaderText="Dominio" Visible="false" />
+                <asp:BoundField DataField="Sufijo" HeaderText="Sufijo del Dominio" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                       <asp:Button runat="server" ID="botoneliminardominio" ButtonType="Button" CommandName="Delete" Text="Eliminar" ControlStyle-CssClass="btn btn-danger" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' onclick="botoneliminardominio_Click" CausesValidation="false"/>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
 
@@ -16,7 +21,8 @@
         </div>
 
         <div class="form-group mt-4">
-            <asp:Button ID="btnCreateDomain" CssClass="btn btn-success" Text="Crear Dominio" runat="server" />
+            <asp:Button ID="btnCreateDomain" CssClass="btn btn-success" Text="Crear Dominio" runat="server" OnClick="btnCreateDomain_Click" />
+            <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClick="btnBack_Click" />
         </div>
     </div>
 </asp:Content>

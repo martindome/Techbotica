@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
+    [Serializable]
     public class Empresa_BE
     {
         public int IdEmpresa { get; set; }

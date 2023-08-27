@@ -25,5 +25,25 @@ namespace BusinessLayer
         {
             mapper.nueva_empresa(empresa);
         }
+
+        public void ActualizarEmpresa(Empresa_BE empresabe)
+        {
+            mapper.actualizar_empresa(empresabe);
+        }
+
+        public void NuevoDominio(Dominio_BE newDomain)
+        {
+            mapper.nuevo_dominio(newDomain);
+        }
+
+        public void EliminarDominio(int domainId)
+        {
+            mapper.eliminar_dominio(domainId);
+        }
+
+        public void EliminarEmpresa(Empresa_BE empresabe)
+        {
+            mapper.eliminar_empresa(empresabe);
+        }
     }
 }

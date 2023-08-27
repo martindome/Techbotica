@@ -124,6 +124,7 @@ namespace DataAccessLayer
             e.Descripcion = reg["descripcion"].ToString();
             e.Telefono = reg["telefono"].ToString();
             e.Email = reg["email"].ToString();
+            e.Borrado = reg["borrado"].ToString();
             e.Dominios = new List<Dominio_BE>();
         }
 
@@ -131,7 +132,72 @@ namespace DataAccessLayer
         {
             e.IdDominio = Convert.ToInt32(reg["id"].ToString());
             e.Sufijo = reg["sufijo"].ToString();
-            e.IdDominio = Convert.ToInt32(reg["id_empresa"].ToString());
+            e.IdEmpresa = Convert.ToInt32(reg["id_empresa"].ToString());
+            e.Borrado = reg["borrado"].ToString();
+        }
+
+        public void actualizar_empresa(Empresa_BE empresabe)
+        {
+            SqlParameter[] parametros = new SqlParameter[6];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@nombre";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = empresabe.Nombre;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@descripcion";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = empresabe.Descripcion;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@telefono";
+            parametros[2].DbType = DbType.String;
+            parametros[2].Value = empresabe.Telefono;
+
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@email";
+            parametros[3].DbType = DbType.String;
+            parametros[3].Value = empresabe.Email;
+
+            parametros[4] = new SqlParameter();
+            parametros[4].ParameterName = "@borrado";
+            parametros[4].DbType = DbType.String;
+            parametros[4].Value = empresabe.Borrado;
+
+            parametros[5] = new SqlParameter();
+            parametros[5].ParameterName = "@id";
+            parametros[5].DbType = DbType.Int32;
+            parametros[5].Value = empresabe.IdEmpresa;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("actualizar_empresa", parametros);
+        }
+
+        public void eliminar_dominio(int idDominio)
+        {
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@idDominio";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = idDominio;
+
+            ac.ejecutar_stored_procedure("eliminar_dominio", parametros);
+        }
+
+        public void eliminar_empresa(Empresa_BE empresabe)
+        {
+            foreach (Dominio_BE d in empresabe.Dominios)
+            {
+                eliminar_dominio(d.IdDominio);
+            }
+
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = empresabe.IdEmpresa;
+
+            ac.ejecutar_stored_procedure("eliminar_empresa", parametros);
+
         }
     }
 }
