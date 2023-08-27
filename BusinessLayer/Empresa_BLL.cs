@@ -20,5 +20,10 @@ namespace BusinessLayer
         {
             return mapper.listar_dominios_empresa(id);
         }
+
+        public void NuevaEmpresa(Empresa_BE empresa)
+        {
+            mapper.nueva_empresa(empresa);
+        }
     }
 }

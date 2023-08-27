@@ -27,6 +27,7 @@
             <asp:Button ID="btnEditCompany" CssClass="btn btn-success" Text="Aplicar cambios" runat="server" OnClick="btnEditCompany_Click" />
             <asp:Button ID="btnEditDomains" CssClass="btn btn-primary ml-2" Text="Editar Dominios" runat="server" OnClick="btnEditDomains_Click" />
         </div>
+        
     </div>
 </asp:Content>
 

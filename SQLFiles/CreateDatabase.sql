@@ -218,7 +218,7 @@ GO
 Create procedure [dbo].[listar_usuarios]
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email,a.bloqueado, a.borrado, a.telefono, a.apellido, a.id_empresa, a.id_especilidad, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email,a.bloqueado, a.borrado, a.telefono, a.apellido, a.id_empresa, a.id_especialidad, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -525,6 +525,46 @@ where e.id = @id_empresa
 end 
 GO
 
+/****** Object:  StoredProcedure [dbo].[nueva_empresa]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nueva_empresa]
+@nombre varchar(100),
+@descripcion varchar(100),
+@telefono varchar(100),
+@email varchar(100),
+@borrado varchar(100)
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Empresa),0 ) +1
+INSERT INTO Empresa (id, nombre, descripcion, telefono, email, borrado)
+VALUES (@id, @nombre, @descripcion, @telefono, @email, @borrado);
+end
+select u.id as id, u.nombre as nombre, u.descripcion as descripcion, u.telefono as telefono, u.email as email, u.borrado as borrado From Empresa u WHERE u.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[nuevo_dominio]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_dominio]
+@sufijo varchar(100),
+@id_empresa int,
+@borrado varchar(100)
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Dominio),0 ) +1
+INSERT INTO Dominio (id, sufijo, id_empresa, borrado)
+VALUES (@id, @sufijo, @id_empresa, @borrado);
+end
+select u.id as id, u.sufijo as sufijo, u.id_empresa as id_empresa, u.borrado as borrado From Dominio u WHERE u.id = @id
+GO
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -569,7 +609,8 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (6, 1, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (7, 1, 7)
 GO
 INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
-(1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No')
+(1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No'),
+(2, 'example2', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'example.com', 1, 'No'),

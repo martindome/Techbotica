@@ -5,7 +5,7 @@
         
         <asp:TextBox ID="SearchCompanyByNameTextBox" runat="server" CssClass="form-control" Placeholder="Buscar empresas por nombre"></asp:TextBox>
         <asp:TextBox ID="SearchCompanyByDescTextBox" runat="server" CssClass="form-control mt-2" Placeholder="Buscar empresas por descripción"></asp:TextBox>
-        <asp:Button ID="SearchCompanyButton" runat="server" Text="Buscar" CssClass="btn btn-primary mt-2 mb-2" />
+        <asp:Button ID="SearchCompanyButton" runat="server" Text="Buscar" CssClass="btn btn-primary mt-2 mb-2" OnClick="SearchCompanyButton_Click" />
 
         <asp:GridView ID="CompaniesGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdEmpresa">
             <Columns>
@@ -30,6 +30,11 @@
 
         <div class="mt-3">
             <asp:Button ID="NewCompanyButton" runat="server" Text="Nueva Empresa" CssClass="btn btn-success" OnClick="NewCompanyButton_Click" />
+        </div>
+        <div>
+            <asp:RegularExpressionValidator cssClass="hiddenValidator" ID="RegularExpressionNombre" Display="None" runat="server" ControlToValidate="SearchCompanyByNameTextBox"  ErrorMessage="Formato de nombre invalido" ValidationExpression="^[a-zA-Z0-9+_.-]{0,50}$"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator cssClass="hiddenValidator" ID="RegularExpressionDescripcion" Display="None" runat="server" ControlToValidate="SearchCompanyByDescTextBox"  ErrorMessage="Formato de descripcion invalido" ValidationExpression="^[a-zA-Z0-9+_.-]{0,50}$"></asp:RegularExpressionValidator>
+            <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
         </div>
     </div>
 </asp:Content>

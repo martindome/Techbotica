@@ -57,6 +57,64 @@ namespace DataAccessLayer
         public void nueva_empresa(Empresa_BE empresa)
         {
 
+            SqlParameter[] parametros = new SqlParameter[5];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@nombre";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = empresa.Nombre;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@descripcion";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = empresa.Descripcion;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@telefono";
+            parametros[2].DbType = DbType.String;
+            parametros[2].Value = empresa.Telefono;
+
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@email";
+            parametros[3].DbType = DbType.String;
+            parametros[3].Value = empresa.Email;
+
+            parametros[4] = new SqlParameter();
+            parametros[4].ParameterName = "@borrado";
+            parametros[4].DbType = DbType.String;
+            parametros[4].Value = empresa.Borrado;
+            DataTable Tabla = ac.ejecutar_stored_procedure("nueva_empresa", parametros);
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                empresa.IdEmpresa = Convert.ToInt32(reg["id"].ToString());
+            }
+
+            foreach (Dominio_BE d in empresa.Dominios)
+            {
+                d.IdEmpresa = empresa.IdEmpresa;
+                nuevo_dominio(d);
+            }
+        }
+
+        public void nuevo_dominio (Dominio_BE d)
+        {
+            SqlParameter[] parametros = new SqlParameter[3];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@sufijo";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = d.Sufijo;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@id_empresa";
+            parametros[1].DbType = DbType.Int32;
+            parametros[1].Value = d.IdEmpresa;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@borrado";
+            parametros[2].DbType = DbType.String;
+            parametros[2].Value = d.Borrado;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("nuevo_dominio", parametros);
         }
 
         private void mappear_empresa(DataRow reg, Empresa_BE e)

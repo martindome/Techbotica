@@ -27,47 +27,31 @@ namespace WebApplication1.Administracion
                 if (!IsPostBack)
                 {
                     actualizar_grid();
-                    
-
-                    //// Crear una lista de objetos ficticios "Company"
-                    //List<Company> companies = new List<Company>
-                    //{
-                    //    new Company { CompanyName = "Empresa 1", CompanyDesc = "Descripción 1", CompanyEmail = "empresa1@ejemplo.com", CompanyPhone = "123456789" },
-                    //    new Company { CompanyName = "Empresa 2", CompanyDesc = "Descripción 2", CompanyEmail = "empresa2@ejemplo.com", CompanyPhone = "987654321" },
-                    //    new Company { CompanyName = "Empresa 3", CompanyDesc = "Descripción 3", CompanyEmail = "empresa3@ejemplo.com", CompanyPhone = "456123789" },
-                    //    // puedes agregar más empresas aquí
-                    //};
-
-                    //// Vincular la lista de objetos "Company" a la GridView
-                    //CompaniesGrid.DataSource = companies;
-                    //CompaniesGrid.DataBind();
+                   
                 }
             }
         }
 
         protected void actualizar_grid()
         {
+            string filterName = SearchCompanyByNameTextBox.Text.ToLower().Trim();
+            string filterDescription = SearchCompanyByDescTextBox.Text.ToLower().Trim();
+
             List<Empresa_BE> empresas = mapper.ListarEmpresas();
+
+            // Si hay un valor en el TextBox de nombre, aplicamos ese filtro
+            if (!string.IsNullOrEmpty(filterName))
+            {
+                empresas = empresas.Where(emp => emp.Nombre.ToLower().Contains(filterName)).ToList();
+            }
+
+            // Si hay un valor en el TextBox de descripción, aplicamos ese filtro
+            if (!string.IsNullOrEmpty(filterDescription))
+            {
+                empresas = empresas.Where(emp => emp.Descripcion.ToLower().Contains(filterDescription)).ToList();
+            }
             CompaniesGrid.DataSource = empresas;
             CompaniesGrid.DataBind();
-        }
-
-        protected void CompaniesGrid_RowEditing(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void CompaniesGrid_RowDeleting(object seder, EventArgs e)
-        {
-
-        }
-
-        public class Company
-        {
-            public string CompanyName { get; set; }
-            public string CompanyDesc { get; set; }
-            public string CompanyEmail { get; set; }
-            public string CompanyPhone { get; set; }
         }
 
         protected void NewCompanyButton_Click(object sender, EventArgs e)
@@ -95,6 +79,14 @@ namespace WebApplication1.Administracion
         {
             Response.Redirect("~/Administracion/GestionarEmpresas.aspx");
             
+        }
+
+        protected void SearchCompanyButton_Click(object sender, EventArgs e)
+        {
+            if (IsValid)
+            {
+                actualizar_grid();
+            }
         }
     }
 }
