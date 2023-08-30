@@ -37,6 +37,13 @@ namespace WebApplication1
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
+
+            ScriptManager.ScriptResourceMapping.AddDefinition("bootstrap", new ScriptResourceDefinition
+            {
+                Path = "~/scripts/bootstrap.min.js",
+                DebugPath = "~/scripts/bootstrap.js",
+                LoadSuccessExpression = "bootstrap"
+            });
         }
     }
 }
