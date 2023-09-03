@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Crear Usuario" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CrearUsuario.aspx.cs" Inherits="WebApplication1.Administracion.Usuarios.CrearUsuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container" style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
-        <h2 class="mt-4">Registro de Estudiante</h2>
+        <h2 class="mt-4">Registro de Usuario</h2>
         <div class="form-group">
             <label for="nombre">Nombre</label>
             <asp:TextBox ID="TextBoxNombre" CssClass="form-control" runat="server"></asp:TextBox>
@@ -28,7 +28,7 @@
             <asp:RegularExpressionValidator ID="RegularExpressionValidatorCorreo" Display="None" runat="server" ControlToValidate="TextBoxEmail" CssClass="text-danger" ErrorMessage="Debe ingresar una casilla de email valida" ValidationExpression="^[a-zA-Z0-9+_.-]{1,50}@[a-zA-Z0-9.-]{1,49}$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
-            <label for="correoElectronico">TextBoxPassword</label>
+            <label for="correoElectronico">Contraseña</label>
             <asp:TextBox ID="TextBoxPassword" runat="server" class="form-control" TextMode="Password"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="None" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Debe ingresar una clave para continuar"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Display="None" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Su password debe contener entre 8 y 20 caracteres, al menos 1 número y 1 carácter especial" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"></asp:RegularExpressionValidator>
@@ -62,13 +62,23 @@
     </div>
 
     <asp:RequiredFieldValidator 
-    ID="RequiredFieldValidatorFamilia" 
-    runat="server" 
-    Display="None" 
-    ControlToValidate="GridView2" 
-    CssClass="text-danger" 
-    ErrorMessage="Debe seleccionar una familia para continuar">
-</asp:RequiredFieldValidator>
+        ID="RequiredFieldValidatorFamilia" 
+        runat="server" 
+        Display="None" 
+        ControlToValidate="GridView2" 
+        CssClass="text-danger" 
+        ErrorMessage="Debe seleccionar una familia para continuar">
+    </asp:RequiredFieldValidator>
+
+        <asp:RequiredFieldValidator 
+        ID="RequiredFieldValidatorEmpresa" 
+        runat="server" 
+        Display="None" 
+        ControlToValidate="ListBoxEmpresas" 
+        CssClass="text-danger" 
+        ErrorMessage="Debe seleccionar una empresa para continuar">
+    </asp:RequiredFieldValidator>
+
 
 
 

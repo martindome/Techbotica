@@ -28,7 +28,7 @@ namespace DataAccessLayer
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
@@ -62,7 +62,7 @@ namespace DataAccessLayer
                 usuarioBE.Contraseña = reg["contraseña"].ToString();
                 usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Telefono = reg["telefono"].ToString();
@@ -102,7 +102,7 @@ namespace DataAccessLayer
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
@@ -147,7 +147,7 @@ namespace DataAccessLayer
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
@@ -246,7 +246,7 @@ namespace DataAccessLayer
         {
             string password = Servicio.Encriptacion.Calcular_HashSHA256(usuario.Contraseña);
 
-            SqlParameter[] parametros = new SqlParameter[10];
+            SqlParameter[] parametros = new SqlParameter[9];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@usu";
             parametros[0].DbType = DbType.String;
@@ -292,11 +292,6 @@ namespace DataAccessLayer
             parametros[8].DbType = DbType.Int32;
             parametros[8].Value = usuario.Empresa;
 
-            parametros[9] = new SqlParameter();
-            parametros[9].ParameterName = "@especialidad";
-            parametros[9].DbType = DbType.Int32;
-            parametros[9].Value = usuario.Especialidad;
-
 
             DataTable Tabla = ac.ejecutar_stored_procedure("registrar_usuario", parametros);
         }
@@ -305,7 +300,7 @@ namespace DataAccessLayer
         {
             string password = Servicio.Encriptacion.Calcular_HashSHA256(usuario.Contraseña);
 
-            SqlParameter[] parametros = new SqlParameter[10];
+            SqlParameter[] parametros = new SqlParameter[9];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@usu";
             parametros[0].DbType = DbType.String;
@@ -351,11 +346,6 @@ namespace DataAccessLayer
             parametros[8].DbType = DbType.Int32;
             parametros[8].Value = usuario.Empresa;
 
-            parametros[9] = new SqlParameter();
-            parametros[9].ParameterName = "@especialidad";
-            parametros[9].DbType = DbType.Int32;
-            parametros[9].Value = 0;
-
 
             DataTable Tabla = ac.ejecutar_stored_procedure("registrar_usuario", parametros);
         }
@@ -384,7 +374,7 @@ namespace DataAccessLayer
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = reg["email"].ToString();
                 usuarioBE.Borrado = reg["borrado"].ToString();
@@ -520,7 +510,7 @@ namespace DataAccessLayer
                 usuarioBE.Nombre = reg["nombre"].ToString();
                 usuarioBE.Apellido = reg["apellido"].ToString();
                 usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
-                usuarioBE.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+                
                 usuarioBE.Telefono = reg["telefono"].ToString();
                 usuarioBE.Email = email;
                 usuarioBE.Borrado = reg["borrado"].ToString();

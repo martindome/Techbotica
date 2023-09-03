@@ -86,13 +86,24 @@ namespace WebApplication1.Administracion
             // Obteniendo el valor de IdEmpresa usando DataKeys
             string idEmpresa = CompaniesGrid.DataKeys[rowIndex].Value.ToString();
 
-            Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
+            if (int.Parse(idEmpresa) == 1)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No se puede eliminar empresa')", true);
+                actualizar_grid();
 
-            mapper.EliminarEmpresa(empresabe);
+            }
+            else
+            {
+                Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa eliminada con exito')", true);
+                mapper.EliminarEmpresa(empresabe);
 
-            actualizar_grid();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa eliminada con exito')", true);
+
+                actualizar_grid();
+            }
+
+            
         }
 
         protected void SearchCompanyButton_Click(object sender, EventArgs e)

@@ -101,60 +101,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Familia](
-	[id] [int] NULL,
+	[id] [int] PRIMARY KEY,
 	[familia] [varchar](100) NULL,
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Familia_Patente]    Script Date: 24/1/2023 23:23:57 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Familia_Patente](
-	[id] [int] NULL,
-	[id_familia] [int] NULL,
-	[id_patente] [int] NULL,
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Familia_Usuario]    Script Date: 24/1/2023 23:23:57 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Familia_Usuario](
-	[id] [int] NULL,
-	[id_familia] [int] NULL,
-	[id_usuario] [int] NULL,
-) ON [PRIMARY]
-GO
+
 /****** Object:  Table [dbo].[Patente]    Script Date: 24/1/2023 23:23:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Patente](
-	[id] [int] NULL,
+	[id] [int] PRIMARY KEY,
 	[detalle] [varchar](50) NULL,
-) ON [PRIMARY]
-GO
-
-/****** Object:  Table [dbo].[Usuario]    Script Date: 24/1/2023 23:23:57 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Usuario](
-	[id] [int] NULL,
-	[usuario] [varchar](100) NULL,
-	[contraseña] [varchar](100) NULL,
-	[nombre] [varchar](100) NULL,
-    [apellido] [varchar](100) NULL,
-    [telefono] [varchar](100) NULL,
-	[email] [varchar](100) NULL,
-    [bloqueado] [int] NULL,
-	[borrado] [varchar](100) NULL,
-    [id_especialidad] [int] NULL,
-    [id_empresa] [int] NULL,
 ) ON [PRIMARY]
 GO
 
@@ -164,12 +123,60 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Empresa](
-	[id] [int] NULL,
+	[id] [int] PRIMARY KEY,
 	[nombre] [varchar](100) NULL,
     [descripcion] [varchar](MAX) NULL,
     [email] [varchar](100) NULL,
     [telefono] [varchar](100) NULL,
     [borrado] [varchar](100) NULL,
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Usuario]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[id] [int] PRIMARY KEY,
+	[usuario] [varchar](100) NULL,
+	[contraseña] [varchar](100) NULL,
+	[nombre] [varchar](100) NULL,
+    [apellido] [varchar](100) NULL,
+    [telefono] [varchar](100) NULL,
+	[email] [varchar](100) NULL,
+    [bloqueado] [int] NULL,
+	[borrado] [varchar](100) NULL,
+    [id_empresa] [int] NULL,
+	FOREIGN KEY (id_empresa) REFERENCES Empresa(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Familia_Patente]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Familia_Patente](
+	[id] [int] PRIMARY KEY,
+	[id_familia] [int] NULL,
+	[id_patente] [int] NULL,
+	FOREIGN KEY (id_familia) REFERENCES Familia(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_patente) REFERENCES Patente(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Familia_Usuario]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Familia_Usuario](
+	[id] [int] PRIMARY KEY,
+	[id_familia] [int] NULL,
+	[id_usuario] [int] NULL,
+	FOREIGN KEY (id_familia) REFERENCES Familia(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
 
@@ -179,10 +186,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Dominio](
-	[id] [int] NULL,
+	[id] [int] PRIMARY KEY,
 	[sufijo] [varchar](100) NULL,
     [id_empresa] [int] NULL,
     [borrado] [varchar](100) NULL,
+	FOREIGN KEY (id_empresa) REFERENCES Empresa(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
 
@@ -192,7 +200,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Especialidad](
-	[id] [int] NULL,
+	[id] [int] PRIMARY KEY,
 	[nombre] [varchar](100) NULL,
     [descripcion] [varchar](MAX) NULL,
 ) ON [PRIMARY]
@@ -218,7 +226,7 @@ GO
 Create procedure [dbo].[listar_usuarios]
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email,a.bloqueado, a.borrado, a.telefono, a.apellido, a.id_empresa, a.id_especialidad, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email,a.bloqueado, a.borrado, a.telefono, a.apellido, a.id_empresa,  b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -236,7 +244,7 @@ CREATE procedure [dbo].[obtener_usuario_usuario]
 @usu varchar(100)
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido, a.id_especialidad, a.id_empresa, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido,  a.id_empresa, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -255,7 +263,7 @@ CREATE procedure [dbo].[obtener_usuario_id]
 @id int
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido, a.id_especialidad, a.id_empresa, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido,  a.id_empresa, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -274,7 +282,7 @@ CREATE procedure [dbo].[verificar_usuario]
 @usu varchar(100), @pass varchar(100)
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido, a.id_especialidad, a.id_empresa, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.borrado, a.bloqueado, a.telefono, a.apellido,  a.id_empresa, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -299,20 +307,19 @@ CREATE procedure [dbo].[registrar_usuario]
 @borrado varchar(100),
 @apellido varchar(100),
 @telefono varchar(100),
-@empresa int,
-@especialidad int
+@empresa int
 as 
 begin
 declare @id int
 set @id = isnull((Select max(id) from Usuario),0 ) +1
 declare @id_fu int
 set @id_fu = isnull((Select max(id) from Familia_Usuario),0 ) +1
-INSERT INTO Usuario (id, usuario, contraseña, nombre, bloqueado, email, borrado, apellido, telefono, id_empresa, id_especialidad)
-VALUES (@id, @usu, @pass, @nom, 0, @email, @borrado, @apellido, @telefono, @empresa, @especialidad);
+INSERT INTO Usuario (id, usuario, contraseña, nombre, bloqueado, email, borrado, apellido, telefono, id_empresa)
+VALUES (@id, @usu, @pass, @nom, 0, @email, @borrado, @apellido, @telefono, @empresa);
 Insert Into Familia_Usuario (id, id_familia, id_usuario)
 VALUES (@id_fu, @tipo, @id);
 end
-select u.id as id, b.id as id_fu, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email, u.borrado as borrado, u.telefono as telefono, u.apellido as apellido, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on b.id_usuario = u.id where usuario = @usu
+select u.id as id, b.id as id_fu, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email, u.borrado as borrado, u.telefono as telefono, u.apellido as apellido, u.id_empresa as id_empresa,   b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on b.id_usuario = u.id where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[listar_patentes]    Script Date: 5/7/2022 03:16:57 ******/
@@ -343,7 +350,7 @@ as
 begin
 UPDATE dbo.Usuario SET bloqueado = bloqueado + 1 where usuario = @usu
 end 
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[update_usuario]    Script Date: 5/7/2022 03:16:57 ******/
@@ -365,7 +372,7 @@ UPDATE Usuario
 SET bloqueado = @bloqueado, email=@email, nombre = @nombre, apellido=@apellido, telefono=@telefono, borrado = @borrado
 WHERE usuario = @usu;
 end
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[verificar_usuario_sinpassword]    Script Date: 5/7/2022 03:16:57 ******/
@@ -377,7 +384,7 @@ CREATE procedure [dbo].[verificar_usuario_sinpassword]
 @usu varchar(100)
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.bloqueado, a.borrado, a.apellido, a.telefono, a.id_especialidad, a.id_empresa, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.bloqueado, a.borrado, a.apellido, a.telefono,  a.id_empresa, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -399,7 +406,7 @@ as
 begin
 UPDATE dbo.Familia_Usuario SET id_familia = @familia where id_usuario = @usu
 end 
-select u.id as id, b.id as id_fu, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where u.id = @usu
+select u.id as id, b.id as id_fu, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.id_empresa as id_empresa,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where u.id = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[blanquear_password]    Script Date: 5/7/2022 03:16:57 ******/
@@ -413,7 +420,7 @@ as
 begin
 UPDATE dbo.Usuario SET bloqueado = 0 where usuario = @usu
 end 
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,   u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[listar_usuariosBloqueados]    Script Date: 5/7/2022 03:16:57 ******/
@@ -443,7 +450,7 @@ UPDATE Usuario
 SET bloqueado = 0
 WHERE usuario = @usu;
 end
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,   u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[cambiar_password]    Script Date: 5/7/2022 03:16:57 ******/
@@ -460,7 +467,7 @@ UPDATE Usuario
 SET contraseña = @pass, bloqueado = 0
 WHERE usuario = @usu;
 end
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,   u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[Restaurar_Usuario]    Script Date: 5/7/2022 03:16:57 ******/
@@ -476,7 +483,7 @@ UPDATE Usuario
 SET borrado = 'No', bloqueado = 0
 WHERE usuario = @usu;
 end
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa, u.id_especialidad as id_especialidad,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
+select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,   u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
 GO
 
 /****** Object:  StoredProcedure [dbo].[validar_usuario_email]    Script Date: 24/1/2023 23:23:57 ******/
@@ -488,7 +495,7 @@ CREATE procedure [dbo].[validar_usuario_email]
 @email varchar(100)
 as 
 begin
-select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.apellido, a.telefono, a.bloqueado, a.borrado, a.id_especialidad, a.id_empresa, b.id_familia as familia, c.familia as detalle
+select a.id, a.nombre, a.usuario, a.contraseña, a.email, a.apellido, a.telefono, a.bloqueado, a.borrado,  a.id_empresa, b.id_familia as familia, c.familia as detalle
 from Usuario a 
 inner join Familia_Usuario b 
 on a.id = b.id_usuario
@@ -641,28 +648,6 @@ from Familia
 end
 GO
 
-
-/****** Object:  StoredProcedure [dbo].[update_usuario]    Script Date: 24/1/2023 23:23:57 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[update_usuario]
-@usu varchar(100),
-@email varchar(100),
-@nombre varchar(100),
-@borrado varchar(100),
-@bloqueado int
-as 
-begin
-
-UPDATE Usuario
-SET bloqueado = @bloqueado, email=@email, nombre = @nombre
-WHERE usuario = @usu;
-end
-select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
-GO
-
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -680,10 +665,14 @@ INSERT [dbo].[Familia] ([id], [familia]) VALUES (2, N'Estudiante')
 INSERT [dbo].[Familia] ([id], [familia]) VALUES (3, N'Tutor')
 INSERT [dbo].[Familia] ([id], [familia]) VALUES (4, N'Administrador')
 GO
-INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa], id_especialidad) VALUES 
-(1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No', 0, 0),
-(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 1, 0),
-(3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No', 0, 1 );
+INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
+(1, 'TECHBOTICA', 'Empresa TECHBOTICA', 'contacto@techbotica.com', '555-1234', 'No'),
+(2, 'example2', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
+GO
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
+(1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No', 1),
+(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 2),
+(3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No', 1);
 GO
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'MenuAdministracion')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (2, N'MenuTutores')
@@ -706,13 +695,9 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (5, 1, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (6, 1, 6)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (7, 1, 7)
 GO
-INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
-(1, 'example', 'Esta es una empresa de ejemplo', 'contacto@example.com', '555-1234', 'No'),
-(2, 'example2', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
-GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
-(1, 'example.com', 1, 'No'),
-(2, 'gmail.com',1, 'No')
+(1, 'techbotica.ar', 1, 'No'),
+(2, 'gmail.com', 1, 'No')
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')
