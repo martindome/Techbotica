@@ -36,5 +36,25 @@ namespace BusinessLayer
         {
             return mapper.listar_cursos_carrera(carrera.Id);
         }
+
+        public void AgregarCarreraCurso(Curso_BE cursoBE, Carrera_BE carrera)
+        {
+            new Carrera_BLL().AgregarCursoCarrera(carrera, cursoBE);
+        }
+
+        public void EliminarCarreraCurso(Curso_BE cursoBE, Carrera_BE carrera)
+        {
+            new Carrera_BLL().EliminarCursoCarrera(carrera, cursoBE);
+        }
+
+        public List<Carrera_BE> ListarCarrerasPorCurso(Curso_BE cursoBE)
+        {
+            List<Carrera_BE> carreras = new Carrera_BLL().ListarCarreras();
+
+            // Filtrar las carreras que contienen el curso específico
+            var carrerasConCurso = carreras.Where(carrera => carrera.Cursos.Any(curso => curso.Id == cursoBE.Id)).ToList();
+
+            return carrerasConCurso;
+        }
     }
 }

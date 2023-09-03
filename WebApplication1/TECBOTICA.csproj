@@ -186,7 +186,9 @@
     <Content Include="Tutores\Carrera\EditarCarrera.aspx" />
     <Content Include="Tutores\Carrera\ManejarCursosCarrera.aspx" />
     <Content Include="Tutores\Carrera\NuevaCarrera.aspx" />
+    <Content Include="Tutores\Curso\EditarCarreras.aspx" />
     <Content Include="Tutores\Curso\EditarCurso.aspx" />
+    <Content Include="Tutores\Curso\NuevoCursoGenerico.aspx" />
     <Content Include="Tutores\Dictado\EditarDictado.aspx" />
     <Content Include="Tutores\Dictado\NuevoDictado1erPaso.aspx" />
     <Content Include="Tutores\Dictado\NuevoDictado2doPaso.aspx" />
@@ -194,7 +196,6 @@
     <Content Include="Tutores\GestionCursos.aspx" />
     <Content Include="Tutores\GestionCarreras.aspx" />
     <Content Include="Tutores\GestionDictados.aspx" />
-    <Content Include="Tutores\Curso\NuevoCursoGenerico.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -511,12 +512,26 @@
     <Compile Include="Tutores\Carrera\NuevaCarrera.aspx.designer.cs">
       <DependentUpon>NuevaCarrera.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tutores\Curso\EditarCarreras.aspx.cs">
+      <DependentUpon>EditarCarreras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Curso\EditarCarreras.aspx.designer.cs">
+      <DependentUpon>EditarCarreras.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tutores\Curso\EditarCurso.aspx.cs">
       <DependentUpon>EditarCurso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Tutores\Curso\EditarCurso.aspx.designer.cs">
       <DependentUpon>EditarCurso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.cs">
+      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.designer.cs">
+      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutores\Dictado\EditarDictado.aspx.cs">
       <DependentUpon>EditarDictado.aspx</DependentUpon>
@@ -566,13 +581,6 @@
     </Compile>
     <Compile Include="Tutores\GestionDictados.aspx.designer.cs">
       <DependentUpon>GestionDictados.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.cs">
-      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Tutores\Curso\NuevoCursoGenerico.aspx.designer.cs">
-      <DependentUpon>NuevoCursoGenerico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutores\MisDictados\Actividad\EditarActividad.aspx.cs">
       <DependentUpon>EditarActividad.aspx</DependentUpon>

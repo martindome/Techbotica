@@ -21,9 +21,9 @@
         </div>
 
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorNombre" Display="None" runat="server" ControlToValidate="CareerName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre para continuar"></asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" Display="None" runat="server" ControlToValidate="CareerName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" Display="None" runat="server" ControlToValidate="CareerName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDescripcion" Display="None" runat="server" ControlToValidate="CareerDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripcion para continuar"></asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidatorDescripcion" Display="None" runat="server" ControlToValidate="CareerDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripcion valida" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorDescripcion" Display="None" runat="server" ControlToValidate="CareerDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripcion valida" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
         <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
     </div>
 </asp:Content>

@@ -43,7 +43,7 @@ namespace DataAccessLayer
             parametros[2] = new SqlParameter();
             parametros[2].ParameterName = "@especialidad";
             parametros[2].DbType = DbType.Int32;
-            parametros[2].Value = curso.Especialidad;
+            parametros[2].Value = curso.Especialidad.IdEspecialidad;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("nuevo_curso", parametros);
 
@@ -74,7 +74,7 @@ namespace DataAccessLayer
             parametros[3] = new SqlParameter();
             parametros[3].ParameterName = "@especialidad";
             parametros[3].DbType = DbType.Int32;
-            parametros[3].Value = cursobe.Especialidad;
+            parametros[3].Value = cursobe.Especialidad.IdEspecialidad;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("actualizar_curso", parametros);
         }
@@ -97,7 +97,9 @@ namespace DataAccessLayer
             e.Id = Convert.ToInt32(reg["id"].ToString());
             e.Nombre = reg["nombre"].ToString();
             e.Descripcion = reg["descripcion"].ToString();
-            e.Especialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+            //Especialidad_BE especialidad = new Especialidad_BE();
+            //especialidad.IdEspecialidad = Convert.ToInt32(reg["id_especialidad"].ToString());
+            e.Especialidad = new Especialidad_DAL().listar_especilidades().FirstOrDefault(es => es.IdEspecialidad == Convert.ToInt32(reg["id_especialidad"].ToString()));
         }
 
         public List<Curso_BE> listar_cursos_carrera(int id)

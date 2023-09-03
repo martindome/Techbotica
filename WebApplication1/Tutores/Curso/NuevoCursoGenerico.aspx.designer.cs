@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1.Tutores.Nuevo
+namespace WebApplication1.Tutores.Curso
 {
 
 
@@ -33,75 +33,111 @@ namespace WebApplication1.Tutores.Nuevo
         protected global::System.Web.UI.WebControls.TextBox CourseDescription;
 
         /// <summary>
-        /// Control CourseSpecialty.
+        /// Control ddlEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CourseSpecialty;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEspecialidad;
 
         /// <summary>
-        /// Control SearchTutorTextBox.
+        /// Control AvailableCareers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchTutorTextBox;
+        protected global::System.Web.UI.WebControls.ListBox AvailableCareers;
 
         /// <summary>
-        /// Control SearchTutorButton.
+        /// Control btnAssignCareer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchTutorButton;
+        protected global::System.Web.UI.WebControls.Button btnAssignCareer;
 
         /// <summary>
-        /// Control AvailableTutorsList.
+        /// Control AssignedCareers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AvailableTutorsList;
+        protected global::System.Web.UI.WebControls.ListBox AssignedCareers;
 
         /// <summary>
-        /// Control AddTutorButton.
+        /// Control btnRemoveCareer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddTutorButton;
+        protected global::System.Web.UI.WebControls.Button btnRemoveCareer;
 
         /// <summary>
-        /// Control AssignedTutorsList.
+        /// Control btnCreateCourse.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AssignedTutorsList;
+        protected global::System.Web.UI.WebControls.Button btnCreateCourse;
 
         /// <summary>
-        /// Control RemoveTutorButton.
+        /// Control btnBackToCourses.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemoveTutorButton;
+        protected global::System.Web.UI.WebControls.Button btnBackToCourses;
 
         /// <summary>
-        /// Control SubmitButton.
+        /// Control RequiredFieldValidatorCourseName.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SubmitButton;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorCourseName;
+
+        /// <summary>
+        /// Control RegularExpressionValidatorCourseName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorCourseName;
+
+        /// <summary>
+        /// Control RequiredFieldValidatorCourseDescription.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorCourseDescription;
+
+        /// <summary>
+        /// Control RegularExpressionValidatorCourseDescription.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorCourseDescription;
+
+        /// <summary>
+        /// Control valSummaryCourse.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummaryCourse;
     }
 }

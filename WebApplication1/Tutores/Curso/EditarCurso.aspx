@@ -12,29 +12,21 @@
 
                 <asp:Label runat="server" AssociatedControlID="CourseSpeciality" CssClass="form-label">Especialidad:</asp:Label>
                 <asp:DropDownList ID="CourseSpeciality" runat="server" CssClass="form-control"></asp:DropDownList>
+                
+                <asp:Button ID="ButtonEditCareers" CssClass="btn btn-primary ml-2" Text="Editar Carreras" runat="server" OnClick="ButtonEditCareers_Click" CausesValidation="false"/>
+                <asp:Button class="btn btn-primary" type="button" ID="UpdateCourseButton" Text="Actualizar" runat="server" OnClick="UpdateCourseButton_Click"/>
+                <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClick="btnBack_Click" CausesValidation="false" />
 
-                <div>
-                <h4>Carreras</h4>
-                <div class="input-group mb-3">
-                    <asp:TextBox ID="SearchTutorTextBox" runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:Button class="btn btn-primary" type="button" ID="SearchTutorButton" Text="Buscar" runat="server" />
-                </div>
 
-                <asp:ListBox ID="AvailableTutorsList" runat="server" CssClass="form-control mb-3"></asp:ListBox>
-                <asp:Button class="btn btn-outline-secondary mb-3" type="button" ID="AddTutorButton" Text="Asignar Carrera" runat="server" />
-
-                <h4>Carreras Asignadas</h4>
-                <asp:ListBox ID="AssignedTutorsList" runat="server" CssClass="form-control mb-3"></asp:ListBox>
-                <asp:Button class="btn btn-outline-danger mb-3" type="button" ID="RemoveTutorButton" Text="Desasignar Carrera " runat="server" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorCourseName" Display="None" runat="server" ControlToValidate="CourseName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre para continuar"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidatorCourseName" Display="None" runat="server" ControlToValidate="CourseName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre válido" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorCourseDescription" Display="None" runat="server" ControlToValidate="CourseDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripción para continuar"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidatorCourseDescription" Display="None" runat="server" ControlToValidate="CourseDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripción válida" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
             </div>
-                <asp:Button class="btn btn-primary" type="button" ID="Button2" Text="Actualizar" runat="server" OnClick="Button2_Click"/>
-                 <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
-
-            </div>
-
-    </div>
+        </div>
     </div>
 </asp:Content>
+
 
 
 

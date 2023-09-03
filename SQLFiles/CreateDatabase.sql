@@ -246,7 +246,60 @@ CREATE TABLE [dbo].[Curso_Carrera](
 ) ON [PRIMARY]
 GO
 
+/****** Object:  Table [dbo].[Tipo_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tipo_Dictado](
+	[id] [int] PRIMARY KEY,
+	[tipo_dictado][varchar](100) NULL
+) ON [PRIMARY]
+GO
 
+/****** Object:  Table [dbo].[Dictado]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dictado](
+	[id] [int] PRIMARY KEY,
+	[fecha_inicio] date NULL,
+    [fecha_fin] date NULL,
+	[enlace] varchar(50) NULL,
+	[id_curso] int NULL,
+	[id_tipo_dictado] int NULL,
+	FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_tipo_dictado) REFERENCES Tipo_Dictado(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Horario]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Horario](
+	[id] [int] PRIMARY KEY,
+	[dia] varchar(50) NULL,
+	HoraInicio TIME NULL,
+    HoraFin TIME NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Horario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Horario_Dictado](
+	[id] [int] PRIMARY KEY,
+	[id_horario] varchar(50) NULL,
+	[id_dictado] varchar(50) NULL,
+	FOREIGN KEY (id_horario) REFERENCES Horario(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
 
 /************************************************************************************************/
 /************************************************************************************************/
@@ -887,7 +940,7 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarU
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarTutores')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Tutores/GestionarCarreras')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCursos')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictaods')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictados')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
@@ -912,11 +965,11 @@ INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')
 INSERT into Carrera (id, nombre, descripcion) VALUES
-(1, 'Robotica', 'Especialista en Robotica'),
-(2, 'Matematica', 'Especialista en Matematica')
+(1, 'Carrera en Robotica', 'Tecnico robotico'),
+(2, 'Carrera en Matematica', 'Tecnico matematico')
 INSERT into Curso (id, nombre, descripcion, id_especialidad) VALUES
-(1, 'Robotica-01', 'Especialista en Robotica', 1),
-(2, 'Matematica-01', 'Especialista en Matematica', 2)
+(1, 'Robotica-01', 'Curso de robotica inicial', 1),
+(2, 'Matematica-01', 'Curso de matematica inicial', 2)
 INSERT into Curso_Carrera (id, id_carrera, id_curso) VALUES
 (1, 1, 1),
 (2, 2, 2)

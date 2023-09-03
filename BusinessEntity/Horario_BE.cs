@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-    [Serializable]
-    public class Curso_BE
+    public class Horario_BE
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public Especialidad_BE  Especialidad { get; set; }
+        public string Dia { get; set; }
+        public TimeSpan HoraInicio { get; set; }
+        public TimeSpan HoraFin { get; set; }
     }
 }

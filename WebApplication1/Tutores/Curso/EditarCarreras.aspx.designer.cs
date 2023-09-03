@@ -7,56 +7,56 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1.Tutores
+namespace WebApplication1.Tutores.Curso
 {
 
 
-    public partial class MisCursos
+    public partial class EditarCarreras
     {
 
         /// <summary>
-        /// Control searchName.
+        /// Control AvailableCareers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchName;
+        protected global::System.Web.UI.WebControls.ListBox AvailableCareers;
 
         /// <summary>
-        /// Control searchCareer.
+        /// Control btnAssignCareer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchCareer;
+        protected global::System.Web.UI.WebControls.Button btnAssignCareer;
 
         /// <summary>
-        /// Control searchSpeciality.
+        /// Control AssignedCareers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList searchSpeciality;
+        protected global::System.Web.UI.WebControls.ListBox AssignedCareers;
 
         /// <summary>
-        /// Control btnSearch.
+        /// Control btnRemoveCareer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.Button btnRemoveCareer;
 
         /// <summary>
-        /// Control coursesGrid.
+        /// Control btnBackToCourses.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView coursesGrid;
+        protected global::System.Web.UI.WebControls.Button btnBackToCourses;
     }
 }
