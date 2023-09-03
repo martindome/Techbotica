@@ -70,7 +70,7 @@ namespace WebApplication1.Administracion
             // Obteniendo el valor de IdEmpresa usando DataKeys
             string idEmpresa = CompaniesGrid.DataKeys[rowIndex].Value.ToString();
 
-            // Ahora puedes usar idEmpresa para tus propósitos
+            
             Session["id_empresa_editar"] = idEmpresa;
             Response.Redirect("~/Administracion/Empresas/DetalleEmpresa.aspx");
         }

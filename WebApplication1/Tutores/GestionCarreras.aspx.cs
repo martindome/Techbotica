@@ -63,7 +63,7 @@ namespace WebApplication1.Tutores
             // Obteniendo el valor de IdEmpresa usando DataKeys
             string idEmpresa = CareersGrid.DataKeys[rowIndex].Value.ToString();
 
-            // Ahora puedes usar idEmpresa para tus propósitos
+            
             Session["id_carrera_editar"] = idEmpresa;
 
             Response.Redirect("~/Tutores/Carrera/EditarCarrera.aspx");

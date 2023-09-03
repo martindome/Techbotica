@@ -16,11 +16,11 @@ namespace WebApplication1.Administracion
         Permisos_BLL mapperPermisos = new Permisos_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Administracion/GestionarUsuarios")))
-            //{
-            //    //Sacamos controles de navegacion
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
-            //}
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Administracion/GestionarUsuarios")))
+            {
+               //Sacamos controles de navegacion
+               ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
 
             if (!IsPostBack)
             {
