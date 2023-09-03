@@ -78,32 +78,34 @@ namespace WebApplication1.Administracion.Usuarios
                         usuarioBE.Email = TextBoxEmail.Text;
                         usuarioBE.Familia = new Familia_BE();
                         usuarioBE.Familia.id = permisosBLL.ListarFamilias().FirstOrDefault(x => x.familia == GridView2.SelectedValue).id;
-                        if (usuarioBE.Familia.id == 2) //Es estudiante
-                        {
-                            if (!string.IsNullOrEmpty(ListBoxEmpresas.SelectedValue))
-                            {
-                                int idEmpresaSeleccionada = int.Parse(ListBoxEmpresas.SelectedValue);
-                                usuarioBE.Empresa = empresaBLL.ListarEmpresas().FirstOrDefault(x => x.IdEmpresa == idEmpresaSeleccionada).IdEmpresa;
-                                usuarioBE.Especialidad = 0;
-                            }
-                            else
-                            {
-                                
-                                Label1.Text = "Por favor, seleccione una empresa.";
-                                Label1.Visible = true;
-                                return; // No continuamos con el proceso si no se ha seleccionado una empresa.
-                            }
-                        }
-                        //else if (usuarioBE.Familia.id == 3) // Es tutor
+                        int idEmpresaSeleccionada = int.Parse(ListBoxEmpresas.SelectedValue);
+                        usuarioBE.Empresa = empresaBLL.ListarEmpresas().FirstOrDefault(x => x.IdEmpresa == idEmpresaSeleccionada).IdEmpresa;
+                        //if (usuarioBE.Familia.id == 2) //Es estudiante
                         //{
-                        //    usuarioBE.Especialidad = especialidadBLL.ListarEspecialidades().FirstOrDefault(x => x.IdEspecialidad == int.Parse(ListBoxEspecialidades.SelectedValue.ToString())).IdEspecialidad;
+                        //    if (!string.IsNullOrEmpty(ListBoxEmpresas.SelectedValue))
+                        //    {
+                        //        int idEmpresaSeleccionada = int.Parse(ListBoxEmpresas.SelectedValue);
+                        //        usuarioBE.Empresa = empresaBLL.ListarEmpresas().FirstOrDefault(x => x.IdEmpresa == idEmpresaSeleccionada).IdEmpresa;
+                        //        usuarioBE.Especialidad = 0;
+                        //    }
+                        //    else
+                        //    {
+                                
+                        //        Label1.Text = "Por favor, seleccione una empresa.";
+                        //        Label1.Visible = true;
+                        //        return; // No continuamos con el proceso si no se ha seleccionado una empresa.
+                        //    }
+                        //}
+                        ////else if (usuarioBE.Familia.id == 3) // Es tutor
+                        ////{
+                        ////    usuarioBE.Especialidad = especialidadBLL.ListarEspecialidades().FirstOrDefault(x => x.IdEspecialidad == int.Parse(ListBoxEspecialidades.SelectedValue.ToString())).IdEspecialidad;
+                        ////    usuarioBE.Empresa = 0;
+                        ////}
+                        //else //Es todo lo demas
+                        //{
+                        //    usuarioBE.Especialidad = 0;
                         //    usuarioBE.Empresa = 0;
                         //}
-                        else //Es todo lo demas
-                        {
-                            usuarioBE.Especialidad = 0;
-                            usuarioBE.Empresa = 0;
-                        }
                         if (!string.IsNullOrEmpty(usuarioBLL.VerificarUsuarioEmail(TextBoxEmail.Text).Email))
                         {
                             Label1.Text = "Email '" + TextBoxEmail.Text + "' existente";

@@ -12,8 +12,8 @@
 
                 <asp:Label runat="server" AssociatedControlID="CourseSpeciality" CssClass="form-label">Especialidad:</asp:Label>
                 <asp:DropDownList ID="CourseSpeciality" runat="server" CssClass="form-control"></asp:DropDownList>
-                
-                <asp:Button ID="ButtonEditCareers" CssClass="btn btn-primary ml-2" Text="Editar Carreras" runat="server" OnClick="ButtonEditCareers_Click" CausesValidation="false"/>
+                <br />
+                <asp:Button ID="ButtonEditCareers" CssClass="btn btn-primary ml-2" Text="Editar Carreras" runat="server" OnClick="ButtonEditCareers_Click" CausesValidation="false"/><br />
                 <asp:Button class="btn btn-primary" type="button" ID="UpdateCourseButton" Text="Actualizar" runat="server" OnClick="UpdateCourseButton_Click"/>
                 <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClick="btnBack_Click" CausesValidation="false" />
 

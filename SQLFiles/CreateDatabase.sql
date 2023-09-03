@@ -8,12 +8,12 @@ USE [master]
 GO
 /****** Object:  Database [Techbotica]    Script Date: 24/1/2023 23:23:57 ******/
 CREATE DATABASE [Techbotica]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'Techbotica', FILENAME = N'C:\TECHBOTICASQL\Techbotica.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'Techbotica_log', FILENAME = N'C:\TECHBOTICASQL\Techbotica_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT
+--  CONTAINMENT = NONE
+--  ON  PRIMARY 
+-- ( NAME = N'Techbotica', FILENAME = N'C:\TECHBOTICASQL\Techbotica.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--  LOG ON 
+-- ( NAME = N'Techbotica_log', FILENAME = N'C:\TECHBOTICASQL\Techbotica_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+--  WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 ALTER DATABASE [Techbotica] SET COMPATIBILITY_LEVEL = 150
 GO
@@ -927,7 +927,7 @@ INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [
 (2, 'example2', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
 GO
 INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
-(1,'juan.perez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Pérez', '555-1234', 'juan.perez@techbotica.ar', 0, 'No', 1),
+(1,'web.master@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Web', 'Master', '555-1234', 'web.master@techbotica.ar', 0, 'No', 1),
 (2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 2),
 (3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No', 1);
 GO
