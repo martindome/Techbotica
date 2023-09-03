@@ -24,5 +24,7 @@
             <asp:Button ID="btnCreateDomain" CssClass="btn btn-success" Text="Crear Dominio" runat="server" OnClick="btnCreateDomain_Click" />
             <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClick="btnBack_Click" />
         </div>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorDominio" Display="None" runat="server" ControlToValidate="NewDomain" CssClass="text-danger" ErrorMessage="Debe ingresar un dominio valido" ValidationExpression="^([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$"></asp:RegularExpressionValidator>
+        <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
     </div>
 </asp:Content>

@@ -206,6 +206,32 @@ CREATE TABLE [dbo].[Especialidad](
 ) ON [PRIMARY]
 GO
 
+/****** Object:  Table [dbo].[Curso]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Curso](
+	[id] [int] PRIMARY KEY,
+	[nombre] [varchar](100) NULL,
+    [descripcion] [varchar](MAX) NULL,
+	[id_especialidad] int NULL,
+	FOREIGN KEY (id_especialidad) REFERENCES Empresa(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Carrera]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Carrera](
+	[id] [int] PRIMARY KEY,
+	[nombre] [varchar](100) NULL,
+    [descripcion] [varchar](MAX) NULL,
+) ON [PRIMARY]
+GO
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
