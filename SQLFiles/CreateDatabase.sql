@@ -215,8 +215,8 @@ CREATE TABLE [dbo].[Curso](
 	[id] [int] PRIMARY KEY,
 	[nombre] [varchar](100) NULL,
     [descripcion] [varchar](MAX) NULL,
-	[id_especialidad] int NULL,
-	FOREIGN KEY (id_especialidad) REFERENCES Empresa(id) ON DELETE CASCADE
+	[id_especialidad] [int] NULL,
+	FOREIGN KEY (id_especialidad) REFERENCES Especialidad(id) ON DELETE CASCADE,
 ) ON [PRIMARY]
 GO
 
@@ -231,6 +231,22 @@ CREATE TABLE [dbo].[Carrera](
     [descripcion] [varchar](MAX) NULL,
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[Curso_Carrera]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Curso_Carrera](
+	[id] [int] PRIMARY KEY,
+	[id_curso] int NULL,
+    [id_carrera] int NULL,
+	FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_carrera) REFERENCES Carrera(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+
 
 /************************************************************************************************/
 /************************************************************************************************/
@@ -248,7 +264,6 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 Create procedure [dbo].[listar_usuarios]
 as 
 begin
@@ -260,7 +275,6 @@ inner join Familia c
 on c.id = b.id_familia
 end 
 GO
-
 /****** Object:  StoredProcedure [dbo].[obtener_usuario_usuario]    Script Date: 5/7/2022 03:16:57 ******/
 SET ANSI_NULLS ON
 GO
@@ -674,6 +688,170 @@ from Familia
 end
 GO
 
+/****** Object:  StoredProcedure [dbo].[listar_cursos]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_cursos]
+as 
+begin
+select e.id, e.nombre, e.descripcion, e.id_especialidad from Curso e
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[nuevo_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_curso]
+@nombre varchar(100),
+@descripcion varchar(100),
+@especialidad int
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Curso),0 ) +1
+INSERT INTO Curso (id, nombre, descripcion, id_especialidad)
+VALUES (@id, @nombre, @descripcion, @especialidad);
+end
+select e.id, e.nombre, e.descripcion, e.id_especialidad from Curso e WHERE e.id = @id
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[actualizar_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[actualizar_curso]
+@nombre varchar(100),
+@descripcion varchar(100),
+@id int,
+@especialidad int
+as 
+BEGIN
+    UPDATE Curso 
+    SET nombre = @nombre,
+        descripcion = @descripcion,
+		id_especialidad = @especialidad
+    WHERE id = @id;
+END
+select e.id, e.nombre, e.descripcion, e.id_especialidad from Curso e WHERE e.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_curso]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_curso
+@id INT
+AS
+BEGIN
+    DELETE FROM Curso WHERE id = @id;
+
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_cursos_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_cursos_carrera]
+@id int
+as 
+begin
+select e.id, e.nombre, e.descripcion, e.id_especialidad from Curso e inner join Curso_Carrera cc on cc.id_curso = e.id where cc.id_carrera = @id
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_carreras]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_carreras]
+as 
+begin
+select e.id, e.nombre, e.descripcion from Carrera e
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[nueva_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nueva_carrera]
+@nombre varchar(100),
+@descripcion varchar(100)
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Carrera),0 ) +1
+INSERT INTO Carrera (id, nombre, descripcion)
+VALUES (@id, @nombre, @descripcion);
+end
+select e.id, e.nombre, e.descripcion from Carrera e WHERE e.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[actualizar_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[actualizar_carrera]
+@nombre varchar(100),
+@descripcion varchar(100),
+@id int
+as 
+BEGIN
+    UPDATE Carrera 
+    SET nombre = @nombre,
+        descripcion = @descripcion
+    WHERE id = @id;
+END
+select e.id, e.nombre, e.descripcion from Carrera e WHERE e.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_carrera
+@id INT
+AS
+BEGIN
+    DELETE FROM Carrera WHERE id = @id;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[nuevo_curso_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_curso_carrera]
+@id_carrera int,
+@id_curso int
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Curso_Carrera),0 ) +1
+INSERT INTO Curso_Carrera (id, id_carrera, id_curso)
+VALUES (@id, @id_carrera, @id_curso);
+end
+select e.id, e.nombre, e.descripcion from Carrera e WHERE e.id = @id_carrera
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_curso_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_curso_carrera
+@id_carrera INT,
+@id_curso INT
+AS
+BEGIN
+    DELETE FROM Curso_Carrera WHERE id_carrera = @id_carrera AND id_curso = @id_curso;
+END
+GO
+
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -707,6 +885,9 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'MenuBusqueda')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'/Administracion/GestionarEmpresas')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarUsuarios')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarTutores')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Tutores/GestionarCarreras')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCursos')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictaods')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
@@ -720,6 +901,9 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (4, 1, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (5, 1, 5)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (6, 1, 6)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (7, 1, 7)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (8, 1, 8)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (9, 1, 9)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (10, 1, 10)
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
@@ -727,3 +911,12 @@ INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')
+INSERT into Carrera (id, nombre, descripcion) VALUES
+(1, 'Robotica', 'Especialista en Robotica'),
+(2, 'Matematica', 'Especialista en Matematica')
+INSERT into Curso (id, nombre, descripcion, id_especialidad) VALUES
+(1, 'Robotica-01', 'Especialista en Robotica', 1),
+(2, 'Matematica-01', 'Especialista en Matematica', 2)
+INSERT into Curso_Carrera (id, id_carrera, id_curso) VALUES
+(1, 1, 1),
+(2, 2, 2)

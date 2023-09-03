@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso_DAL.cs" />
+    <Compile Include="Carrera_DAL.cs" />
+    <Compile Include="Curso_DAL.cs" />
     <Compile Include="Empresa_DAL.cs" />
     <Compile Include="Especialidad_DAL.cs" />
     <Compile Include="Permisos_DAL.cs" />

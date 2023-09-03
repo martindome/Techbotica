@@ -52,7 +52,7 @@ namespace WebApplication1.Administracion.Empresas
                 empresabe.Telefono = CompanyPhone.Text;
                 empresabe.Borrado = "No";
                 mappere.ActualizarEmpresa(empresabe);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa editada con exito');window.location.href = '/Administracion/GestionarEmpresas.aspx'", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Carrera editada con exito');window.location.href = '/Administracion/GestionarEmpresas.aspx'", true);
             }
         }
 

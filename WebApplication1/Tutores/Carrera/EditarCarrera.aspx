@@ -13,26 +13,17 @@
             <asp:TextBox ID="CareerDescription" CssClass="form-control" runat="server"></asp:TextBox>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Cursos Disponibles</h3>
-                <asp:ListBox ID="AvailableCourses" CssClass="form-control" runat="server">
-                </asp:ListBox>
-                <asp:Button ID="btnAssignCourse" CssClass="btn btn-primary mt-2" Text="Asignar Curso" runat="server" />
-            </div>
-
-            <div class="col-md-6">
-                <h3>Cursos Asignados</h3>
-                <asp:ListBox ID="AssignedCourses" CssClass="form-control" runat="server">
-                </asp:ListBox>
-                <asp:Button ID="btnRemoveCourse" CssClass="btn btn-danger mt-2" Text="Desasignar Curso" runat="server" />
-            </div>
-        </div>
 
         <div class="form-group mt-4">
             <asp:Button ID="btnEditCareer" CssClass="btn btn-success" Text="Aplicar cambios" runat="server" OnClick="btnEditCareer_Click" />
-            <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
-
+            <asp:Button ID="ButtonEditCourses" CssClass="btn btn-primary ml-2" Text="Editar Cursos" runat="server" OnClick="ButtonEditCourses_Click" CausesValidation="false"/>
+            <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClick="btnBack_Click" CausesValidation="false" />
         </div>
+
+        <asp:RequiredFieldValidator ID="RequiredFieldValidatorNombre" Display="None" runat="server" ControlToValidate="CareerName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre para continuar"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" Display="None" runat="server" ControlToValidate="CareerName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidatorDescripcion" Display="None" runat="server" ControlToValidate="CareerDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripcion para continuar"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorDescripcion" Display="None" runat="server" ControlToValidate="CareerDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripcion valida" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+(?: [a-zA-ZáéíóúÁÉÍÓÚüÜñÑ-]+)*$"></asp:RegularExpressionValidator>
+        <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
     </div>
 </asp:Content>

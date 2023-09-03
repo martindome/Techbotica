@@ -184,6 +184,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Tutores\Carrera\EditarCarrera.aspx" />
+    <Content Include="Tutores\Carrera\ManejarCursosCarrera.aspx" />
     <Content Include="Tutores\Carrera\NuevaCarrera.aspx" />
     <Content Include="Tutores\Curso\EditarCurso.aspx" />
     <Content Include="Tutores\Dictado\EditarDictado.aspx" />
@@ -495,6 +496,13 @@
     </Compile>
     <Compile Include="Tutores\Carrera\EditarCarrera.aspx.designer.cs">
       <DependentUpon>EditarCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Carrera\ManejarCursosCarrera.aspx.cs">
+      <DependentUpon>ManejarCursosCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Carrera\ManejarCursosCarrera.aspx.designer.cs">
+      <DependentUpon>ManejarCursosCarrera.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutores\Carrera\NuevaCarrera.aspx.cs">
       <DependentUpon>NuevaCarrera.aspx</DependentUpon>

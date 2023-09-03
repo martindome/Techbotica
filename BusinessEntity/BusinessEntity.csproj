@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrera_BE.cs" />
     <Compile Include="Composite\Compuesto_BE.cs" />
     <Compile Include="Composite\Familia_BE.cs" />
     <Compile Include="Composite\Patente_BE.cs" />
+    <Compile Include="Curso_BE.cs" />
     <Compile Include="Dominio_BE.cs" />
     <Compile Include="Empresa_BE.cs" />
     <Compile Include="Especialidad_BE.cs" />

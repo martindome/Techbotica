@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrera_BLL.cs" />
+    <Compile Include="Curso_BLL.cs" />
     <Compile Include="Empresa_BLL.cs" />
     <Compile Include="Especialidad_BLL.cs" />
     <Compile Include="Permisos_BLL.cs" />
