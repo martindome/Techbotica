@@ -88,7 +88,7 @@ namespace WebApplication1.Administracion.Usuarios
                             }
                             else
                             {
-                                // Aquí puedes gestionar el error. Por ejemplo:
+                                
                                 Label1.Text = "Por favor, seleccione una empresa.";
                                 Label1.Visible = true;
                                 return; // No continuamos con el proceso si no se ha seleccionado una empresa.
