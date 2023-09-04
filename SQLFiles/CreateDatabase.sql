@@ -268,6 +268,7 @@ CREATE TABLE [dbo].[Dictado](
     [fecha_fin] date NULL,
 	[enlace] varchar(50) NULL,
 	[id_curso] int NULL,
+	[cupo] int NULL,
 	[id_tipo_dictado] int NULL,
 	FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE,
 	FOREIGN KEY (id_tipo_dictado) REFERENCES Tipo_Dictado(id) ON DELETE CASCADE
@@ -282,24 +283,40 @@ GO
 CREATE TABLE [dbo].[Horario](
 	[id] [int] PRIMARY KEY,
 	[dia] varchar(50) NULL,
-	HoraInicio TIME NULL,
-    HoraFin TIME NULL
+	[hora_inicio] TIME NULL,
+    [hora_fin] TIME NULL,
+	[id_dictado] int NULL,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
 
-/****** Object:  Table [dbo].[Horario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
+/****** Object:  Table [dbo].[Usuario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Horario_Dictado](
+CREATE TABLE [dbo].[Usuario_Dictado](
 	[id] [int] PRIMARY KEY,
-	[id_horario] varchar(50) NULL,
-	[id_dictado] varchar(50) NULL,
-	FOREIGN KEY (id_horario) REFERENCES Horario(id) ON DELETE CASCADE,
-	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE
+	[id_usuario] int NULL,
+	[id_dictado] int NULL,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
+
+-- /****** Object:  Table [dbo].[Horario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
+-- SET ANSI_NULLS ON
+-- GO
+-- SET QUOTED_IDENTIFIER ON
+-- GO
+-- CREATE TABLE [dbo].[Horario_Dictado](
+-- 	[id] [int] PRIMARY KEY,
+-- 	[id_horario] int NULL,
+-- 	[id_dictado] int NULL,
+-- 	FOREIGN KEY (id_horario) REFERENCES Horario(id) ON DELETE CASCADE,
+-- 	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE
+-- ) ON [PRIMARY]
+-- GO
 
 /************************************************************************************************/
 /************************************************************************************************/
@@ -904,6 +921,200 @@ BEGIN
 END
 GO
 
+/****** Object:  StoredProcedure [dbo].[listar_dictados]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_dictados]
+as 
+begin
+select d.id, d.fecha_inicio, d.fecha_fin, d.enlace, t.tipo_dictado, d.id_curso, d.cupo from Dictado d inner join Tipo_Dictado t on t.id = d.id_tipo_dictado
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[nuevo_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_dictado]
+@fecha_inicio Date,
+@fecha_fin Date,
+@enlace varchar(100),
+@tipo_dictado int,
+@curso int,
+@cupo int
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Dictado),0 ) +1
+INSERT INTO Dictado (id, fecha_inicio, fecha_fin, enlace, id_tipo_dictado, id_curso, cupo)
+VALUES (@id, @fecha_inicio, @fecha_fin, @enlace, @tipo_dictado, @curso, @cupo);
+end
+select d.id, d.fecha_inicio, d.fecha_fin, d.enlace, t.tipo_dictado, d.id_curso, d.cupo from Dictado d inner join Tipo_Dictado t on t.id = d.id_tipo_dictado where d.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[actualizar_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[actualizar_dictado]
+@fecha_inicio Date,
+@fecha_fin Date,
+@enlace varchar(100),
+@tipo_dictado int,
+@id int,
+@cupo int
+as 
+BEGIN
+    UPDATE Dictado 
+    SET fecha_fin = @fecha_fin,
+		fecha_inicio = @fecha_inicio,
+		enlace = @enlace,
+		id_tipo_dictado = @tipo_dictado,
+		cupo = @cupo
+    WHERE id = @id;
+END
+select d.id, d.fecha_inicio, d.fecha_fin, d.enlace, t.tipo_dictado, d.id_curso, d.cupo from Dictado d inner join Tipo_Dictado t on t.id = d.id_tipo_dictado where d.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_dictado
+@id INT
+AS
+BEGIN
+    DELETE FROM Dictado WHERE id = @id;
+
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[nuevo_horario]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_horario]
+@hora_inicio TIME,
+@hora_fin TIME,
+@dia varchar(100),
+@dictado int
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Horario),0 ) +1
+INSERT INTO Horario (id, hora_inicio, hora_fin, dia, id_dictado)
+VALUES (@id, @hora_inicio, @hora_fin, @dia, @dictado);
+end
+select h.id, h.hora_inicio, h.hora_fin, h.dia, h.id_dictado from Horario h where h.id = @id
+GO
+
+/****** Object:  StoredProcedure [dbo].[actualizar_horario]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[actualizar_horario]
+@hora_inicio TIME,
+@hora_fin TIME,
+@dia varchar(100),
+@id int
+as 
+BEGIN
+    UPDATE Horario 
+    SET hora_fin = @hora_fin,
+		hora_inicio = @hora_inicio,
+		dia = @dia
+    WHERE id = @id;
+END
+select h.id, h.hora_inicio, h.hora_fin, h.dia, h.id_dictado from Horario h where h.id = @id
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[eliminar_horario]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_horario
+@id INT
+AS
+BEGIN
+    DELETE FROM Horario WHERE id = @id;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_horarios_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_horarios_dictado]
+@id_curso int
+as 
+begin
+select h.id, h.hora_inicio, h.hora_fin, h.dia, h.id_dictado from Horario h where h.id_dictado = @id_curso
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_dictados_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_dictados_curso]
+@id int
+as 
+begin
+select d.id, d.fecha_inicio, d.fecha_fin, d.enlace, t.tipo_dictado, d.id_curso, d.cupo from Dictado d inner join Tipo_Dictado t on t.id = d.id_tipo_dictado Where d.id_curso = @id
+end 
+GO
+
+/****** Object:  StoredProcedure [dbo].[nuevo_usuario_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[nuevo_usuario_dictado]
+@id_usuario int,
+@id_dictado int
+as 
+begin
+declare @id int
+set @id = isnull((Select max(id) from Usuario_Dictado),0 ) +1
+INSERT INTO Usuario_Dictado (id, id_usuario, id_dictado)
+VALUES (@id, @id_usuario, @id_dictado);
+end
+select d.id, d.fecha_inicio, d.fecha_fin, d.enlace, t.tipo_dictado, d.id_curso, d.cupo from Dictado d inner join Tipo_Dictado t on t.id = d.id_tipo_dictado Where d.id = @id_dictado
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_usuario_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_usuario_dictado
+@id_usuario int,
+@id_dictado int
+AS
+BEGIN
+    DELETE FROM Usuario_Dictado WHERE id_usuario = @id_usuario AND id_dictado = @id_dictado;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_usuarios_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_usuarios_dictado]
+@id_dictado int
+as 
+begin
+select a.id, a.nombre, a.usuario, a.contraseña, a.email,a.bloqueado, a.borrado, a.telefono, a.apellido, a.id_empresa,  b.id_familia as familia, c.familia as detalle
+from Usuario a 
+inner join Familia_Usuario b 
+on a.id = b.id_usuario
+inner join Familia c
+on c.id = b.id_familia
+inner JOIN Usuario_Dictado ud on ud.id_dictado = @id_dictado and ud.id_usuario = a.id
+end 
+GO
+
 
 /************************************************************************************************/
 /************************************************************************************************/
@@ -941,6 +1152,7 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarT
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Tutores/GestionarCarreras')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCursos')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictados')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (11, N'/Tutores/MisDictados')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
@@ -973,3 +1185,19 @@ INSERT into Curso (id, nombre, descripcion, id_especialidad) VALUES
 INSERT into Curso_Carrera (id, id_carrera, id_curso) VALUES
 (1, 1, 1),
 (2, 2, 2)
+
+INSERT INTO [dbo].[Tipo_Dictado] (id, tipo_dictado)
+VALUES (1, 'Autodirigido'),
+       (2, 'Interactivo');
+
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES (1, '2023-02-01', '2023-02-15', 'http://enlace1.com', 1, 1, 20),
+       (2, '2023-03-01', '2023-03-15', 'http://enlace2.com', 1, 1, 12);
+
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES (1, 'Lunes', '08:00:00', '10:00:00',1),
+       (2, 'Martes', '10:00:00', '12:00:00',1); --debe tener al menos un horario cada dictado interactivo
+
+-- INSERT INTO [dbo].[Horario_Dictado] (id, id_horario, id_dictado)
+-- VALUES (1, 1, 1),
+--        (2, 2, 2);

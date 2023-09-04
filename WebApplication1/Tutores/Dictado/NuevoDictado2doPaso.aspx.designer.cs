@@ -15,49 +15,58 @@ namespace WebApplication1.Tutores.Dictado
     {
 
         /// <summary>
-        /// Control SearchScheduleTextBox.
+        /// Control DayDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchScheduleTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList DayDropDownList;
 
         /// <summary>
-        /// Control SearchScheduleButton.
+        /// Control StartTimeTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchScheduleButton;
+        protected global::System.Web.UI.WebControls.TextBox StartTimeTextBox;
 
         /// <summary>
-        /// Control SchedulesGrid.
+        /// Control EndTimeTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView SchedulesGrid;
+        protected global::System.Web.UI.WebControls.TextBox EndTimeTextBox;
 
         /// <summary>
-        /// Control AssignedSchedulesGrid.
+        /// Control AddButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AssignedSchedulesGrid;
+        protected global::System.Web.UI.WebControls.Button AddButton;
 
         /// <summary>
-        /// Control NextPageButton.
+        /// Control HorariosGridView.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button NextPageButton;
+        protected global::System.Web.UI.WebControls.GridView HorariosGridView;
+
+        /// <summary>
+        /// Control ContinueButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ContinueButton;
 
         /// <summary>
         /// Control btnBack.

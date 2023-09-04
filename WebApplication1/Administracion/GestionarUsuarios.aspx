@@ -54,10 +54,12 @@
     <hr />
     <asp:Label ID="LabelAccion" runat="server" Text="" CssClass="text-info"></asp:Label>
     <br />
-    <asp:Button ID="ButtonAplicar" runat="server" Text="Aplicar" OnClick="ButtonAplicar_Click" ssClass="btn btn-primary"/>
+    <asp:Button ID="ButtonAplicar" runat="server" Text="Aplicar" OnClick="ButtonAplicar_Click" CssClass="btn btn-primary"/>
+
+    
     <br />
-    <asp:Button ID="ButtonNuevoUsuario" runat="server" Text="Nuevo Usuario" OnClick="ButtonNuevoUsuario_Click" ssClass="btn btn-primary" />
+    <asp:Button ID="ButtonNuevoUsuario" runat="server" Text="Nuevo Usuario" OnClick="ButtonNuevoUsuario_Click" CssClass="btn btn-primary"/ />
     <br />
-    <asp:Button ID="ButtonSalir" runat="server" Text="Salir" OnClick="ButtonSalir_Click" ssClass="btn btn-primary" />
+    <asp:Button ID="ButtonSalir" runat="server" Text="Salir" OnClick="ButtonSalir_Click" CssClass="btn btn-secondary" />
 </asp:Content>
 

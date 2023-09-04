@@ -22,6 +22,7 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorCourseName" Display="None" runat="server" ControlToValidate="CourseName" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre válido" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorCourseDescription" Display="None" runat="server" ControlToValidate="CourseDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripción para continuar"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorCourseDescription" Display="None" runat="server" ControlToValidate="CourseDescription" CssClass="text-danger" ErrorMessage="Debe ingresar una descripción válida" ValidationExpression="^(?=.*[a-zA-Z0-9\-])[a-zA-Z0-9\- ]{1,50}$"></asp:RegularExpressionValidator>
+                <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
             </div>
         </div>
     </div>

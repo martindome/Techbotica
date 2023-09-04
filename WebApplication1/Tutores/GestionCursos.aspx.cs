@@ -129,7 +129,17 @@ namespace WebApplication1.Tutores
 
         protected void btnDictation_Click(object sender, EventArgs e)
         {
-            string courseName = (sender as Button).CommandArgument;
+            Button btn = (Button)sender;
+
+            // Recuperando el índice de la fila desde el CommandArgument del botón
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+
+            // Obteniendo el valor de Id del curso usando DataKeys
+            int idCurso = Convert.ToInt32(coursesGrid.DataKeys[rowIndex].Value);
+
+            // Almacena el ID del curso en una variable de sesión para usarlo en la página de edición
+            Session["id_curso_editar"] = idCurso;
+
             Response.Redirect("~/Tutores/GestionDictados.aspx");
             // Lógica para eliminar el curso con el nombre dado
         }

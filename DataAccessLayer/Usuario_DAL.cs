@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessEntity;
 using BusinessEntity.Composite;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DataAccessLayer
 {
@@ -522,6 +523,42 @@ namespace DataAccessLayer
 
             }
             return usuarioBE;
+
+            
+        }
+
+        public List<Usuario_BE> listar_usuarios_dictado(int id_dictado)
+        {
+
+            List<Usuario_BE> usuarios = new List<Usuario_BE>();
+
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = id_dictado;
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_usuarios_dictado", parametros);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Usuario_BE usuarioBE = new Usuario_BE();
+                usuarioBE.Usuario = reg["usuario"].ToString();
+                usuarioBE.Contraseña = reg["contraseña"].ToString();
+                usuarioBE.IdUsuario = Convert.ToInt32(reg["id"].ToString());
+                usuarioBE.Nombre = reg["nombre"].ToString();
+                usuarioBE.Apellido = reg["apellido"].ToString();
+                usuarioBE.Empresa = Convert.ToInt32(reg["id_empresa"].ToString());
+
+                usuarioBE.Telefono = reg["telefono"].ToString();
+                usuarioBE.Email = reg["email"].ToString();
+                usuarioBE.Borrado = reg["borrado"].ToString();
+                usuarioBE.Bloqueado = int.Parse(reg["bloqueado"].ToString());
+                Familia_BE tipoUsuario = new Familia_BE();
+                tipoUsuario.id = Convert.ToInt32(reg["familia"].ToString());
+                tipoUsuario.familia = reg["detalle"].ToString();
+                usuarioBE.Familia = tipoUsuario;
+                usuarios.Add(usuarioBE);
+            }
+            return usuarios;
         }
 
         #region private functions

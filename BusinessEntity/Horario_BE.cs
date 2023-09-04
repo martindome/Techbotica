@@ -12,5 +12,6 @@ namespace BusinessEntity
         public string Dia { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
+        public Dictado_BE Dictado { get; set; }
     }
 }
