@@ -40,7 +40,7 @@ namespace BusinessLayer
 
         public void EliminarDictado(Dictado_BE dictado)
         {
-            mapper.actualizar_dictado(dictado);
+            mapper.eliminar_dictado(dictado);
         }
 
         public void NuevoHorario(Horario_BE horario)
@@ -63,6 +63,11 @@ namespace BusinessLayer
             return mapper.listar_dictados_curso(curso.Id);
         }
 
+        public List<Dictado_BE> ListarDictadosPorTutor(Usuario_BE tutor)
+        {
+            return mapper.listar_dictados_por_tutor(tutor.IdUsuario);
+        }
+
         public void AgregarDictadoUsuario(Dictado_BE d, Usuario_BE u)
         {
             mapper.agregar_usuario_dictado(d.Id, u.IdUsuario);
@@ -72,5 +77,6 @@ namespace BusinessLayer
         {
             mapper.eliminar_usuario_dictado(d.Id, u.IdUsuario);
         }
+
     }
 }

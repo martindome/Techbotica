@@ -37,7 +37,7 @@
 
                 <!-- GridView para listar los dictados -->
                 <h2 class="mt-4">Dictados</h2>
-                <asp:GridView ID="dictationsGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" AllowSorting="True" OnSorting="dictationsGrid_Sorting">
+                <asp:GridView ID="dictationsGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" AllowSorting="True" OnSorting="dictationsGrid_Sorting" DataKeyNames="Id">
                     <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" Visible="false" />
                     <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Inicio" SortExpression="FechaInicio" />

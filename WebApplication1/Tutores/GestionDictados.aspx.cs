@@ -65,8 +65,9 @@ namespace WebApplication1.Tutores
             // Recuperando el índice de la fila desde el CommandArgument del botón
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
 
+
             // Obteniendo el valor de Id del curso usando DataKeys
-            int idDictado = Convert.ToInt32(coursesGrid.DataKeys[rowIndex].Value);
+            int idDictado = Convert.ToInt32(dictationsGrid.DataKeys[rowIndex].Value);
             Session["id_dictado_editar"] = idDictado;
             Response.Redirect("~/Tutores/Dictado/EditarDictado.aspx");
         }

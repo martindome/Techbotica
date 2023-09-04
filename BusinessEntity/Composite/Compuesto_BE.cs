@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity.Composite
 {
+    [Serializable]
     public abstract class Compuesto_BE
     {
         public string Nombre { get; set; }

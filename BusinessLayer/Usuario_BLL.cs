@@ -108,5 +108,9 @@ namespace BusinessLayer
         {
             return mapper.validar_usuario_email(email);
         }
+
+        public List<Usuario_BE> ListarUsuarioDictado(Dictado_BE dictado) {
+            return mapper.listar_usuarios_dictado(dictado.Id);
+        }
     }
 }

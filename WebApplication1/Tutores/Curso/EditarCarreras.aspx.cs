@@ -18,18 +18,27 @@ namespace WebApplication1.Tutores.Curso
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Mismo manejo de sesión que en la otra página...
-            if (!IsPostBack)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/GestionarCursos")))
             {
-                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/GestionarCursos")))
+                // Mostrar error si no hay curso a editar.
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Curso inexistente');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (Session["id_curso_editar"] == null)
                 {
-                    // Mostrar error si no hay curso a editar.
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Curso inexistente');window.location.href = '/Default.aspx'", true);
                 }
-                cursoBE = (Curso_BE)cursoBll.ListarCursos().FirstOrDefault(item => item.Id == int.Parse(Session["id_curso_editar"].ToString()));
-                ViewState["cursoBE"] = cursoBE;
-                CargarCarreras();
+                if (!IsPostBack)
+                {
+
+                    cursoBE = (Curso_BE)cursoBll.ListarCursos().FirstOrDefault(item => item.Id == int.Parse(Session["id_curso_editar"].ToString()));
+                    ViewState["cursoBE"] = cursoBE;
+                    CargarCarreras();
+                }
             }
+            // Mismo manejo de sesión que en la otra página...
+            
         }
 
         private void CargarCarreras()

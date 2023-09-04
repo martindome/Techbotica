@@ -8,6 +8,7 @@ using BusinessEntity.Composite;
 
 namespace BusinessEntity
 {
+    [Serializable]
     public class Usuario_BE
     {
         public int IdUsuario { get; set; }

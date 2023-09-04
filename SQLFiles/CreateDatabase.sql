@@ -1191,12 +1191,16 @@ VALUES (1, 'Autodirigido'),
        (2, 'Interactivo');
 
 INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
-VALUES (1, '2023-02-01', '2023-02-15', 'http://enlace1.com', 1, 1, 20),
-       (2, '2023-03-01', '2023-03-15', 'http://enlace2.com', 1, 1, 12);
+VALUES (1, '2023-09-05', '2023-12-12', 'http://enlace1.com', 1, 1, 20), --formato de la fecha aca es anio-mes-dia
+       (2, '2023-09-05', '2023-12-12', 'http://enlace2.com', 1, 2, 12);
 
 INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
 VALUES (1, 'Lunes', '08:00:00', '10:00:00',1),
        (2, 'Martes', '10:00:00', '12:00:00',1); --debe tener al menos un horario cada dictado interactivo
+
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES (1,1,3),
+       (2,2,3); --debe tener al menos un horario cada dictado interactivo
 
 -- INSERT INTO [dbo].[Horario_Dictado] (id, id_horario, id_dictado)
 -- VALUES (1, 1, 1),

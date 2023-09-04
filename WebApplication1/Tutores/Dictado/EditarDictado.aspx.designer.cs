@@ -15,22 +15,31 @@ namespace WebApplication1.Tutores.Dictado
     {
 
         /// <summary>
-        /// Control DictationStartDate.
+        /// Control StartDateTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DictationStartDate;
+        protected global::System.Web.UI.WebControls.TextBox StartDateTextBox;
 
         /// <summary>
-        /// Control DictationEndDate.
+        /// Control EndDateTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DictationEndDate;
+        protected global::System.Web.UI.WebControls.TextBox EndDateTextBox;
+
+        /// <summary>
+        /// Control LinkTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LinkTextBox;
 
         /// <summary>
         /// Control TextBoxcupo.
@@ -42,129 +51,102 @@ namespace WebApplication1.Tutores.Dictado
         protected global::System.Web.UI.WebControls.TextBox TextBoxcupo;
 
         /// <summary>
-        /// Control SearchScheduleTextBox.
+        /// Control ButtonEditarHorarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchScheduleTextBox;
+        protected global::System.Web.UI.WebControls.Button ButtonEditarHorarios;
 
         /// <summary>
-        /// Control SearchScheduleButton.
+        /// Control ButtonEditarTutores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchScheduleButton;
+        protected global::System.Web.UI.WebControls.Button ButtonEditarTutores;
 
         /// <summary>
-        /// Control AvailableSchedulesList.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AvailableSchedulesList;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control AddScheduleButton.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddScheduleButton;
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// Control AssignedSchedulesList.
+        /// Control RequiredFieldValidatorCourseLink.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AssignedSchedulesList;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorCourseLink;
 
         /// <summary>
-        /// Control RemoveScheduleButton.
+        /// Control RegularExpressionValidatorCourseLink.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemoveScheduleButton;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorCourseLink;
 
         /// <summary>
-        /// Control SearchTutorTextBox.
+        /// Control RequiredFieldValidator1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchTutorTextBox;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// Control SearchTutorButton.
+        /// Control RegularExpressionValidator1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchTutorButton;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
-        /// Control AvailableTutorsList.
+        /// Control RequiredFieldValidatorFechaInicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AvailableTutorsList;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFechaInicio;
 
         /// <summary>
-        /// Control AddTutorButton.
+        /// Control RequiredFieldValidatorFechaFin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddTutorButton;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFechaFin;
 
         /// <summary>
-        /// Control AssignedTutorsList.
+        /// Control valSummary.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox AssignedTutorsList;
-
-        /// <summary>
-        /// Control RemoveTutorButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemoveTutorButton;
-
-        /// <summary>
-        /// Control UpdateDictationButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateDictationButton;
-
-        /// <summary>
-        /// Control DeleteDictationButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DeleteDictationButton;
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummary;
     }
 }

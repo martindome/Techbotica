@@ -38,12 +38,13 @@ namespace WebApplication1.Tutores.Dictado
 
         private void LoadTutors()
         {
+            string searchTerm = SearchTutorTextBox.Text.ToLower();
             Usuario_BLL userBLL = new Usuario_BLL();
             List<Usuario_BE> allUsers = userBLL.ListarUsuarios();
             List<Usuario_BE> assignedTutors = (List<Usuario_BE>)Session["AssignedTutors"];
 
             // Obtener tutores que no están en la lista de tutores asignados
-            List<Usuario_BE> availableTutors = allUsers.Where(u => u.Familia.familia == "Tutor" && !assignedTutors.Any(at => at.IdUsuario == u.IdUsuario)).ToList();
+            List<Usuario_BE> availableTutors = allUsers.Where(u => u.Familia.familia == "Tutor" && (u.Nombre.ToLower().Contains(searchTerm) || u.Apellido.ToLower().Contains(searchTerm) || u.Email.ToLower().Contains(searchTerm)) && !assignedTutors.Any(at => at.IdUsuario == u.IdUsuario)).ToList();
 
             TutorsGrid.DataSource = availableTutors;
             TutorsGrid.DataBind();
@@ -70,13 +71,14 @@ namespace WebApplication1.Tutores.Dictado
 
         protected void SearchTutorButton_Click(object sender, EventArgs e)
         {
-            string searchTerm = SearchTutorTextBox.Text.ToLower();
-            Usuario_BLL userBLL = new Usuario_BLL();
-            List<Usuario_BE> allUsers = userBLL.ListarUsuarios();
-            List<Usuario_BE> tutors = allUsers.Where(u => u.Familia.familia == "Tutor" && (u.Nombre.ToLower().Contains(searchTerm) || u.Apellido.ToLower().Contains(searchTerm) || u.Email.ToLower().Contains(searchTerm))).ToList();
+            //string searchTerm = SearchTutorTextBox.Text.ToLower();
+            //Usuario_BLL userBLL = new Usuario_BLL();
+            //List<Usuario_BE> allUsers = userBLL.ListarUsuarios();
+            //List<Usuario_BE> tutors = allUsers.Where(u => u.Familia.familia == "Tutor" && (u.Nombre.ToLower().Contains(searchTerm) || u.Apellido.ToLower().Contains(searchTerm) || u.Email.ToLower().Contains(searchTerm))).ToList();
 
-            TutorsGrid.DataSource = tutors;
-            TutorsGrid.DataBind();
+            //TutorsGrid.DataSource = tutors;
+            //TutorsGrid.DataBind();
+            LoadTutors();
         }
 
         protected void btnAdd_Click1(object sender, EventArgs e)
@@ -87,6 +89,15 @@ namespace WebApplication1.Tutores.Dictado
 
             Usuario_BLL userBLL = new Usuario_BLL();
             Usuario_BE selectedTutor = userBLL.obtener_usuario(userId);
+
+            Dictado_BE newDictado = (Dictado_BE)Session["dictado_crear"];
+
+            // Comprobar solapamiento de horarios
+            if (TieneConflictoDeHorarios(selectedTutor, newDictado))
+            {
+                Response.Write("<script>alert('El tutor tiene un conflicto de horarios con otro dictado');</script>");
+                return;
+            }
 
             if (Session["AssignedTutors"] == null)
             {
@@ -138,6 +149,42 @@ namespace WebApplication1.Tutores.Dictado
                 AssignedTutorsGrid.DataBind();
             }
             LoadTutors();
+        }
+
+        private bool TieneConflictoDeHorarios(Usuario_BE tutor, Dictado_BE nuevoDictado)
+        {
+            Dictado_BLL dictadoBLL = new Dictado_BLL();
+
+            // Obtener dictados del tutor
+            List<Dictado_BE> todosLosDictadosTutor = dictadoBLL.ListarDictadosPorTutor(tutor);
+
+            // Filtrar dictados que tienen solapamiento de fechas con el nuevo dictado
+            var dictadosSolapados = todosLosDictadosTutor.Where(d =>
+                (d.FechaInicio <= nuevoDictado.FechaFin && d.FechaFin >= nuevoDictado.FechaInicio) // Rango solapado
+            ).ToList();
+
+            foreach (var dictado in dictadosSolapados)
+            {
+                foreach (var horario in dictado.Horarios)
+                {
+                    foreach (var nuevohorario in nuevoDictado.Horarios)
+                    {
+                        if (horario.Dia == nuevohorario.Dia &&
+                            ((nuevohorario.HoraInicio <= horario.HoraInicio && nuevohorario.HoraFin > horario.HoraInicio) ||
+                            (nuevohorario.HoraFin >= horario.HoraFin && nuevohorario.HoraInicio < horario.HoraFin)))
+                        {
+                            return true; // Hay solapamiento
+                        }
+                    }
+                }
+            }
+
+            return false; // No hay solapamiento
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutores/Dictado/NuevoDictado2doPaso.aspx");
         }
     }
 }

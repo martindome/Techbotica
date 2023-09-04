@@ -38,7 +38,7 @@
                     </Columns>
                 </asp:GridView>
                 <asp:Button ID="ConfirmButton" runat="server" Text="Confirmar" CssClass="btn btn-primary mt-3" OnClick="ConfirmButton_Click" />
-                <asp:Button ID="btnBack" CssClass="btn btn-secondary mt-3" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
+                <asp:Button ID="btnBack" CssClass="btn btn-secondary mt-3" Text="Atrás" runat="server" OnClick="btnBack_Click" />
                 <asp:Button ID="CancelButton" runat="server" Text="Cancelar" CssClass="btn btn-danger mt-3" OnClick="CancelButton_Click" />
             </div>
         </div>

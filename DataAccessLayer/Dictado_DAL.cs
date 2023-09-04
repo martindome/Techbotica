@@ -98,8 +98,8 @@ namespace DataAccessLayer
 
             parametros[3] = new SqlParameter();
             parametros[3].ParameterName = "@tipo_dictado";
-            parametros[2].DbType = DbType.Int32;
-            parametros[2].Value = dictado.TipoDictado == "Autodirigido" ? 1 : 2;
+            parametros[3].DbType = DbType.Int32;
+            parametros[3].Value = dictado.TipoDictado == "Autodirigido" ? 1 : 2;
 
             parametros[4] = new SqlParameter();
             parametros[4].ParameterName = "@id";
@@ -294,6 +294,14 @@ namespace DataAccessLayer
             e.Dia = reg["dia"].ToString();
             e.HoraInicio = TimeSpan.Parse(reg["hora_inicio"].ToString());
             e.HoraFin = TimeSpan.Parse(reg["hora_fin"].ToString());
+        }
+
+        public List<Dictado_BE> listar_dictados_por_tutor(int idUsuario)
+        {
+            List < Dictado_BE > dictados = listar_dictados();
+
+            return dictados.Where(d => d.Tutores.Any(t => t.IdUsuario == idUsuario)).ToList();
+
         }
     }
 }

@@ -116,5 +116,10 @@ namespace WebApplication1.Tutores.Dictado
             // Volver a enlazar los datos al GridView
             BindGridView();
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutores/Dictado/NuevoDictado1erPaso.aspx");
+        }
     }
 }

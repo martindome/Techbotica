@@ -190,6 +190,8 @@
     <Content Include="Tutores\Curso\EditarCurso.aspx" />
     <Content Include="Tutores\Curso\NuevoCursoGenerico.aspx" />
     <Content Include="Tutores\Dictado\EditarDictado.aspx" />
+    <Content Include="Tutores\Dictado\EditarHorarios.aspx" />
+    <Content Include="Tutores\Dictado\EditarTutores.aspx" />
     <Content Include="Tutores\Dictado\NuevoDictado1erPaso.aspx" />
     <Content Include="Tutores\Dictado\NuevoDictado2doPaso.aspx" />
     <Content Include="Tutores\Dictado\NuevoDictado3erPaso.aspx" />
@@ -539,6 +541,20 @@
     </Compile>
     <Compile Include="Tutores\Dictado\EditarDictado.aspx.designer.cs">
       <DependentUpon>EditarDictado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarHorarios.aspx.cs">
+      <DependentUpon>EditarHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarHorarios.aspx.designer.cs">
+      <DependentUpon>EditarHorarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarTutores.aspx.cs">
+      <DependentUpon>EditarTutores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutores\Dictado\EditarTutores.aspx.designer.cs">
+      <DependentUpon>EditarTutores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutores\Dictado\NuevoDictado1erPaso.aspx.cs">
       <DependentUpon>NuevoDictado1erPaso.aspx</DependentUpon>

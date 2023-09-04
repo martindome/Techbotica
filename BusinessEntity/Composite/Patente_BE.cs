@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity.Composite
 {
+    [Serializable]
     public class Patente_BE : Compuesto_BE
     {
         public int id { get; set; }

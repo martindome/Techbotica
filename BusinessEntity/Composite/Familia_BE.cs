@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity.Composite
 {
+    [Serializable]
     public class Familia_BE : Compuesto_BE
     {
 

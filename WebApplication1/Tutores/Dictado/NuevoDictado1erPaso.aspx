@@ -30,16 +30,17 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <hr />
+                <asp:Label Font-Bold="True" runat="server">Curso Seleccionado</asp:Label>
                 <asp:TextBox ID="SelectedCourseTextBox" runat="server" CssClass="form-control mt-3" Enabled="false"></asp:TextBox>
                 <hr />
-                <asp:Label Font-Bold="True" runat="server">Enlace del Curso</asp:Label>
-                <hr />
+                <asp:Label Font-Bold="True" runat="server">Enlace de la cursada</asp:Label>
                 <asp:TextBox ID="CourseLinkTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                <hr />
                 <asp:Label Font-Bold="True" runat="server">Cupo</asp:Label>
-                <hr />
                 <asp:TextBox ID="CapacityTexBox" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:Label runat="server" Font-Bold="True">Tipo de dictado</asp:Label>
                 <hr />
+                <asp:Label runat="server" Font-Bold="True">Tipo de dictado</asp:Label>
                 <asp:DropDownList ID="CourseTypeDropDown" runat="server" CssClass="form-control">
                     <asp:ListItem Value="Interactivo">Interactivo</asp:ListItem>
                     <asp:ListItem Value="Autodirigido">Autodirigido</asp:ListItem>
@@ -50,7 +51,7 @@
                 <hr />
                 <asp:Label runat="server" Font-Bold="True">Fecha de Fin</asp:Label>
                 <asp:TextBox ID="EndDateTextBox" CssClass="form-control" runat="server"></asp:TextBox>
-
+                <hr />
                 <asp:Button ID="NextPageButton" runat="server" Text="Siguiente" CssClass="btn btn-primary mt-3" OnClick="NextPageButton_Click1" />
 
                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorCourseName" Display="None" runat="server" ControlToValidate="SelectedCourseTextBox" CssClass="text-danger" ErrorMessage="Debe seleccionar un curso"></asp:RequiredFieldValidator>
