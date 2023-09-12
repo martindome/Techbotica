@@ -23,28 +23,28 @@
                 <div class="form-group">
                     <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Buscar" runat="server" OnClick="btnSearch_Click" />
                 </div>
-
-                <!-- GridView para listar los cursos -->
-                <asp:GridView ID="coursesGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
-                    <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="Id" Visible="false" />
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                        <asp:TemplateField HeaderText="Especialidad">
-                            <ItemTemplate>
-                                <%# Eval("Especialidad.Nombre") %>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnEdit" CssClass="btn btn-secondary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Editar" runat="server" OnClick="btnEdit_Click" />
-                                <asp:Button ID="btnDelete" CssClass="btn btn-danger" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Eliminar" runat="server" OnClick="btnDelete_Click" />
-                                <asp:Button ID="btnDictation" CssClass="btn btn-primary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Ver Dictados" runat="server" OnClick="btnDictation_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-                
+                <div class="table-responsive mt-4">
+                    <!-- GridView para listar los cursos -->
+                    <asp:GridView ID="coursesGrid" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <Columns>
+                            <asp:BoundField DataField="Id" HeaderText="Id" Visible="false" />
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+                            <asp:TemplateField HeaderText="Especialidad">
+                                <ItemTemplate>
+                                    <%# Eval("Especialidad.Nombre") %>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnEdit" CssClass="btn btn-secondary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Editar" runat="server" OnClick="btnEdit_Click" />
+                                    <asp:Button ID="btnDelete" CssClass="btn btn-danger" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Eliminar" runat="server" OnClick="btnDelete_Click" />
+                                    <asp:Button ID="btnDictation" CssClass="btn btn-primary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Ver Dictados" runat="server" OnClick="btnDictation_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>     
             </div>
         </div>
     </div>

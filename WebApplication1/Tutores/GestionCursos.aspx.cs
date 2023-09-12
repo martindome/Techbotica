@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,22 @@ namespace WebApplication1.Tutores
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["id_curso_editar"] = null;
-            if (!IsPostBack)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/GestionarCursos")))
             {
-                CargarCursos();
-                Especialidad_BLL ebll = new Especialidad_BLL();
-                searchSpeciality.DataSource = ebll.ListarEspecialidades();
-                searchSpeciality.DataTextField = "Nombre";
-                searchSpeciality.DataValueField = "IdEspecialidad";
-                searchSpeciality.DataBind();
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (!IsPostBack)
+                {
+                    CargarCursos();
+                    Especialidad_BLL ebll = new Especialidad_BLL();
+                    searchSpeciality.DataSource = ebll.ListarEspecialidades();
+                    searchSpeciality.DataTextField = "Nombre";
+                    searchSpeciality.DataValueField = "IdEspecialidad";
+                    searchSpeciality.DataBind();
+                }
             }
         }
 

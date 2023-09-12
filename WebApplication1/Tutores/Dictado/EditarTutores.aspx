@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarTutores.aspx.cs" Inherits="WebApplication1.Tutores.Dictado.EditarTutores" %>
+﻿<%@ Page Title="Editar Tutores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditarTutores.aspx.cs" Inherits="WebApplication1.Tutores.Dictado.EditarTutores" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-5">
     <div class="row">
