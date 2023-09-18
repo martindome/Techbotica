@@ -475,11 +475,12 @@ CREATE procedure [dbo].[update_usuario]
 @borrado varchar(100),
 @apellido varchar(100),
 @telefono varchar(100),
-@bloqueado int
+@bloqueado int,
+@empresa int
 as 
 begin
 UPDATE Usuario
-SET bloqueado = @bloqueado, email=@email, nombre = @nombre, apellido=@apellido, telefono=@telefono, borrado = @borrado
+SET bloqueado = @bloqueado, email=@email, nombre = @nombre, apellido=@apellido, telefono=@telefono, borrado = @borrado, id_empresa = @empresa
 WHERE usuario = @usu;
 end
 select u.id as id, u.usuario as usuario, u.contraseña as contraseña, u.nombre as nombre, u.bloqueado as bloqueado, u.email as email, u.apellido as apellido, u.telefono as telefono, u.id_empresa as id_empresa,  u.borrado as borrado, b.id_familia as familia From Usuario u INNER JOIN Familia_Usuario b on u.id = b.id_usuario where usuario = @usu
@@ -1140,7 +1141,7 @@ GO
 INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
 (1,'web.master@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Web', 'Master', '555-1234', 'web.master@techbotica.ar', 0, 'No', 1),
 (2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 2),
-(3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 1, 'No', 1);
+(3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 0, 'No', 1);
 GO
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'MenuAdministracion')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (2, N'MenuTutores')

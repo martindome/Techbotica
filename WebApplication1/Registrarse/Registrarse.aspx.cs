@@ -33,7 +33,7 @@ namespace WebApplication1.Registarse
             if (IsValid)
             {
                 usuarioBE = usuarioBLL.VerificarUsuarioEmail(correoElectronico.Text);
-                if (!string.IsNullOrEmpty(usuarioBE.Email))
+                if (!string.IsNullOrEmpty(usuarioBE.Email) && usuarioBE.Borrado == "No")
                 {
                     Label1.Text = "Email '" + correoElectronico.Text + "' existente";
                     Label1.Visible = true;
@@ -70,7 +70,7 @@ namespace WebApplication1.Registarse
                                 usuarioBE.Contraseña = nuevapass;
                                 usuarioBE.Email = correoElectronico.Text;
                                 usuarioBE.Telefono = telefono.Text;
-                                usuarioBE.Bloqueado = 3;
+                                usuarioBE.Bloqueado = 0;
                                 usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == empresa.Text)?.IdEmpresa;
                                 usuarioBE.Borrado = "No";
                                 usuarioBLL.RegistrarEstudiante(usuarioBE);
@@ -80,8 +80,21 @@ namespace WebApplication1.Registarse
                             }
                             else
                             {
-                                Label1.Text = "Usuario Existente";
-                                Label1.Visible = true;
+                                string nuevapass = Servicio.GeneradorClave.CrearRandomContrasenia();
+                                Label1.Visible = false;
+                                usuarioBE.Nombre = nombre.Text;
+                                usuarioBE.Apellido = apellido.Text;
+                                usuarioBE.Usuario = correoElectronico.Text;
+                                //usuarioBE.Contraseña = nuevapass;
+                                usuarioBE.Email = correoElectronico.Text;
+                                usuarioBE.Telefono = telefono.Text;
+                                usuarioBE.Bloqueado = 0;
+                                usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == empresa.Text)?.IdEmpresa;
+                                usuarioBE.Borrado = "No";
+                                usuarioBLL.UpdateUsuario(usuarioBE);
+                                usuarioBLL.RecuperarPassword(usuarioBE);
+                                //Servicio.GeneradorClave.EnviarNuevaContrasenia(nuevapass, correoElectronico.Text);
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Se ha enviado la clave a su correo electronico');window.location.href = '/Default.aspx'", true);
                             }
                         }
                     } 

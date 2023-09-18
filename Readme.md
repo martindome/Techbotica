@@ -1,6 +1,8 @@
 # Software de Inscripción a Cursos de TECHBOTICA
 
-## Caso de uso 1: Creación de oferta académica
+## Casos de uso
+
+### Caso de uso 1: Creación de oferta académica
 
 **Pasos a seguir:**
 
@@ -23,7 +25,7 @@
 
 8. Verificar el dictado creado en `Gestionar Dictado`.
 
-## Soluciones Técnicas para Ejecutar en Laboratorio Universidad UAI
+### Soluciones Técnicas para Ejecutar en Laboratorio Universidad UAI
 
 - **Arreglar error de certificado:** 
   - Consulta [aquí](https://stackoverflow.com/questions/44066709/your-connection-is-not-private-neterr-cert-common-name-invalid).
@@ -45,3 +47,10 @@
         LoadSuccessExpression = "bootstrap"
     });
     ```
+
+## Posibles mejoras
+
+1. En gestion de usuarios
+    - Poder cambiar la password desde el panel
+    - Poder cambiar la empresa desde el panel
+    - Agregar un filtro para visualizar empleados por empresa

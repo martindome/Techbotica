@@ -61,7 +61,7 @@ namespace WebApplication1.Login
             }
             else if (usuarioBE.Bloqueado == 3)
             {
-                Label1.Text = "Su usuario esta bloqueado. Contactar administrador.";
+                Label1.Text = "La cuenta ha sido bloqueada o eliminada";
                 Label1.Visible = true;
             }
 

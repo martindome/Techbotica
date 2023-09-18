@@ -15,24 +15,6 @@ namespace WebApplication1.Administracion
     {
 
         /// <summary>
-        /// Control ListBoxUsuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxUsuarios;
-
-        /// <summary>
-        /// Control ButtonSeleccionarUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSeleccionarUsuario;
-
-        /// <summary>
         /// Control TextBoxUsuarioFiltro.
         /// </summary>
         /// <remarks>
@@ -67,6 +49,24 @@ namespace WebApplication1.Administracion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonFiltrar;
+
+        /// <summary>
+        /// Control ListBoxUsuarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxUsuarios;
+
+        /// <summary>
+        /// Control ButtonSeleccionarUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSeleccionarUsuario;
 
         /// <summary>
         /// Control LabelUsuarioSeleccionado.
@@ -130,15 +130,6 @@ namespace WebApplication1.Administracion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxBorrado;
-
-        /// <summary>
-        /// Control LabelAccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelAccion;
 
         /// <summary>
         /// Control ButtonAplicar.

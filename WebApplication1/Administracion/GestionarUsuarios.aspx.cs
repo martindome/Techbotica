@@ -74,11 +74,13 @@ namespace WebApplication1.Administracion
                 //    Familia_BE p = mapperPermisos.ListarFamilias().FirstOrDefault(permiso => permiso.familia == tipo_usuario);
                 //    mapperUsuarios.CambiarPerfil(usuarioBE.IdUsuario, p.id);
                 //}
-                LabelAccion.Text = "Usuario cambiado correctamente";
+                Response.Write("<script>alert('Usuario cambiado correctamente');</script>");
+                //LabelAccion.Text = "Usuario cambiado correctamente";
             }
             else
             {
-                LabelAccion.Text = "Error al cambiar usuario";
+                //LabelAccion.Text = "Error al cambiar usuario";
+                Response.Write("<script>alert('Error al cambiar al usuario');</script>");
             }
         }
 

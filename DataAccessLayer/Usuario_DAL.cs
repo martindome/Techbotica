@@ -203,7 +203,7 @@ namespace DataAccessLayer
 
         public void update_usuario(Usuario_BE usuario)
         {
-            SqlParameter[] parametros = new SqlParameter[7];
+            SqlParameter[] parametros = new SqlParameter[8];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@usu";
             parametros[0].DbType = DbType.String;
@@ -238,6 +238,11 @@ namespace DataAccessLayer
             parametros[6].ParameterName = "@bloqueado";
             parametros[6].DbType = DbType.String;
             parametros[6].Value = usuario.Bloqueado;
+
+            parametros[7] = new SqlParameter();
+            parametros[7].ParameterName = "@empresa";
+            parametros[7].DbType = DbType.Int32;
+            parametros[7].Value = usuario.Empresa;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("update_usuario", parametros);
 
