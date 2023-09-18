@@ -9,7 +9,7 @@
         <div class="form-group">
             <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Buscar" runat="server" />
         </div>
-        <asp:GridView ID="carrerasGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+        <asp:GridView ID="carrerasGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" DataKeyNames="Nombre">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" Visible="False" />

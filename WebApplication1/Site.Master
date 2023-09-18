@@ -91,8 +91,8 @@
                      <li runat="server"  id="dropEstudiantes" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones</a>
-                          <a class="dropdown-item" href="/Estudiantes/MisCursadas/MisCursadas.aspx">Mis Cursadas</a>
+                        <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones (TO DO)</a>
+                          <a class="dropdown-item" href="/Estudiantes/MisCursadas/MisCursadas.aspx">Mis Cursadas (TO DO)</a>
                       </div>
                     </li>
 
@@ -106,7 +106,7 @@
                         <a class="dropdown-item" href="/Tutores/GestionCursos.aspx">Gestionar Cursos</a>
                         <a class="dropdown-item" href="/Tutores/GestionDictados.aspx">Gestionar Dictados</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Tutores/MisDictados/MisDictados.aspx">Mis Dictados</a>
+                        <a class="dropdown-item" href="/Tutores/MisDictados/MisDictados.aspx">Mis Dictados (TO DO)</a>
                       </div>
                     </li>
                    
