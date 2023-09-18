@@ -81,9 +81,9 @@
                      <li runat="server"  id="dropBusquedaDeOferta" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Buscar...</a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/BuscarCursos.aspx">Buscar cursos</a>
-                        <a class="dropdown-item" href="/BuscarCarreras.aspx">Buscar carreras</a>
-                        <a class="dropdown-item" href="/ConsultarTutores.aspx">Consultar Tutores</a>
+                        <a class="dropdown-item" href="/BuscarCursos.aspx">Buscar cursos (TO DO)</a>
+                        <a class="dropdown-item" href="/BuscarCarreras.aspx">Buscar carreras (TO DO)</a>
+                        <a class="dropdown-item" href="/ConsultarTutores.aspx">Consultar Tutores (TO DO)</a>
                       </div>
                     </li>
 

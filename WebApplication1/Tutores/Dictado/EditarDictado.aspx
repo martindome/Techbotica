@@ -34,6 +34,9 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorFechaFin" Display="None" runat="server" ControlToValidate="EndDateTextBox" CssClass="text-danger" ErrorMessage="Debe ingresar fecha de fin"></asp:RequiredFieldValidator>
                 <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
             </div>
+            <div>
+                <asp:Button ID="btnBack" CssClass="btn btn-secondary mt-3" Text="Atrás" runat="server" OnClick="btnBack_Click" />
+            </div>
         </div>            
     </div>
         

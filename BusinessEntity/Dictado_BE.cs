@@ -18,5 +18,13 @@ namespace BusinessEntity
         public List<Horario_BE> Horarios { get; set; }
         public int Cupo;
         public List<Usuario_BE> Tutores { get; set; }
+
+        public Dictado_BE()
+        {
+            this.Horarios = new List<Horario_BE>();
+            this.Tutores = new List<Usuario_BE>();
+        }
     }
+
+    
 }

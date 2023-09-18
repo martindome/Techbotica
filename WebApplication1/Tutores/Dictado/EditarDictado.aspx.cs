@@ -123,5 +123,10 @@ namespace WebApplication1.Tutores.Dictado
         {
             Response.Redirect("~/Tutores/Dictado/EditarTutores.aspx");
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutores/GestionDictados.aspx");
+        }
     }
 }

@@ -93,7 +93,7 @@ namespace WebApplication1.Tutores.Dictado
             Dictado_BE newDictado = (Dictado_BE)Session["dictado_crear"];
 
             // Comprobar solapamiento de horarios
-            if (TieneConflictoDeHorarios(selectedTutor, newDictado))
+            if (newDictado.TipoDictado == "Interactivo" && TieneConflictoDeHorarios(selectedTutor, newDictado))
             {
                 Response.Write("<script>alert('El tutor tiene un conflicto de horarios con otro dictado');</script>");
                 return;
