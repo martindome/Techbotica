@@ -79,7 +79,7 @@ namespace WebApplication1.Administracion.Empresas
 
         protected void btnCreateDomain_Click(object sender, EventArgs e)
         {
-            string pattern = @"^(?!-)(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.[a-zA-Z]{2,6}$";
+            string pattern = @"^(?!-)(?!.*--)([A-Za-z0-9-]{1,63}\.)+[A-Za-z]{2,6}$";
             if (!Regex.IsMatch(NewDomain.Text, pattern))
             {
                 // El valor del TextBox no coincide con la expresión regular, manejar error.

@@ -48,7 +48,7 @@ namespace Servicio
         {
             try
             {
-                string mAsunto = "Stilo - Reestablecer contraseña";
+                string mAsunto = "TECHBOTICA - Nueva contraseña";
                 string mMensaje = "La clave para que accedas al sistema es:\t" + pPWD;
                 Notificacion.EnviarEmail(mMensaje, mAsunto, pTo);
             }
