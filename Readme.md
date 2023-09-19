@@ -51,6 +51,7 @@
 ## Posibles mejoras
 
 1. En gestion de usuarios
-    - Poder cambiar la password desde el panel
+    - Poder cambiar la password desde el panel  (o actualizacion y envio por email)
     - Poder cambiar la empresa desde el panel
     - Agregar un filtro para visualizar empleados por empresa
+    - Chequear usuarios eliminados como en registrar
