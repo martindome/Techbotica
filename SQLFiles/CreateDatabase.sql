@@ -1175,6 +1175,8 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (11, 1,
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 3, 9)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (13, 3, 10)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 3, 11)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 2)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 8)
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
