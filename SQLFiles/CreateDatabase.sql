@@ -304,6 +304,36 @@ CREATE TABLE [dbo].[Usuario_Dictado](
 ) ON [PRIMARY]
 GO
 
+/****** Object:  Table [dbo].[Inscripcion_Curso]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Inscripcion_Curso](
+	[id] [int] PRIMARY KEY,
+	[fecha] datetime NULL,
+	[id_estudiante] int NULL,
+	[id_dictado] int NULL,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Inscripcion_Carrera]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Inscripcion_Carrera](
+	[id] [int] PRIMARY KEY,
+	[fecha] datetime NULL,
+	[id_estudiante] int NULL,
+	[id_dictado] int NULL,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE
+) ON [PRIMARY]
+GO
+
 -- /****** Object:  Table [dbo].[Horario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
 -- SET ANSI_NULLS ON
 -- GO
@@ -1117,6 +1147,54 @@ end
 GO
 
 
+
+/****** Object:  StoredProcedure [dbo].[listar_inscripciones_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_inscripciones_curso]
+@id_dictado int
+as 
+begin
+select a.id, a.fecha, a.id_estudiante, a.id_dictado
+from Inscripcion_Curso a
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[nueva_inscripcion_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[nueva_inscripcion_curso]
+    @id_usuario INT,
+    @id_dictado INT
+AS 
+BEGIN
+    DECLARE @id INT
+    SET @id = ISNULL((SELECT MAX(id) FROM Inscripcion_Curso),0 ) +1
+    
+    -- Insertando la fecha actual en la columna 'fecha'
+    INSERT INTO Inscripcion_Curso (id, fecha, id_dictado, id_estudiante)
+    VALUES (@id, GETDATE(), @id_dictado, @id_usuario);
+    
+    
+END
+SELECT a.id, a.id_estudiante, a.id_dictado, a.fecha 
+    FROM Inscripcion_Curso a
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_inscripcion]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_inscripcion_curso
+@id int
+AS
+BEGIN
+    DELETE FROM Inscripcion_Curso WHERE id = @id;
+END
+GO
+
+
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -1154,6 +1232,7 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Tutores/GestionarCarreras
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCursos')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictados')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (11, N'/Tutores/MisDictados')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (12, N'/Estudiante/Inscripciones')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
@@ -1171,12 +1250,13 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (8, 1, 
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (9, 1, 9)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (10, 1, 10)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (11, 1, 11)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 1, 12)
 --permisos tutor
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 3, 9)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (13, 3, 10)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 3, 11)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 2)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 8)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (13, 3, 9)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 3, 10)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 11)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 2)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (17, 3, 8)
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),

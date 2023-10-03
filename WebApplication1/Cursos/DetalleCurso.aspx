@@ -28,31 +28,40 @@
                     </asp:DropDownList>
                 </div>
 
-                <div class="form-group">
+                <%--<div class="form-group">
                     <label for="searchSchedule">Horario</label>
                     <asp:TextBox ID="searchSchedule" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group">
+                </div>--%>
+<%--                <div class="form-group">
                     <label for="searchTutor">Tutor</label>
                     <asp:TextBox ID="searchTutor" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
+                </div>--%>
                 <div class="form-group">
-                    <asp:Button ID="btnFilter" CssClass="btn btn-primary" Text="Filtrar" runat="server" />
+                    <asp:Button ID="btnFilter" CssClass="btn btn-primary" Text="Filtrar" runat="server" OnClick="btnFilter_Click" />
                 </div>
 
                 <!-- Lista de dictados -->
-                <asp:GridView ID="lecturesGrid" CssClass="table" runat="server" AutoGenerateColumns="False">
+                <asp:GridView ID="dictationsGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" AllowSorting="True" DataKeyNames="Id">
                     <Columns>
-                        <asp:BoundField HeaderText="Fecha de Inicio" DataField="Fecha de Inicio" />
-                        <asp:BoundField HeaderText="Fecha de Fin" DataField="Fecha de Fin" />
-                        <asp:BoundField HeaderText="Horarios" DataField="Horarios" />
-                        <asp:BoundField HeaderText="Tutores" DataField="Tutores" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnSelect" runat="server" CssClass="btn btn-secondary" Text="Seleccionar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnSelect_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
+                    <asp:BoundField DataField="Id" HeaderText="Id" Visible="false" />
+                    <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Inicio" SortExpression="FechaInicio" />
+                    <asp:BoundField DataField="FechaFin" HeaderText="Fecha de Fin" SortExpression="FechaFin"/>
+                    <asp:BoundField DataField="TipoDictado" HeaderText="Tipo de Dictado" SortExpression="TipoDictado" />
+                    <asp:TemplateField HeaderText="Horarios">
+                        <ItemTemplate>
+                            <asp:Repeater ID="rptHorarios" runat="server" DataSource='<%# Eval("Horarios") %>'>
+                                <ItemTemplate>
+                                    <%# Eval("Dia") %> <%# Eval("HoraInicio", "{0:hh\\:mm}") %> - <%# Eval("HoraFin", "{0:hh\\:mm}") %><br />
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btnSelect" CssClass="btn btn-secondary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' Text="Inscribir" runat="server" OnClick="btnSelect_Click1" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
                 </asp:GridView>
 
                 <!-- Botones de acción -->

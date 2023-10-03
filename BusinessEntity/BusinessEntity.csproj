@@ -51,6 +51,8 @@
     <Compile Include="Empresa_BE.cs" />
     <Compile Include="Especialidad_BE.cs" />
     <Compile Include="Horario_BE.cs" />
+    <Compile Include="InscripcionCarrera_BE.cs" />
+    <Compile Include="InscripcionCurso_BE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Categoria_Usuario.cs" />
     <Compile Include="Usuario_BE.cs" />

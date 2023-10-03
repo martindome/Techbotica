@@ -269,6 +269,63 @@ namespace DataAccessLayer
             return dictados;
         }
 
+        public List<InscripcionCurso_BE> listar_inscripcion() {
+
+            List<InscripcionCurso_BE> inscripciones = new List<InscripcionCurso_BE>();
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_inscripciones_curso", null);
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                InscripcionCurso_BE c = new InscripcionCurso_BE();
+                mappear_inscripciones(reg, c);
+                inscripciones.Add(c);
+            }
+            return inscripciones;
+        }
+
+        public InscripcionCurso_BE nueva_inscripcion (int id_estudiante, int id_dictado)
+        {
+            SqlParameter[] parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_usuario";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = id_estudiante;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@id_dictado";
+            parametros[1].DbType = DbType.Int32;
+            parametros[1].Value = id_dictado;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("nueva_inscripcion_curso", parametros);
+
+            InscripcionCurso_BE i = new InscripcionCurso_BE();
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                mappear_inscripciones(reg, i);
+            }
+            return i;
+        }
+
+        public void eliminar_inscripcion(int id_inscripcion)
+        {
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = id_inscripcion;
+
+            ac.ejecutar_stored_procedure("eliminar_inscripcion_curso", parametros);
+        }
+
+        private void mappear_inscripciones(DataRow reg, InscripcionCurso_BE e)
+        {
+            e.Id = Convert.ToInt32(reg["id"].ToString());
+            e.IdEstudiante = Convert.ToInt32(reg["id_estudiante"].ToString());
+            e.IdDictado = Convert.ToInt32(reg["id_dictado"].ToString());
+            e.Fecha = DateTime.Parse(reg["fecha"].ToString());
+        }
+
         private void mappear_dictado(DataRow reg, Dictado_BE e)
         {
             e.Id = Convert.ToInt32(reg["id"].ToString());
@@ -301,7 +358,6 @@ namespace DataAccessLayer
             List < Dictado_BE > dictados = listar_dictados();
 
             return dictados.Where(d => d.Tutores.Any(t => t.IdUsuario == idUsuario)).ToList();
-
         }
     }
 }

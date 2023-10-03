@@ -1,53 +1,104 @@
-﻿using System;
+﻿using BusinessEntity.Composite;
+using BusinessEntity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessLayer;
 
 namespace WebApplication1.Cursos
 {
     public partial class DetalleCurso : System.Web.UI.Page
     {
+
+        Curso_BLL mapperCurso = new Curso_BLL();
+        Curso_BE cursoBE;
+        Carrera_BLL mapper_carrera = new Carrera_BLL();
+        List<Carrera_BE> carrerasAsignadas = new List<Carrera_BE>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            Session["id_dictado_inscribir"] = null;
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Inscripciones")))
             {
-                FillDictations();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (!IsPostBack)
+                {
+                    if (Session["id_curso_inscribir"] == null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Curso inexistente');window.location.href = '/Default.aspx'", true);
+                    }
+                    cursoBE = mapperCurso.ListarCursos().FirstOrDefault(item => item.Id == int.Parse(Session["id_curso_inscribir"].ToString()));
+                    ViewState["cursoBE"] = cursoBE;
+
+                    lblCourseName.Text = cursoBE.Nombre;
+                    lblCourseDescription.Text = cursoBE.Descripcion;
+                    lblCourseSpeciality.Text = cursoBE.Especialidad.Nombre;
+                    CargarDictados();
+                }
             }
         }
 
-        private void FillDictations()
+        private void CargarDictados()
         {
-            // Crear una tabla de dictados dummy
-            DataTable dictations = new DataTable();
-            dictations.Columns.Add("Fecha de Inicio");
-            dictations.Columns.Add("Fecha de Fin");
-            dictations.Columns.Add("Horarios");
-            dictations.Columns.Add("Tutores");
+            Curso_BE curso = (Curso_BE)ViewState["cursoBE"];
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            List<Dictado_BE> dictados = dictadobll.ListarDictadosCurso(curso);
 
-            // Agregar algunos dictados a la lista
-            dictations.Rows.Add(DateTime.Now.AddDays(30).ToShortDateString(), DateTime.Now.AddDays(60).ToShortDateString(), "Lunes y Miércoles 10:00 - 12:00", "Tutor 1, Tutor 2");
-            dictations.Rows.Add(DateTime.Now.AddDays(60).ToShortDateString(), DateTime.Now.AddDays(90).ToShortDateString(), "Martes y Jueves 15:00 - 17:00", "Tutor 3, Tutor 4");
-            dictations.Rows.Add(DateTime.Now.AddDays(90).ToShortDateString(), DateTime.Now.AddDays(120).ToShortDateString(), "Lunes y Miércoles 20:00 - 22:00", "Tutor 5, Tutor 6");
-
-            // Enlazar la lista de dictados al GridView
-            lecturesGrid.DataSource = dictations;
-            lecturesGrid.DataBind();
-        }
-
-        protected void lecturesGrid_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Enroll")
+            // Filtros aplicados desde la UI
+            DateTime startDate;
+            if (DateTime.TryParse(searchStartDate.Text, out startDate))
             {
-                // Aquí puedes agregar el código para manejar la inscripción de un usuario en un dictado específico
+                dictados = dictados.Where(d => d.FechaInicio >= startDate).ToList();
             }
+
+            DateTime endDate;
+            if (DateTime.TryParse(searchEndDate.Text, out endDate))
+            {
+                dictados = dictados.Where(d => d.FechaFin <= endDate).ToList();
+            }
+
+            string modalidad = searchCourseType.SelectedValue;
+            if (!string.IsNullOrWhiteSpace(modalidad))
+            {
+                dictados = dictados.Where(d => d.TipoDictado == modalidad).ToList();
+            }
+
+            //string horario = searchSchedule.Text;
+            //if (!string.IsNullOrWhiteSpace(horario))
+            //{
+            //    dictados = dictados.Where(d => d.Horarios.Any(h => h.HoraInicio.ToString("hh\\:mm") == horario)).ToList();
+            //}
+
+            // Mostrar resultados
+            dictationsGrid.DataSource = dictados;
+            dictationsGrid.DataBind();
         }
 
-        protected void btnSelect_Click(object sender, EventArgs e)
+
+        protected void btnSelect_Click1(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+
+            // Recuperando el índice de la fila desde el CommandArgument del botón
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+
+
+            // Obteniendo el valor de Id del curso usando DataKeys
+            int idDictado = Convert.ToInt32(dictationsGrid.DataKeys[rowIndex].Value);
+            Session["id_dictado_inscribir"] = idDictado;
             Response.Redirect("~/Cursos/DetalleDictado.aspx");
+        }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            CargarDictados();
         }
     }
 }

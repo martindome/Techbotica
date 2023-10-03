@@ -69,24 +69,6 @@ namespace WebApplication1.Cursos
         protected global::System.Web.UI.WebControls.DropDownList searchCourseType;
 
         /// <summary>
-        /// Control searchSchedule.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchSchedule;
-
-        /// <summary>
-        /// Control searchTutor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchTutor;
-
-        /// <summary>
         /// Control btnFilter.
         /// </summary>
         /// <remarks>
@@ -96,13 +78,13 @@ namespace WebApplication1.Cursos
         protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
-        /// Control lecturesGrid.
+        /// Control dictationsGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView lecturesGrid;
+        protected global::System.Web.UI.WebControls.GridView dictationsGrid;
 
         /// <summary>
         /// Control btnBack.

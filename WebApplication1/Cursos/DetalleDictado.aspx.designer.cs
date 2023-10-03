@@ -33,15 +33,6 @@ namespace WebApplication1.Cursos
         protected global::System.Web.UI.WebControls.Label lblCourseDescription;
 
         /// <summary>
-        /// Control lblCourseSpeciality.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCourseSpeciality;
-
-        /// <summary>
         /// Control lblStartDate.
         /// </summary>
         /// <remarks>
@@ -94,15 +85,6 @@ namespace WebApplication1.Cursos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEnroll;
-
-        /// <summary>
-        /// Control btnConsultTutors.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConsultTutors;
 
         /// <summary>
         /// Control btnBack.

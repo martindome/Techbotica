@@ -78,5 +78,19 @@ namespace BusinessLayer
             mapper.eliminar_usuario_dictado(d.Id, u.IdUsuario);
         }
 
+        public List<InscripcionCurso_BE> ListarInscripciones()
+        {
+            return mapper.listar_inscripcion();
+        }
+
+        public InscripcionCurso_BE NuevaInscripcion(int id_estudiante, int id_dictado)
+        {
+            return mapper.nueva_inscripcion(id_estudiante, id_dictado);
+        }
+
+        public void EliminarInscripcion (InscripcionCurso_BE i)
+        {
+            mapper.eliminar_inscripcion(i.Id);
+        }
     }
 }
