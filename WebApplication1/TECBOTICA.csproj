@@ -111,11 +111,11 @@
     <Content Include="Administracion\GestionarUsuarios.aspx" />
     <Content Include="Administracion\GestionarTutores.aspx" />
     <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
-    <Content Include="BuscarCarreras.aspx" />
-    <Content Include="BuscarCursos.aspx" />
+    <Content Include="Carreras\BuscarCarreras.aspx" />
+    <Content Include="Cursos\BuscarCursos.aspx" />
     <Content Include="Carreras\ConfirmacionInscripcionCarrera.aspx" />
     <Content Include="Carreras\DetalleCarrera.aspx" />
-    <Content Include="ConsultarTutores.aspx" />
+    <Content Include="Estudiantes\ConsultarTutores.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -300,18 +300,18 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BuscarCarreras.aspx.cs">
+    <Compile Include="Carreras\BuscarCarreras.aspx.cs">
       <DependentUpon>BuscarCarreras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BuscarCarreras.aspx.designer.cs">
+    <Compile Include="Carreras\BuscarCarreras.aspx.designer.cs">
       <DependentUpon>BuscarCarreras.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BuscarCursos.aspx.cs">
+    <Compile Include="Cursos\BuscarCursos.aspx.cs">
       <DependentUpon>BuscarCursos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BuscarCursos.aspx.designer.cs">
+    <Compile Include="Cursos\BuscarCursos.aspx.designer.cs">
       <DependentUpon>BuscarCursos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Carreras\ConfirmacionInscripcionCarrera.aspx.cs">
@@ -328,11 +328,11 @@
     <Compile Include="Carreras\DetalleCarrera.aspx.designer.cs">
       <DependentUpon>DetalleCarrera.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ConsultarTutores.aspx.cs">
+    <Compile Include="Estudiantes\ConsultarTutores.aspx.cs">
       <DependentUpon>ConsultarTutores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConsultarTutores.aspx.designer.cs">
+    <Compile Include="Estudiantes\ConsultarTutores.aspx.designer.cs">
       <DependentUpon>ConsultarTutores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contacto.aspx.cs">

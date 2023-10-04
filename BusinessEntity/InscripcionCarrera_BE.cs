@@ -10,7 +10,7 @@ namespace BusinessEntity
     {
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
-        public int IdDictado { get; set; }
+        public int IdCarrera { get; set; }
         public int IdEstudiante { get; set; }
     }
 }

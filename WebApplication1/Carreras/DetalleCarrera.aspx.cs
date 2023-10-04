@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessEntity.Composite;
+using BusinessEntity;
+using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,36 +14,83 @@ namespace WebApplication1.Carreras
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            Session["numero_inscripcion_carrera"] = null;
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Inscripciones")))
             {
-                // Establecer los valores para los detalles de la carrera
-                nombreCarrera.Text = "Ciencias de la Computación";
-                descripcionCarrera.Text = "Esta carrera proporciona un profundo entendimiento de los conceptos y prácticas fundamentales en torno a la computación y sus aplicaciones.";
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (Session["id_carrera_inscribir"] == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Carrera inexistente');window.location.href = '/Default.aspx'", true);
+                }
+                if (!IsPostBack)
+                {
+                    Session["numero_inscripcion_carrera"] = null;
+                    Carrera_BLL carreraBLL = new Carrera_BLL();
+                    int id_carrera = int.Parse(Session["id_carrera_inscribir"].ToString());
+                    Carrera_BE carrera = carreraBLL.ListarCarreras().SingleOrDefault(c => c.Id == id_carrera);
 
-                // Generar lista de cursos
-                List<Course> cursos = new List<Course>()
+                    if (carrera != null)
+                    {
+                        CargarDatosCarrera(carrera);
+                    }
+                }
+            }
+        }
+
+        private void CargarDatosCarrera(Carrera_BE carrera)
         {
-            new Course() { Nombre = "Programación 101", Especialidad = "Programación" },
-            new Course() { Nombre = "Algoritmos y Estructuras de Datos", Especialidad = "Computación" },
-            new Course() { Nombre = "Diseño de Sistemas", Especialidad = "Sistemas" },
-            new Course() { Nombre = "Matemáticas para Computación", Especialidad = "Matemáticas" }
-        };
+            // Cargando y mostrando la información básica de la carrera
+            nombreCarrera.Text = carrera.Nombre ?? "No disponible";
+            descripcionCarrera.Text = carrera.Descripcion ?? "No disponible";
 
-                // Asignar la lista de cursos al GridView
-                cursosCarrera.DataSource = cursos;
+            if (carrera.Cursos != null && carrera.Cursos.Count > 0)
+            {
+                cursosCarrera.DataSource = carrera.Cursos;
                 cursosCarrera.DataBind();
             }
         }
 
-        public class Course
-        {
-            public string Nombre { get; set; }
-            public string Especialidad { get; set; }
-        }
-
         protected void btnInscribirse_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Carreras/ConfirmacionInscripcionCarrera.aspx");
+            // Obteniendo el usuario actual
+            Usuario_BE usuario = (Usuario_BE)Session["usuario"];
+            if (usuario != null)
+            {
+                // Obteniendo la información de la carrera desde la variable de sesión
+
+                int id_carrera_inscribir = int.Parse(Session["id_carrera_inscribir"].ToString());
+
+                //if (id_carrera_inscribir)
+                //{
+                    Carrera_BLL carreraBLL = new Carrera_BLL();
+
+                    InscripcionCarrera_BE nuevaInscripcion = carreraBLL.NuevaInscripcion(usuario.IdUsuario, id_carrera_inscribir);
+
+                    if (nuevaInscripcion != null)
+                    {
+                        // Suponiendo que quieras guardar el ID de la inscripción en la sesión
+                        Session["numero_inscripcion_carrera"] = nuevaInscripcion.Id;
+                        Response.Redirect("~/Carreras/ConfirmacionInscripcionCarrera.aspx");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Error en la inscripcion.');</script>");
+                    }
+                //}
+                //else
+                //{
+                //    Response.Write("<script>alert('Error en la inscripcion');</script>");
+                //}
+            }
+            else
+            {
+                Response.Write("<script>alert('Error en la inscripcion');</script>");
+            }
         }
+
     }
 }

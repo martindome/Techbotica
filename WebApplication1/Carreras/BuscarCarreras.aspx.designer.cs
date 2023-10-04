@@ -15,30 +15,30 @@ namespace WebApplication1
     {
 
         /// <summary>
-        /// Control searchName.
+        /// Control SearchCareerTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchName;
+        protected global::System.Web.UI.WebControls.TextBox SearchCareerTextBox;
 
         /// <summary>
-        /// Control btnSearch.
+        /// Control SearchCareerButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.Button SearchCareerButton;
 
         /// <summary>
-        /// Control carrerasGrid.
+        /// Control CareersGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView carrerasGrid;
+        protected global::System.Web.UI.WebControls.GridView CareersGrid;
     }
 }

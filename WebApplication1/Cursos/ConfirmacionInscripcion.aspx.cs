@@ -28,14 +28,17 @@ namespace WebApplication1.Cursos
                 if (!IsPostBack)
                 {
 
-                    lblInscriptionNumber.Text = int.Parse(Session["id_dictado_inscribir"].ToString()).ToString();
+                    lblInscriptionNumber.Text = int.Parse(Session["numero_inscripcion_curso"].ToString()).ToString();
+                    Session["numero_inscripcion_curso"] = null;
+                    Session["id_curso_inscribir"] = null;
+                    Session["id_dictado_inscribir"] = null;
                 }
             }
 
         }
         protected void btnCursos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/BuscarCursos.aspx");
+            Response.Redirect("~/Cursos/BuscarCursos.aspx");
         }
 
         protected void btnInscripciones_Click(object sender, EventArgs e)

@@ -313,9 +313,11 @@ CREATE TABLE [dbo].[Inscripcion_Curso](
 	[id] [int] PRIMARY KEY,
 	[fecha] datetime NULL,
 	[id_estudiante] int NULL,
+	[id_curso] int NULL,
 	[id_dictado] int NULL,
-	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
-	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE NO ACTION,
+	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
 
@@ -328,8 +330,8 @@ CREATE TABLE [dbo].[Inscripcion_Carrera](
 	[id] [int] PRIMARY KEY,
 	[fecha] datetime NULL,
 	[id_estudiante] int NULL,
-	[id_dictado] int NULL,
-	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+	[id_carrera] int NULL,
+	FOREIGN KEY (id_carrera) REFERENCES Carrera(id) ON DELETE CASCADE,
 	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
@@ -1154,11 +1156,26 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create procedure [dbo].[listar_inscripciones_curso]
-@id_dictado int
 as 
 begin
-select a.id, a.fecha, a.id_estudiante, a.id_dictado
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
 from Inscripcion_Curso a
+end
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_inscripciones_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_inscripciones_curso_estudiante]
+@id_usuario int
+as 
+begin
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
+from Inscripcion_Curso a
+where id_estudiante = @id_usuario
 end
 GO
 
@@ -1168,19 +1185,20 @@ GO
 
 CREATE PROCEDURE [dbo].[nueva_inscripcion_curso]
     @id_usuario INT,
-    @id_dictado INT
+    @id_dictado INT,
+	@id_curso INT
 AS 
 BEGIN
     DECLARE @id INT
     SET @id = ISNULL((SELECT MAX(id) FROM Inscripcion_Curso),0 ) +1
     
     -- Insertando la fecha actual en la columna 'fecha'
-    INSERT INTO Inscripcion_Curso (id, fecha, id_dictado, id_estudiante)
-    VALUES (@id, GETDATE(), @id_dictado, @id_usuario);
+    INSERT INTO Inscripcion_Curso (id, fecha, id_dictado, id_estudiante, id_curso)
+    VALUES (@id, GETDATE(), @id_dictado, @id_usuario, @id_curso);
     
     
 END
-SELECT a.id, a.id_estudiante, a.id_dictado, a.fecha 
+SELECT a.id, a.id_estudiante, a.id_dictado, a.fecha , a.id_curso
     FROM Inscripcion_Curso a
 GO
 
@@ -1193,6 +1211,67 @@ BEGIN
 END
 GO
 
+
+
+/****** Object:  StoredProcedure [dbo].[listar_inscripciones_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_inscripciones_carrera]
+as 
+begin
+select a.id, a.fecha, a.id_estudiante, a.id_carrera
+from Inscripcion_Carrera a
+end
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_inscripciones_carrera_estudiante]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_inscripciones_carrera_estudiante]
+@id_usuario int
+as 
+begin
+select a.id, a.fecha, a.id_estudiante, a.id_carrera
+from Inscripcion_Carrera a
+where id_estudiante = @id_usuario
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[nueva_inscripcion_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[nueva_inscripcion_carrera]
+    @id_usuario INT,
+    @id_carrera INT
+AS 
+BEGIN
+    DECLARE @id INT
+    SET @id = ISNULL((SELECT MAX(id) FROM Inscripcion_Carrera),0 ) +1
+    
+    -- Insertando la fecha actual en la columna 'fecha'
+    INSERT INTO Inscripcion_Carrera (id, fecha, id_carrera, id_estudiante)
+    VALUES (@id, GETDATE(), @id_carrera, @id_usuario);
+    
+    
+END
+SELECT a.id, a.id_estudiante, a.id_carrera, a.fecha
+    FROM Inscripcion_Carrera a
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_inscripcion_carrera]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_inscripcion_carrera
+@id int
+AS
+BEGIN
+    DELETE FROM Inscripcion_Carrera WHERE id = @id;
+END
+GO
 
 
 /************************************************************************************************/
@@ -1283,8 +1362,8 @@ VALUES (1, '2023-09-05', '2023-12-12', 'http://enlace1.com', 1, 1, 20), --format
        (2, '2023-09-05', '2023-12-12', 'http://enlace2.com', 1, 2, 12);
 
 INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
-VALUES (1, 'Lunes', '08:00:00', '10:00:00',1),
-       (2, 'Martes', '10:00:00', '12:00:00',1); --debe tener al menos un horario cada dictado interactivo
+VALUES (1, 'Lunes', '08:00:00', '10:00:00',2),
+       (2, 'Martes', '10:00:00', '12:00:00',2); --debe tener al menos un horario cada dictado interactivo
 
 INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
 VALUES (1,1,3),

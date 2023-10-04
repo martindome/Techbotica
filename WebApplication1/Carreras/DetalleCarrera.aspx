@@ -15,7 +15,11 @@
             <asp:GridView ID="cursosCarrera" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
                 <Columns>
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+                    <asp:TemplateField HeaderText="Especialidad">
+                        <ItemTemplate>
+                            <%# Eval("Especialidad.Nombre") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>

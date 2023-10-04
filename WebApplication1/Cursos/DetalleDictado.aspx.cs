@@ -17,7 +17,7 @@ namespace WebApplication1.Cursos
         Dictado_BLL dictado_BLL = new Dictado_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["numero_inscripcion_curso"] = null;
+            
             if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Inscripciones")))
             {
                 //Sacamos controles de navegacion
@@ -31,6 +31,7 @@ namespace WebApplication1.Cursos
                 }
                 if (!IsPostBack)
                 {
+                    Session["numero_inscripcion_curso"] = null;
                     ViewState["dictado"] = new Dictado_BE();
                     dictado = dictado_BLL.ListarDictados().SingleOrDefault(d => d.Id == int.Parse(Session["id_dictado_inscribir"].ToString()));
                     ViewState["dictado"] = dictado;
@@ -104,7 +105,8 @@ namespace WebApplication1.Cursos
                 if (id_dictado_inscribir.HasValue)
                 {
                     Dictado_BLL dictado_BLL = new Dictado_BLL();
-                    InscripcionCurso_BE nuevaInscripcion = dictado_BLL.NuevaInscripcion(usuario.IdUsuario, id_dictado_inscribir.Value);
+                    dictado = dictado_BLL.ListarDictados().SingleOrDefault(d => d.Id == int.Parse(Session["id_dictado_inscribir"].ToString()));
+                    InscripcionCurso_BE nuevaInscripcion = dictado_BLL.NuevaInscripcion(usuario.IdUsuario, id_dictado_inscribir.Value, dictado.Curso.Id);
 
                     if (nuevaInscripcion != null)
                     {

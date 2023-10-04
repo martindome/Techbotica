@@ -284,9 +284,9 @@ namespace DataAccessLayer
             return inscripciones;
         }
 
-        public InscripcionCurso_BE nueva_inscripcion (int id_estudiante, int id_dictado)
+        public InscripcionCurso_BE nueva_inscripcion (int id_estudiante, int id_dictado, int id_curso)
         {
-            SqlParameter[] parametros = new SqlParameter[2];
+            SqlParameter[] parametros = new SqlParameter[3];
             parametros[0] = new SqlParameter();
             parametros[0].ParameterName = "@id_usuario";
             parametros[0].DbType = DbType.Int32;
@@ -296,6 +296,11 @@ namespace DataAccessLayer
             parametros[1].ParameterName = "@id_dictado";
             parametros[1].DbType = DbType.Int32;
             parametros[1].Value = id_dictado;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@id_curso";
+            parametros[2].DbType = DbType.Int32;
+            parametros[2].Value = id_curso;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("nueva_inscripcion_curso", parametros);
 
@@ -318,11 +323,34 @@ namespace DataAccessLayer
             ac.ejecutar_stored_procedure("eliminar_inscripcion_curso", parametros);
         }
 
+
+        public List<InscripcionCurso_BE> ListarInscripcionesPorEstudiante(int idUsuario)
+        {
+
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_usuario";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = idUsuario;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_inscripciones_curso_estudiante", parametros);
+            List<InscripcionCurso_BE> inscripciones = new List<InscripcionCurso_BE>();
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                InscripcionCurso_BE c = new InscripcionCurso_BE();
+                mappear_inscripciones(reg, c);
+                inscripciones.Add(c);
+            }
+            return inscripciones;
+        }
+
         private void mappear_inscripciones(DataRow reg, InscripcionCurso_BE e)
         {
             e.Id = Convert.ToInt32(reg["id"].ToString());
             e.IdEstudiante = Convert.ToInt32(reg["id_estudiante"].ToString());
             e.IdDictado = Convert.ToInt32(reg["id_dictado"].ToString());
+            e.IdCurso = Convert.ToInt32(reg["id_curso"].ToString());
             e.Fecha = DateTime.Parse(reg["fecha"].ToString());
         }
 
