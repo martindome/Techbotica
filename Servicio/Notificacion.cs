@@ -10,7 +10,7 @@ namespace Servicio
 {
     public class Notificacion
     {
-        public static void EnviarEmail(string pMensaje, string pAsunto, string pToAddress, string pFrom = "buenviaje@notifications.ar")
+        public static void EnviarEmail(string pMensaje, string pAsunto, string pToAddress, string pFrom = "techboticalearning@gmail.com")
         {
             try
             {
