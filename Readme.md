@@ -55,3 +55,10 @@
     - Poder cambiar la empresa desde el panel
     - Agregar un filtro para visualizar empleados por empresa
     - Chequear usuarios eliminados como en registrar
+2. En insripciones
+  - Verificar que los dictados mostrados tengan fecha de inicio superior a la de hoy (Solucionado)
+3. En Registrarse
+  - Permitir realizar una busqueda de empresas y seleccionarla de esa busqueda en lugar de escribir el nombre (Solucionado)
+4. En administracion
+  - Armar una pagina de administracion para las inscripciones
+

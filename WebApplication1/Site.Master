@@ -91,7 +91,7 @@
                      <li runat="server"  id="dropEstudiantes" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones (TO DO)</a>
+                        <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones</a>
                           <a class="dropdown-item" href="/Estudiantes/MisCursadas/MisCursadas.aspx">Mis Cursadas (TO DO)</a>
                       </div>
                     </li>

@@ -1330,6 +1330,7 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictado
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (11, N'/Tutores/MisDictados')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (12, N'/Estudiante/Inscripciones')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (13, N'/Estudiante/Consultas')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (14, N'/Estudiante/Dictados')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
@@ -1349,12 +1350,24 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (10, 1,
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (11, 1, 11)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 1, 12)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (13, 1, 13)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 1, 14)
 --permisos tutor
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 3, 9)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 10)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 11)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (17, 3, 2)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (18, 3, 8)
+--permisos estudiante
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (19, 2, 3)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (20, 2, 4)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (21, 2, 12)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (22, 2, 13)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (23, 2, 14)
+--permisos administrador
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (24, 4, 1)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (25, 4, 5)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (26, 4, 6)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (27, 4, 7)
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
