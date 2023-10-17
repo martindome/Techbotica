@@ -57,6 +57,11 @@ namespace WebApplication1.Cursos
             {
                 dictados = dictados.Where(d => d.FechaInicio >= startDate).ToList();
             }
+            // else if filter dictations which FechaInicio is greater than today
+            else
+            {
+                dictados = dictados.Where(d => d.FechaInicio >= DateTime.Now).ToList();
+            }
 
             DateTime endDate;
             if (DateTime.TryParse(searchEndDate.Text, out endDate))
@@ -68,13 +73,7 @@ namespace WebApplication1.Cursos
             if (!string.IsNullOrWhiteSpace(modalidad))
             {
                 dictados = dictados.Where(d => d.TipoDictado == modalidad).ToList();
-            }
-
-            //string horario = searchSchedule.Text;
-            //if (!string.IsNullOrWhiteSpace(horario))
-            //{
-            //    dictados = dictados.Where(d => d.Horarios.Any(h => h.HoraInicio.ToString("hh\\:mm") == horario)).ToList();
-            //}
+            } 
 
             // Mostrar resultados
             dictationsGrid.DataSource = dictados;
@@ -92,8 +91,28 @@ namespace WebApplication1.Cursos
 
             // Obteniendo el valor de Id del curso usando DataKeys
             int idDictado = Convert.ToInt32(dictationsGrid.DataKeys[rowIndex].Value);
-            Session["id_dictado_inscribir"] = idDictado;
-            Response.Redirect("~/Cursos/DetalleDictado.aspx");
+            // find dictado and save it in new dictadoBE
+            Dictado_BLL dictadoBLL = new Dictado_BLL();
+            Dictado_BE dictadoBE = dictadoBLL.ListarDictados().FirstOrDefault(item => item.Id == idDictado);
+
+            //Getall the inscripciones for the dictado
+            List<InscripcionCurso_BE> inscripciones = dictadoBLL.ListarInscripcionesPorDictado(idDictado);
+
+            //if the inscripciones count is equal to the dictado cupo, show error message
+            if (inscripciones.Count == dictadoBE.Cupo)
+            {
+                Response.Write("<script>alert('No se puede inscribir a un mensaje que ya esta lleno.');</script>");
+            }
+            // check if dictadoBE fechaInicio is minor than today If thats true, show error message
+            else if (dictadoBE.FechaInicio < DateTime.Now)
+            {
+                Response.Write("<script>alert('No se puede inscribir a un mensaje que ya comenzo.');</script>");
+            }
+            else
+            {
+                Session["id_dictado_inscribir"] = idDictado;
+                Response.Redirect("~/Cursos/DetalleDictado.aspx");
+            }
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)

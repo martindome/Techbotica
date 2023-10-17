@@ -11,14 +11,23 @@
                 <p><strong>Fecha de inicio:</strong> <asp:Label ID="lblStartDate" runat="server" Text="01/01/1996"></asp:Label></p>
                 <p><strong>Fecha de fin:</strong> <asp:Label ID="lblEndDate" runat="server" Text="01/01/1996"></asp:Label></p>
                 <p><strong>Horarios:</strong> <asp:Label ID="lblSchedule" runat="server" Text="Miercoles 12:00-14:00"></asp:Label></p>
-                <asp:Button ID="ButtonIrAlCurso" CssClass="btn btn-secondary" Text="Ir al curso" runat="server" onClick="ButtonIrAlCurso_Click" />
+                <p><strong>Tutores:</strong> <asp:Label ID="lblTutores" runat="server" Text="Miercoles 12:00-14:00"></asp:Label></p>
             
                 <!-- Botones de acción -->
                 <div class="form-group mt-4">
-                    <asp:Button ID="btnUnenroll" CssClass="btn btn-danger" Text="Desinscribir" runat="server" onclick="btnUnenroll_Click"/>
+                    <asp:Button ID="btnUnenroll" CssClass="btn btn-danger" Text="Desinscribir" runat="server" OnClientClick="return confirmDesinscription();" OnClick="btnUnenroll_Click" />
+
                     <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function confirmDesinscription() {
+            var confirmValue = confirm('¿Está seguro de que desea desinscribirse de esta carrera? Esta acción no se puede deshacer.');
+            return confirmValue; // Si es true, continuará con el evento OnClick del lado del servidor. Si es false, no pasará nada.
+        }
+    </script>
+
 </asp:Content>

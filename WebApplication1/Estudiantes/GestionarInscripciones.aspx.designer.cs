@@ -42,15 +42,6 @@ namespace WebApplication1.Estudiantes
         protected global::System.Web.UI.WebControls.GridView careersGrid;
 
         /// <summary>
-        /// Control searchCourseName.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchCourseName;
-
-        /// <summary>
         /// Control searchStartDate.
         /// </summary>
         /// <remarks>
@@ -67,24 +58,6 @@ namespace WebApplication1.Estudiantes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox searchEndDate;
-
-        /// <summary>
-        /// Control searchSpeciality.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList searchSpeciality;
-
-        /// <summary>
-        /// Control searchStatus.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList searchStatus;
 
         /// <summary>
         /// Control btnSearchCourse.

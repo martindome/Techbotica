@@ -123,13 +123,13 @@ namespace WebApplication1.Registarse
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorCorreo;
 
         /// <summary>
-        /// Control empresa.
+        /// Control ddlEmpresa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox empresa;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmpresa;
 
         /// <summary>
         /// Control RequiredFieldValidatorEmpresa.
@@ -139,15 +139,6 @@ namespace WebApplication1.Registarse
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEmpresa;
-
-        /// <summary>
-        /// Control RegularExpressionValidatorEmpresa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEmpresa;
 
         /// <summary>
         /// Control btnRegistrar.

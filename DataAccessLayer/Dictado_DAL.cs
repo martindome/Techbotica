@@ -345,6 +345,28 @@ namespace DataAccessLayer
             return inscripciones;
         }
 
+        //create the method ListarInscripcionesPorDictado
+        public List<InscripcionCurso_BE> ListarInscripcionesPorDictado(int idDictado)
+        {
+
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = idDictado;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_inscripciones_curso_dictado", parametros);
+            List<InscripcionCurso_BE> inscripciones = new List<InscripcionCurso_BE>();
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                InscripcionCurso_BE c = new InscripcionCurso_BE();
+                mappear_inscripciones(reg, c);
+                inscripciones.Add(c);
+            }
+            return inscripciones;
+        }
+
         private void mappear_inscripciones(DataRow reg, InscripcionCurso_BE e)
         {
             e.Id = Convert.ToInt32(reg["id"].ToString());

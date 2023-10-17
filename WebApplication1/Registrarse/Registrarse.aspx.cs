@@ -26,6 +26,22 @@ namespace WebApplication1.Registarse
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Cierre sesion para registrar un nuevo usuario');window.location.href = '/Default.aspx'", true);
             }
+            if (!IsPostBack)
+            {
+                CargarEmpresas();
+            }
+        }
+
+        private void CargarEmpresas()
+        {
+            List<Empresa_BE> listaEmpresas = empresaBLL.ListarEmpresas();
+            ddlEmpresa.DataSource = listaEmpresas;
+            ddlEmpresa.DataTextField = "Nombre"; // El campo que se mostrará
+            ddlEmpresa.DataValueField = "IdEmpresa"; // El valor que se enviará de fondo
+            ddlEmpresa.DataBind();
+
+            // Opcional: Agregar un item por defecto como primer valor
+            //ddlEmpresa.Items.Insert(0, new ListItem("-- Seleccione una empresa --", "0"));
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -40,64 +56,58 @@ namespace WebApplication1.Registarse
                 }
                 else
                 {
-                    List<Empresa_BE> empresas = empresaBLL.ListarEmpresas();
-                    if (!(empresas.Any(item => item.Nombre == empresa.Text)))
+                    int idEmpresaSeleccionada = Convert.ToInt32(ddlEmpresa.SelectedValue);
+                    List<Dominio_BE> dominios = empresaBLL.ListarDominiosEmpresa(idEmpresaSeleccionada);
+                    string sufijo = correoElectronico.Text.Split('@')[1];
+                    if (!(dominios.Any(item => item.Sufijo == sufijo)))
                     {
-                        Label1.Text = "Empresa '" + empresa.Text + "' inexistente";
+                        Label1.Text = "Dominio de la empresa " + correoElectronico.Text.Split('@')[1] + " inexistente";
                         Label1.Visible = true;
                     }
                     else
                     {
-                        int id_empresa = (int)empresas.FirstOrDefault(item => item.Nombre == empresa.Text)?.IdEmpresa;
-                        List<Dominio_BE> dominios = empresaBLL.ListarDominiosEmpresa(id_empresa);
-                        string sufijo = correoElectronico.Text.Split('@')[1];
-                        if (!(dominios.Any(item => item.Sufijo == sufijo)))
+                        List<Empresa_BE> empresas = empresaBLL.ListarEmpresas();
+                        usuarioBE = usuarioBLL.VerificarUsuarioSinPassword(correoElectronico.Text);
+                        if (string.IsNullOrEmpty(usuarioBE.Usuario))
                         {
-                            Label1.Text = "Dominio de la empresa " + correoElectronico.Text.Split('@')[1] + " inexistente";
-                            Label1.Visible = true;
+                            
+                            string nuevapass = Servicio.GeneradorClave.CrearRandomContrasenia();
+                            Label1.Visible = false;
+                            usuarioBE = new Usuario_BE();
+                            usuarioBE.Nombre = nombre.Text;
+                            usuarioBE.Apellido = apellido.Text;
+                            usuarioBE.Usuario = correoElectronico.Text;
+                            usuarioBE.Contraseña = nuevapass;
+                            usuarioBE.Email = correoElectronico.Text;
+                            usuarioBE.Telefono = telefono.Text;
+                            usuarioBE.Bloqueado = 0;
+                            usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == ddlEmpresa.SelectedItem.Text)?.IdEmpresa;
+                            usuarioBE.Borrado = "No";
+                            usuarioBLL.RegistrarEstudiante(usuarioBE);
+
+                            Servicio.GeneradorClave.EnviarNuevaContrasenia(nuevapass, correoElectronico.Text);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Se ha enviado la clave a su correo electronico');window.location.href = '/Default.aspx'", true);
                         }
                         else
                         {
-                            usuarioBE = usuarioBLL.VerificarUsuarioSinPassword(correoElectronico.Text);
-                            if (string.IsNullOrEmpty(usuarioBE.Usuario))
-                            {
-                                string nuevapass = Servicio.GeneradorClave.CrearRandomContrasenia();
-                                Label1.Visible = false;
-                                usuarioBE = new Usuario_BE();
-                                usuarioBE.Nombre = nombre.Text;
-                                usuarioBE.Apellido = apellido.Text;
-                                usuarioBE.Usuario = correoElectronico.Text;
-                                usuarioBE.Contraseña = nuevapass;
-                                usuarioBE.Email = correoElectronico.Text;
-                                usuarioBE.Telefono = telefono.Text;
-                                usuarioBE.Bloqueado = 0;
-                                usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == empresa.Text)?.IdEmpresa;
-                                usuarioBE.Borrado = "No";
-                                usuarioBLL.RegistrarEstudiante(usuarioBE);
-
-                                Servicio.GeneradorClave.EnviarNuevaContrasenia(nuevapass, correoElectronico.Text);
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Se ha enviado la clave a su correo electronico');window.location.href = '/Default.aspx'", true);
-                            }
-                            else
-                            {
-                                string nuevapass = Servicio.GeneradorClave.CrearRandomContrasenia();
-                                Label1.Visible = false;
-                                usuarioBE.Nombre = nombre.Text;
-                                usuarioBE.Apellido = apellido.Text;
-                                usuarioBE.Usuario = correoElectronico.Text;
-                                //usuarioBE.Contraseña = nuevapass;
-                                usuarioBE.Email = correoElectronico.Text;
-                                usuarioBE.Telefono = telefono.Text;
-                                usuarioBE.Bloqueado = 0;
-                                usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == empresa.Text)?.IdEmpresa;
-                                usuarioBE.Borrado = "No";
-                                usuarioBLL.UpdateUsuario(usuarioBE);
-                                usuarioBLL.RecuperarPassword(usuarioBE);
-                                //Servicio.GeneradorClave.EnviarNuevaContrasenia(nuevapass, correoElectronico.Text);
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Se ha enviado la clave a su correo electronico');window.location.href = '/Default.aspx'", true);
-                            }
+                            string nuevapass = Servicio.GeneradorClave.CrearRandomContrasenia();
+                            Label1.Visible = false;
+                            usuarioBE.Nombre = nombre.Text;
+                            usuarioBE.Apellido = apellido.Text;
+                            usuarioBE.Usuario = correoElectronico.Text;
+                            //usuarioBE.Contraseña = nuevapass;
+                            usuarioBE.Email = correoElectronico.Text;
+                            usuarioBE.Telefono = telefono.Text;
+                            usuarioBE.Bloqueado = 0;
+                            usuarioBE.Empresa = (int)empresas.FirstOrDefault(item => item.Nombre == ddlEmpresa.SelectedItem.Text)?.IdEmpresa;
+                            usuarioBE.Borrado = "No";
+                            usuarioBLL.UpdateUsuario(usuarioBE);
+                            usuarioBLL.RecuperarPassword(usuarioBE);
+                            //Servicio.GeneradorClave.EnviarNuevaContrasenia(nuevapass, correoElectronico.Text);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Se ha enviado la clave a su correo electronico');window.location.href = '/Default.aspx'", true);
                         }
-                    } 
+                    }
+                    
                 }
             } 
         }

@@ -97,5 +97,22 @@ namespace BusinessLayer
         {
             return mapper.ListarInscripcionesPorEstudiante(idUsuario);
         }
+
+        //create the method ListarInscriocionesPorDictado
+        public List<InscripcionCurso_BE> ListarInscripcionesPorDictado(int idDictado)
+        {
+            return mapper.ListarInscripcionesPorDictado(idDictado);
+        }
+
+        public List<Dictado_BE> ListarDictadosPorFechas(Curso_BE curso, DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<Dictado_BE> todosDictados = ListarDictadosCurso(curso);
+
+            List<Dictado_BE> dictadosFiltrados = todosDictados.Where(d =>
+                d.FechaInicio >= fechaInicio &&
+                d.FechaInicio <= fechaFin).ToList();
+
+            return dictadosFiltrados;
+        }
     }
 }

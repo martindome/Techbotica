@@ -52,7 +52,7 @@ namespace BusinessLayer
             return mapper.nueva_inscripcion(id_estudiante, id_dictado);
         }
 
-        public void EliminarInscripcion(InscripcionCurso_BE i)
+        public void EliminarInscripcion(InscripcionCarrera_BE i)
         {
             mapper.eliminar_inscripcion(i.Id);
         }

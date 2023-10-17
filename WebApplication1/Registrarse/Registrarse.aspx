@@ -28,11 +28,9 @@
             <asp:RegularExpressionValidator ID="RegularExpressionValidatorCorreo" Display="None" runat="server" ControlToValidate="correoElectronico" CssClass="text-danger" ErrorMessage="Debe ingresar una casilla de email valida" ValidationExpression="^[a-zA-Z0-9+_.-]{1,50}@[a-zA-Z0-9.-]{1,49}$"></asp:RegularExpressionValidator>
         </div>
         <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <asp:TextBox ID="empresa" CssClass="form-control" runat="server"></asp:TextBox>
-            <br />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmpresa" runat="server" Display="None" ControlToValidate="Empresa" CssClass="text-danger" ErrorMessage="Debe indicar la empresa"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmpresa" Display="None" runat="server" ControlToValidate="empresa" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre de empresa valido" ValidationExpression="^(?=.{1,50}$)[a-zA-Z-]+(?: [a-zA-Z-]+)*$"></asp:RegularExpressionValidator>
+            <label for="ddlEmpresa">Empresa</label>
+            <asp:DropDownList ID="ddlEmpresa" CssClass="form-control" runat="server"></asp:DropDownList>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmpresa" runat="server" Display="None" ControlToValidate="ddlEmpresa" CssClass="text-danger" ErrorMessage="Debe seleccionar una empresa"></asp:RequiredFieldValidator>
         </div>
         <div class="form-group">
             <asp:Button ID="btnRegistrar" CssClass="btn btn-primary" Text="Registrar" runat="server" OnClick="btnRegistrar_Click"/>

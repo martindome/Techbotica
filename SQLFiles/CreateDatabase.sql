@@ -1179,6 +1179,23 @@ where id_estudiante = @id_usuario
 end
 GO
 
+/****** Object:  StoredProcedure [dbo].[listar_inscripciones_curso]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_inscripciones_curso_dictado]
+@id_dictado int
+as 
+begin
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
+from Inscripcion_Curso a
+where id_dictado = @id_dictado
+end
+GO
+
+
+
 /****** Object:  StoredProcedure [dbo].[nueva_inscripcion_curso]    Script Date: 5/7/2022 03:16:57 ******/
 SET QUOTED_IDENTIFIER ON
 GO
@@ -1293,7 +1310,7 @@ INSERT [dbo].[Familia] ([id], [familia]) VALUES (4, N'Administrador')
 GO
 INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
 (1, 'TECHBOTICA', 'Empresa TECHBOTICA', 'contacto@techbotica.com', '555-1234', 'No'),
-(2, 'example2', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
+(2, 'Metalurgica de peuba', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
 GO
 INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
 (1,'web.master@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Web', 'Master', '555-1234', 'web.master@techbotica.ar', 0, 'No', 1),
@@ -1341,7 +1358,9 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (18, 3,
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
-(2, 'gmail.com', 1, 'No')
+(2, 'gmail.com', 1, 'No'),
+(3, 'example.com', 2, 'No'),
+(4, 'alumnos.uai.edu.ar', 2, 'No')
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')
@@ -1374,3 +1393,197 @@ VALUES (1,1,3),
 -- INSERT INTO [dbo].[Horario_Dictado] (id, id_horario, id_dictado)
 -- VALUES (1, 1, 1),
 --        (2, 2, 2);
+
+
+-- Insertando tutores
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
+(4,'tutor1@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor1', 'Apellido', '555-0001', 'tutor1@techbotica.ar', 0, 'No', 1),
+(5,'tutor2@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor2', 'Apellido', '555-0002', 'tutor2@techbotica.ar', 0, 'No', 1),
+(6,'tutor3@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor3', 'Apellido', '555-0003', 'tutor3@techbotica.ar', 0, 'No', 1),
+(7,'tutor4@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor4', 'Apellido', '555-0004', 'tutor4@techbotica.ar', 0, 'No', 1),
+(8,'tutor5@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor5', 'Apellido', '555-0005', 'tutor5@techbotica.ar', 0, 'No', 1);
+
+-- Asignando la familia de tutores a los usuarios nuevos
+INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES 
+(4, 3, 4),
+(5, 3, 5),
+(6, 3, 6),
+(7, 3, 7),
+(8, 3, 8);
+
+-- Insertando estudiantes
+INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
+(9, 'estudiante1@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante1', 'Apellido', '555-1001', 'estudiante1@example.com', 0, 'No', 2),
+(10, 'estudiante2@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante2', 'Apellido', '555-1002', 'estudiante2@example.com', 0, 'No', 2),
+(11, 'estudiante3@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante3', 'Apellido', '555-1003', 'estudiante3@example.com', 0, 'No', 2),
+(12, 'estudiante4@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante4', 'Apellido', '555-1004', 'estudiante4@example.com', 0, 'No', 2),
+(13, 'estudiante5@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante5', 'Apellido', '555-1005', 'estudiante5@example.com', 0, 'No', 2),
+(14, 'estudiante6@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante6', 'Apellido', '555-1006', 'estudiante6@example.com', 0, 'No', 2),
+(15, 'estudiante7@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante7', 'Apellido', '555-1007', 'estudiante7@example.com', 0, 'No', 2),
+(16, 'estudiante8@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante8', 'Apellido', '555-1008', 'estudiante8@example.com', 0, 'No', 2),
+(17, 'estudiante9@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante9', 'Apellido', '555-1009', 'estudiante9@example.com', 0, 'No', 2),
+(18, 'estudiante10@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante10', 'Apellido', '555-1010', 'estudiante10@example.com', 0, 'No', 2);
+
+-- Asignando la familia de estudiantes a los usuarios nuevos
+INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES 
+(9, 2, 9),
+(10, 2, 10),
+(11, 2, 11),
+(12, 2, 12),
+(13, 2, 13),
+(14, 2, 14),
+(15, 2, 15),
+(16, 2, 16),
+(17, 2, 17),
+(18, 2, 18);
+
+
+-- Creación de Dictados de Octubre 2023 a Enero 2024
+-- Asumiendo que los cursos y los tipos de dictado ya están definidos como en tus ejemplos.
+
+-- Octubre 2023
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(3, '2023-10-01', '2023-10-31', 'http://enlaceDictadoOctubre.com', 1, 1, 20), -- Autodirigido, Curso 1
+(4, '2023-10-01', '2023-10-31', 'http://enlaceDictadoInteractivoOctubre.com', 1, 2, 12); -- Interactivo, Curso 1
+
+-- Horario para el Dictado Interactivo de Octubre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(3, 'Lunes', '09:00:00', '11:00:00', 4),
+(4, 'Miércoles', '09:00:00', '11:00:00', 4);
+
+-- Vinculación de tutores a los Dictados (asumiendo que el tutor con id_usuario 3 está disponible)
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(3, 3, 3),
+(4, 4, 3);
+
+-- Noviembre 2023
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(5, '2023-11-01', '2023-11-30', 'http://enlaceDictadoNoviembre.com', 1, 1, 20), -- Autodirigido, Curso 1
+(6, '2023-11-01', '2023-11-30', 'http://enlaceDictadoInteractivoNoviembre.com', 1, 2, 12); -- Interactivo, Curso 1
+
+-- Horario para el Dictado Interactivo de Noviembre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(5, 'Martes', '09:00:00', '11:00:00', 6),
+(6, 'Jueves', '09:00:00', '11:00:00', 6);
+
+-- Vinculación de tutores a los Dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(5, 5, 3),
+(6, 6, 3);
+
+-- Diciembre 2023
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(7, '2023-12-01', '2023-12-31', 'http://enlaceDictadoDiciembre.com', 1, 1, 20), -- Autodirigido, Curso 1
+(8, '2023-12-01', '2023-12-31', 'http://enlaceDictadoInteractivoDiciembre.com', 1, 2, 12); -- Interactivo, Curso 1
+
+-- Horario para el Dictado Interactivo de Diciembre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(7, 'Lunes', '14:00:00', '16:00:00', 8),
+(8, 'Miércoles', '14:00:00', '16:00:00', 8);
+
+-- Vinculación de tutores a los Dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(7, 7, 3),
+(8, 8, 3);
+
+-- Enero 2024
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(9, '2024-01-01', '2024-01-31', 'http://enlaceDictadoEnero.com', 1, 1, 20), -- Autodirigido, Curso 1
+(10, '2024-01-01', '2024-01-31', 'http://enlaceDictadoInteractivoEnero.com', 1, 2, 12); -- Interactivo, Curso 1
+
+-- Horario para el Dictado Interactivo de Enero
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(9, 'Martes', '14:00:00', '16:00:00', 10),
+(10, 'Jueves', '14:00:00', '16:00:00', 10);
+
+-- Vinculación de tutores a los Dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(9, 9, 3),
+(10, 10, 3);
+
+
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(11, '2023-10-01', '2023-10-31', 'http://enlaceMatematicaAutodirigido.com', 2, 1, 20), -- Autodirigido, Curso 2
+(12, '2023-10-01', '2023-10-31', 'http://enlaceMatematicaInteractivo.com', 2, 2, 12); -- Interactivo, Curso 2
+
+-- Horario para el Dictado Interactivo de Matemática de Octubre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(11, 'Martes', '14:00:00', '16:00:00', 12),
+(12, 'Jueves', '14:00:00', '16:00:00', 12);
+
+-- Vinculación de tutores a los Dictados (considerando que el tutor con id_usuario 4 está disponible)
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(11, 11, 4), -- Este tutor está disponible y no tiene conflictos de horario.
+(12, 12, 4); -- Este tutor está disponible y no tiene conflictos de horario.
+
+-- Insertando dictados para Noviembre
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(13, '2023-11-01', '2023-11-30', 'http://enlaceMatematicaAutodirigidoNov.com', 2, 1, 20), -- Autodirigido, Curso 2
+(14, '2023-11-01', '2023-11-30', 'http://enlaceMatematicaInteractivoNov.com', 2, 2, 12); -- Interactivo, Curso 2
+
+-- Horarios para el dictado interactivo de Noviembre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(13, 'Martes', '14:00:00', '16:00:00', 14),
+(14, 'Jueves', '14:00:00', '16:00:00', 14);
+
+-- Vinculación de tutores a los dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(13, 13, 4),
+(14, 14, 4);
+
+-- Insertando dictados para Diciembre
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(15, '2023-12-01', '2023-12-31', 'http://enlaceMatematicaAutodirigidoDic.com', 2, 1, 20), -- Autodirigido, Curso 2
+(16, '2023-12-01', '2023-12-31', 'http://enlaceMatematicaInteractivoDic.com', 2, 2, 12); -- Interactivo, Curso 2
+
+-- Horarios para el dictado interactivo de Diciembre
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(15, 'Martes', '14:00:00', '16:00:00', 16),
+(16, 'Jueves', '14:00:00', '16:00:00', 16);
+
+-- Vinculación de tutores a los dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(15, 15, 4),
+(16, 16, 4);
+
+
+-- Insertando dictados para Enero
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES 
+(17, '2024-01-01', '2024-01-31', 'http://enlaceMatematicaAutodirigidoEne.com', 2, 1, 20), -- Autodirigido, Curso 2
+(18, '2024-01-01', '2024-01-31', 'http://enlaceMatematicaInteractivoEne.com', 2, 2, 12); -- Interactivo, Curso 2
+
+-- Horarios para el dictado interactivo de Enero
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES 
+(17, 'Martes', '14:00:00', '16:00:00', 18),
+(18, 'Jueves', '14:00:00', '16:00:00', 18);
+
+-- Vinculación de tutores a los dictados
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES 
+(17, 17, 4),
+(18, 18, 4);
+
+

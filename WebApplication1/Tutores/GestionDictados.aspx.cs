@@ -91,15 +91,6 @@ namespace WebApplication1.Tutores
             coursesGrid.DataBind();
         }
 
-        private void CargarDictados()
-        {
-            Curso_BE curso = (Curso_BE)ViewState["empresabe"];
-            Dictado_BLL dictadobll = new Dictado_BLL();
-            List<Dictado_BE> dictados = dictadobll.ListarDictadosCurso(curso);
-            dictationsGrid.DataSource = dictados;
-            dictationsGrid.DataBind();
-        }
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             CargarCursos();
@@ -150,5 +141,70 @@ namespace WebApplication1.Tutores
             }
             return table;
         }
+
+        protected void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            // Limpiamos las fechas del filtro.
+            txtFechaInicio.Text = string.Empty;
+            txtFechaFin.Text = string.Empty;
+
+            // Recargar los dictados.
+            CargarDictados();
+        }
+
+        private void CargarDictados()
+        {
+            Curso_BE curso = (Curso_BE)ViewState["empresabe"];
+            Dictado_BLL dictadoBLL = new Dictado_BLL();
+
+            // Verificamos si se ingresaron fechas en los campos correspondientes.
+            DateTime fechaInicio;
+            DateTime fechaFin;
+            bool filtroFechaInicio = DateTime.TryParse(txtFechaInicio.Text, out fechaInicio);
+            bool filtroFechaFin = DateTime.TryParse(txtFechaFin.Text, out fechaFin);
+
+            List<Dictado_BE> dictados;
+
+            if (filtroFechaInicio && filtroFechaFin)
+            {
+                // Aplicamos el filtro de fechas si ambos campos tienen fechas válidas.
+                dictados = dictadoBLL.ListarDictadosPorFechas(curso, fechaInicio, fechaFin);
+            }
+            else
+            {
+                // Si no hay fechas de filtro, obtenemos todos los dictados.
+                dictados = dictadoBLL.ListarDictadosCurso(curso);
+            }
+
+            // Enlazamos la lista resultante con el GridView.
+            dictationsGrid.DataSource = dictados;
+            dictationsGrid.DataBind();
+
+            if (dictationsGrid.Rows.Count > 0)
+            {
+                MostrarControlesDeFechas(true);
+            }
+            else
+            {
+                MostrarControlesDeFechas(false);
+                txtFechaInicio.Text = string.Empty;
+                txtFechaFin.Text = string.Empty;
+            }
+        }
+        private void MostrarControlesDeFechas(bool mostrar)
+        {
+            // Aquí, debes reemplazar 'dateFilterSection' con el ID real de tu div que contiene los datepickers y botones si no usaste el estilo inline como se mencionó anteriormente.
+            dateFilterSection.Style["display"] = mostrar ? "block" : "none";
+        }
+
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            // Recargar dictados con el nuevo filtro aplicado.
+            CargarDictados();
+        }
+
+
+
     }
 }
