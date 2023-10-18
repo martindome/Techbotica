@@ -18,34 +18,42 @@
             <div class="col-md-8">
                 <!-- Lista de Materiales -->
                 <h3 class="mt-4">Materiales</h3>
-                <asp:GridView ID="materialsGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre del Material" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnViewMaterial" CssClass="btn btn-secondary" Text="Ver" runat="server" OnClick="btnViewMaterial_Click"/>
-                                <asp:Button ID="btnEditMaterial" CssClass="btn btn-secondary" Text="Editar" runat="server" OnClick="btnEditMaterial_Click" />
-                                <asp:Button ID="btnDeleteMaterial" CssClass="btn btn-secondary" Text="Eliminar" runat="server" OnClick="btnDeleteMaterial_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div class="table-responsive mt-4">
+                    <asp:GridView ID="materialsGrid" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre del Material" />
+                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnViewMaterial" CssClass="btn btn-info" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewMaterial_Click"/>
+                                    <asp:Button ID="btnEditMaterial" CssClass="btn btn-primary" Text="Editar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnEditMaterial_Click" />
+                                    <asp:Button ID="btnDeleteMaterial" CssClass="btn btn-danger" Text="Eliminar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnDeleteMaterial_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+                
 
                 <!-- Lista de Actividades -->
                 <h3 class="mt-4">Actividades</h3>
-                <asp:GridView ID="activitiesGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre de la Actividad" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnViewActivity" CssClass="btn btn-secondary" Text="Ver" runat="server" OnClick="btnViewActivity_Click" />
-                                <asp:Button ID="btnEditActivity" CssClass="btn btn-secondary" Text="Editar" runat="server" OnClick="btnEditActivity_Click" />
-                                <asp:Button ID="btnDeleteActivity" CssClass="btn btn-secondary" Text="Eliminar" runat="server" OnClick="btnDeleteActivity_Click"/>
-                                <asp:Button ID="btnViewDeliveries" CssClass="btn btn-secondary" Text="Ver Entregas" runat="server" OnClick="btnViewDeliveries_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div class="table-responsive mt-4">
+                    <asp:GridView ID="activitiesGrid" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre de la Actividad" />
+                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnViewActivity" CssClass="btn btn-info" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewActivity_Click" />
+                                    <asp:Button ID="btnEditActivity" CssClass="btn btn-primary" Text="Editar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnEditActivity_Click" />
+                                    <asp:Button ID="btnDeleteActivity" CssClass="btn btn-danger" Text="Eliminar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnDeleteActivity_Click"/>
+                                    <asp:Button ID="btnViewDeliveries" CssClass="btn btn-secondary" Text="Ver Entregas" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewDeliveries_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+                
 
                 <!-- Botones para agregar nuevos elementos -->
                 <div class="mt-4">

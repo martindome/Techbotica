@@ -269,7 +269,8 @@ namespace DataAccessLayer
             return dictados;
         }
 
-        public List<InscripcionCurso_BE> listar_inscripcion() {
+        public List<InscripcionCurso_BE> listar_inscripcion()
+        {
 
             List<InscripcionCurso_BE> inscripciones = new List<InscripcionCurso_BE>();
 
@@ -284,7 +285,7 @@ namespace DataAccessLayer
             return inscripciones;
         }
 
-        public InscripcionCurso_BE nueva_inscripcion (int id_estudiante, int id_dictado, int id_curso)
+        public InscripcionCurso_BE nueva_inscripcion(int id_estudiante, int id_dictado, int id_curso)
         {
             SqlParameter[] parametros = new SqlParameter[3];
             parametros[0] = new SqlParameter();
@@ -405,9 +406,198 @@ namespace DataAccessLayer
 
         public List<Dictado_BE> listar_dictados_por_tutor(int idUsuario)
         {
-            List < Dictado_BE > dictados = listar_dictados();
+            List<Dictado_BE> dictados = listar_dictados();
 
             return dictados.Where(d => d.Tutores.Any(t => t.IdUsuario == idUsuario)).ToList();
+        }
+
+        public void nuevo_material(Material_BE material)
+        {
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = material.Dictado.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nombre";
+            parametros[1].SqlDbType = SqlDbType.VarChar;
+            parametros[1].Size = -1;
+            parametros[1].Value = material.Nombre;
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@fecha";
+            parametros[2].SqlDbType = SqlDbType.DateTime;
+            parametros[2].Value = material.Fecha;
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@archivo";
+            parametros[3].SqlDbType = SqlDbType.VarBinary;
+            parametros[3].Size = -1;
+            parametros[3].Value = material.Archivo;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("nuevo_material", parametros);
+        }
+
+        public List<Material_BE> listar_materiales_dictado(Dictado_BE dictado)
+        {
+            List<Material_BE> materiales = new List<Material_BE>();
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = dictado.Id;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_materiales_dictado", parametros);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Material_BE materialBE = new Material_BE();
+                mappear_material(reg, materialBE);
+                materiales.Add(materialBE);
+            }
+
+            return materiales;
+        }
+
+        private void mappear_material(DataRow reg, Material_BE e)
+        {
+            e.Id = Convert.ToInt32(reg["id"].ToString());
+            e.Dictado = listar_dictados().FirstOrDefault(d => d.Id == Convert.ToInt32(reg["id_dictado"].ToString()));
+            e.Nombre = reg["nombre"].ToString();
+            e.Archivo = (byte[])reg["archivo"];
+            e.Fecha = DateTime.Parse(reg["fecha"].ToString());
+        }
+
+
+        public void eliminar_material(Material_BE material)
+        {
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = material.Id ;
+
+            ac.ejecutar_stored_procedure("eliminar_material", parametros);
+        }
+
+        public void editar_material(Material_BE material)
+        {
+            SqlParameter[] parametros = new SqlParameter[5];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = material.Dictado.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nombre";
+            parametros[1].SqlDbType = SqlDbType.VarChar;
+            parametros[1].Size = -1;
+            parametros[1].Value = material.Nombre;
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@fecha";
+            parametros[2].SqlDbType = SqlDbType.DateTime;
+            parametros[2].Value = material.Fecha;
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@archivo";
+            parametros[3].SqlDbType = SqlDbType.VarBinary;
+            parametros[3].Size = -1;
+            parametros[3].Value = material.Archivo;
+            parametros[4] = new SqlParameter();
+            parametros[4].ParameterName = "@id";
+            parametros[4].SqlDbType = SqlDbType.Int;
+            parametros[4].Value = material.Id;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("editar_material", parametros);
+        }
+
+        public void nueva_actividad(Actividad_BE actividad)
+        {
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = actividad.Dictado.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nombre";
+            parametros[1].SqlDbType = SqlDbType.VarChar;
+            parametros[1].Size = -1;
+            parametros[1].Value = actividad.Nombre;
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@fecha";
+            parametros[2].SqlDbType = SqlDbType.DateTime;
+            parametros[2].Value = actividad.Fecha;
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@archivo";
+            parametros[3].SqlDbType = SqlDbType.VarBinary;
+            parametros[3].Size = -1;
+            parametros[3].Value = actividad.Archivo;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("nueva_actividad", parametros);
+        }
+
+        public List<Actividad_BE> listar_actividades_dictado(Dictado_BE dictado)
+        {
+            List<Actividad_BE> actividades = new List<Actividad_BE>();
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = dictado.Id;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_actividades_dictado", parametros);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Actividad_BE actividadBE = new Actividad_BE();
+                mappear_actividad(reg, actividadBE);
+                actividades.Add(actividadBE);
+            }
+
+            return actividades;
+        }
+
+        private void mappear_actividad(DataRow reg, Actividad_BE e)
+        {
+            e.Id = Convert.ToInt32(reg["id"].ToString());
+            e.Dictado = listar_dictados().FirstOrDefault(d => d.Id == Convert.ToInt32(reg["id_dictado"].ToString()));
+            e.Nombre = reg["nombre"].ToString();
+            e.Archivo = (byte[])reg["archivo"];
+            e.Fecha = DateTime.Parse(reg["fecha"].ToString());
+        }
+
+        public void eliminar_material(Actividad_BE actividad)
+        {
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = actividad.Id;
+
+            ac.ejecutar_stored_procedure("eliminar_actividad", parametros);
+        }
+
+        public void editar_actividad(Actividad_BE actividad)
+        {
+            SqlParameter[] parametros = new SqlParameter[5];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_dictado";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = actividad.Dictado.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nombre";
+            parametros[1].SqlDbType = SqlDbType.VarChar;
+            parametros[1].Size = -1;
+            parametros[1].Value = actividad.Nombre;
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@fecha";
+            parametros[2].SqlDbType = SqlDbType.DateTime;
+            parametros[2].Value = actividad.Fecha;
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@archivo";
+            parametros[3].SqlDbType = SqlDbType.VarBinary;
+            parametros[3].Size = -1;
+            parametros[3].Value = actividad.Archivo;
+            parametros[4] = new SqlParameter();
+            parametros[4].ParameterName = "@id";
+            parametros[4].SqlDbType = SqlDbType.Int;
+            parametros[4].Value = actividad.Id;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("editar_actividad", parametros);
         }
     }
 }

@@ -110,7 +110,6 @@
     <Content Include="Administracion\GestionarEmpresas.aspx" />
     <Content Include="Administracion\GestionarInscripciones.aspx" />
     <Content Include="Administracion\GestionarUsuarios.aspx" />
-    <Content Include="Administracion\GestionarTutores.aspx" />
     <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
     <Content Include="Carreras\BuscarCarreras.aspx" />
     <Content Include="Cursos\BuscarCursos.aspx" />
@@ -291,13 +290,6 @@
     </Compile>
     <Compile Include="Administracion\GestionarUsuarios.aspx.designer.cs">
       <DependentUpon>GestionarUsuarios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administracion\GestionarTutores.aspx.cs">
-      <DependentUpon>GestionarTutores.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administracion\GestionarTutores.aspx.designer.cs">
-      <DependentUpon>GestionarTutores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\Usuarios\CrearUsuario.aspx.cs">
       <DependentUpon>CrearUsuario.aspx</DependentUpon>
@@ -692,7 +684,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Estudiantes\MisCursadas\Material.pdf" />
-    <Content Include="Tutores\MisDictados\Material\Material.pdf" />
     <Content Include="Tutores\MisDictados\Actividad\Material.pdf" />
     <Content Include="Tutores\MisDictados\Actividad\Entrega\Material.pdf" />
     <None Include="Web.Debug.config">

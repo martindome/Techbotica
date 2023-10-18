@@ -24,6 +24,24 @@ namespace WebApplication1.Tutores.MisDictados
         protected global::System.Web.UI.WebControls.TextBox searchDictationName;
 
         /// <summary>
+        /// Control searchStartDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox searchStartDate;
+
+        /// <summary>
+        /// Control searchEndDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox searchEndDate;
+
+        /// <summary>
         /// Control btnSearch.
         /// </summary>
         /// <remarks>
@@ -33,12 +51,12 @@ namespace WebApplication1.Tutores.MisDictados
         protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
-        /// Control dictationsGrid.
+        /// Control UserCoursesGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dictationsGrid;
+        protected global::System.Web.UI.WebControls.GridView UserCoursesGrid;
     }
 }

@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessEntity;
 using static WebApplication1.Estudiantes.GestionarInscripciones;
+using BusinessEntity.Composite;
 
 namespace WebApplication1.Administracion
 {
@@ -14,7 +15,11 @@ namespace WebApplication1.Administracion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Administracion/GestionarInscripciones")))
+            {
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
         }
 
         protected void SearchUserButton_Click(object sender, EventArgs e)

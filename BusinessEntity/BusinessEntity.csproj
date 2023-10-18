@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actividad_BE.cs" />
     <Compile Include="Carrera_BE.cs" />
     <Compile Include="Composite\Compuesto_BE.cs" />
     <Compile Include="Composite\Familia_BE.cs" />
@@ -49,12 +50,13 @@
     <Compile Include="Dictado_BE.cs" />
     <Compile Include="Dominio_BE.cs" />
     <Compile Include="Empresa_BE.cs" />
+    <Compile Include="Entrega.cs" />
     <Compile Include="Especialidad_BE.cs" />
     <Compile Include="Horario_BE.cs" />
     <Compile Include="InscripcionCarrera_BE.cs" />
     <Compile Include="InscripcionCurso_BE.cs" />
+    <Compile Include="Material_BE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Categoria_Usuario.cs" />
     <Compile Include="Usuario_BE.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

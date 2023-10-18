@@ -114,5 +114,25 @@ namespace BusinessLayer
 
             return dictadosFiltrados;
         }
+
+        public void NuevoMaterial(Material_BE material)
+        {
+            mapper.nuevo_material(material);
+        }
+
+        public List<Material_BE> ListarMaterialesDictado(Dictado_BE dictado)
+        {
+            return mapper.listar_materiales_dictado(dictado);
+        }
+
+        public void EliminarMaterial(Material_BE material)
+        {
+            mapper.eliminar_material(material);
+        }
+
+        public void EditarMaterial(Material_BE material)
+        {
+            mapper.editar_material(material);
+        }
     }
 }

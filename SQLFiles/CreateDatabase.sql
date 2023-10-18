@@ -336,6 +336,52 @@ CREATE TABLE [dbo].[Inscripcion_Carrera](
 ) ON [PRIMARY]
 GO
 
+/****** Object:  Table [dbo].[Material]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Material](
+	[id] [int] PRIMARY KEY,
+	[fecha] datetime NULL,
+	[nombre] varchar(100) NULL,
+	[id_dictado] int NULL,
+	[archivo] varbinary(max)
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Actividad]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Actividad](
+	[id] [int] PRIMARY KEY,
+	[fecha] datetime NULL,
+	[nombre] varchar(100) NULL,
+	[id_dictado] int NULL,
+	[archivo] varbinary(max)
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Entrega]    Script Date: 24/1/2023 23:23:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Entrega](
+	[id] [int] PRIMARY KEY,
+	[id_actividad] [int] null,
+	[id_estudiante] int NULL,
+	[archivo] varbinary(max),
+	[fecha] datetime null,
+	FOREIGN KEY (id_actividad) REFERENCES Actividad(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE,
+) ON [PRIMARY]
+GO
+
 -- /****** Object:  Table [dbo].[Horario_Dictado]    Script Date: 24/1/2023 23:23:57 ******/
 -- SET ANSI_NULLS ON
 -- GO
@@ -1291,6 +1337,132 @@ END
 GO
 
 
+/****** Object:  StoredProcedure [dbo].[nuevo_material]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE nuevo_material
+@id_dictado INT,
+@nombre varchar(100),
+@fecha datetime,
+@archivo varbinary(max)
+AS
+BEGIN
+    DECLARE @id INT
+    SET @id = ISNULL((SELECT MAX(id) FROM Material),0 ) +1
+    INSERT INTO Material (id, nombre, fecha, archivo, id_dictado)
+    VALUES (@id, @nombre, @fecha, @archivo, @id_dictado);
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_materiales_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_materiales_dictado]
+@id_dictado int
+as 
+begin
+select a.id, a.fecha, a.id_dictado, a.archivo, a.nombre
+from Material a
+where id_dictado = @id_dictado
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_material]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_material
+@id int
+AS
+BEGIN
+    DELETE FROM Material WHERE id = @id;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[editar_material]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[editar_material]
+@id_dictado INT,
+@nombre varchar(100),
+@fecha datetime,
+@archivo varbinary(max),
+@id INT
+as 
+BEGIN
+    UPDATE Material 
+    SET nombre = @nombre,
+		fecha = @fecha,
+		archivo = @archivo,
+		id_dictado = @id_dictado
+    WHERE id = @id;
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[nueva_actividad]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE nueva_actividad
+@id_dictado INT,
+@nombre varchar(100),
+@fecha datetime,
+@archivo varbinary(max)
+AS
+BEGIN
+    DECLARE @id INT
+    SET @id = ISNULL((SELECT MAX(id) FROM Actividad),0 ) +1
+    INSERT INTO Actividad (id, nombre, fecha, archivo, id_dictado)
+    VALUES (@id, @nombre, @fecha, @archivo, @id_dictado);
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_actividades_dictado]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_actividades_dictado]
+@id_dictado int
+as 
+begin
+select a.id, a.fecha, a.id_dictado, a.archivo, a.nombre
+from Actividad a
+where id_dictado = @id_dictado
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_actividad]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_actividad
+@id int
+AS
+BEGIN
+    DELETE FROM Material WHERE id = @id;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[editar_actividad]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[editar_actividad]
+@id_dictado INT,
+@nombre varchar(100),
+@fecha datetime,
+@archivo varbinary(max),
+@id INT
+as 
+BEGIN
+    UPDATE Material 
+    SET nombre = @nombre,
+		fecha = @fecha,
+		archivo = @archivo,
+		id_dictado = @id_dictado
+    WHERE id = @id;
+END
+GO
+
+
 /************************************************************************************************/
 /************************************************************************************************/
 /************************************************************************************************/
@@ -1324,13 +1496,14 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'MenuBusqueda')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'/Administracion/GestionarEmpresas')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (6, N'/Administracion/GestionarUsuarios')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (7, N'/Administracion/GestionarTutores')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Tutores/GestionarCarreras')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCursos')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarDictados')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (11, N'/Tutores/MisDictados')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (12, N'/Estudiante/Inscripciones')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (13, N'/Estudiante/Consultas')
-INSERT [dbo].[Patente] ([id], [detalle]) VALUES (14, N'/Estudiante/Dictados')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (8, N'/Administracion/GestionarInscripciones')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (9, N'/Tutores/GestionarCarreras')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (10, N'/Tutores/GestionarCursos')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (11, N'/Tutores/GestionarDictados')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (12, N'/Tutores/MisDictados')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (13, N'/Estudiante/Inscripciones')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (14, N'/Estudiante/Consultas')
+INSERT [dbo].[Patente] ([id], [detalle]) VALUES (15, N'/Estudiante/Dictados')
 GO
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
 INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)

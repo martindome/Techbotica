@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessEntity;
+using BusinessLayer;
 
 namespace WebApplication1.Tutores.MisDictados
 {
@@ -14,44 +16,71 @@ namespace WebApplication1.Tutores.MisDictados
         {
             if (!IsPostBack)
             {
-                // Crear tablas con columnas para Materiales y Actividades.
-                DataTable materiales = new DataTable();
-                DataTable actividades = new DataTable();
-
-                materiales.Columns.Add("Nombre");
-                actividades.Columns.Add("Nombre");
-
-                // Agregar algunas filas con datos dummy.
-                materiales.Rows.Add("Material 1");
-                materiales.Rows.Add("Material 2");
-                materiales.Rows.Add("Material 3");
-
-                actividades.Rows.Add("Actividad 1");
-                actividades.Rows.Add("Actividad 2");
-                actividades.Rows.Add("Actividad 3");
-
-                // Enlazar las tablas a los GridView.
-                materialsGrid.DataSource = materiales;
-                materialsGrid.DataBind();
-
-                activitiesGrid.DataSource = actividades;
-                activitiesGrid.DataBind();
+                Session["material_view"] = null;
+                Session["actividad_view"] = null;
+                if (Session["id_dictado_ver"] == null)
+                {
+                    Response.Write("<script>alert('No se encuentra el dictado');window.location.href = '/Default.aspx';</script>");
+                }
+                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                //obtener dictado
+                Dictado_BLL dictadobll = new Dictado_BLL();
+                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                ViewState["dictado"] = dictado;
+                string linkText = "Enlace a videollamada";
+                courseLinkLabel.Text = "Aula: <a href='" + dictado.Enlace + "' target='_blank'>" + linkText + "</a>";
+                CargarMateriales();
+                CargarActividades();
             }
+        }
+
+        private void CargarMateriales()
+        {
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            //obtener dictado
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+
+            List<Material_BE> materiales = dictadobll.ListarMaterialesDictado(dictado);
+            materialsGrid.DataSource = materiales;
+            materialsGrid.DataBind();
+        }
+
+        private void CargarActividades()
+        {
+
         }
 
         protected void btnViewMaterial_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idMaterial = Convert.ToInt32(materialsGrid.DataKeys[rowIndex].Value);
+            Session["material_view"] = idMaterial;
             Response.Redirect("~/Tutores/MisDictados/Material/VerMaterial.aspx");
         }
 
         protected void btnEditMaterial_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idMaterial = Convert.ToInt32(materialsGrid.DataKeys[rowIndex].Value);
+            Session["material_view"] = idMaterial;
             Response.Redirect("~/Tutores/MisDictados/Material/EditarMaterial.aspx");
         }
 
         protected void btnDeleteMaterial_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idMaterial = Convert.ToInt32(materialsGrid.DataKeys[rowIndex].Value);
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            //obtener dictado
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+            Material_BE material = dictadobll.ListarMaterialesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(idMaterial.ToString()));
+            dictadobll.EliminarMaterial(material);
+            CargarMateriales();
         }
 
         protected void btnViewActivity_Click(object sender, EventArgs e)

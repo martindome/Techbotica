@@ -24,6 +24,15 @@ namespace WebApplication1.Tutores.MisDictados.Material
         protected global::System.Web.UI.WebControls.Label materialNameLabel;
 
         /// <summary>
+        /// Control materialFechalabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label materialFechalabel;
+
+        /// <summary>
         /// Control pdfViewer.
         /// </summary>
         /// <remarks>
