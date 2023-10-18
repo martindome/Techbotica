@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity;
+using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,24 +14,71 @@ namespace WebApplication1.Tutores.MisDictados.Actividad
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+            {
+                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+            }
+            if (!IsPostBack)
+            {
+                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                //obtener dictado
+                Dictado_BLL dictadobll = new Dictado_BLL();
+                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
+                actividadName.Text = actividad.Nombre;
+            }
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            //if (pdfFile.HasFile)
-            //{
-            //    try
-            //    {
-            //        string filename = Path.GetFileName(pdfFile.FileName);
-            //        pdfFile.SaveAs(Server.MapPath("~/Path/To/Save/") + filename);
-            //        Response.Write("Upload status: File uploaded!");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Response.Write("Upload status: The file could not be uploaded. The following error occured: " + ex.Message);
-            //    }
-            //}
-            Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
+            if (pdfFile.HasFile)
+            {
+                try
+                {
+                    if (pdfFile.PostedFile.ContentType != "application/pdf")
+                    {
+                        Response.Write("<script>alert('Por favor, sube solamente archivos PDF.');</script>");
+                        return;
+                    }
+
+                    int fileSizeLimit = 5 * 1024 * 1024;
+                    if (pdfFile.PostedFile.ContentLength > fileSizeLimit)
+                    {
+                        Response.Write("<script>alert('El tamaño del archivo excede el límite permitido de 5 MB.');</script>");
+                        return;
+                    }
+
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    //obtener dictado
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                    Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
+
+                    byte[] pdfData = pdfFile.FileBytes;
+                    actividad.Archivo = pdfData;
+                    actividad.Dictado = dictado;
+                    actividad.Fecha = DateTime.Now;
+                    actividad.Nombre = actividadName.Text;
+                    dictadobll.EditarActividad(actividad);
+                    Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
+                }
+                catch (Exception ex)
+                {
+                    // Codifica el mensaje de la excepción para uso seguro en JavaScript
+                    string safeMessage = HttpUtility.JavaScriptStringEncode(ex.Message);
+
+                    // Construye el script para mostrar el mensaje
+                    string script = $"<script>alert('Error: {safeMessage}');</script>";
+
+                    // Escribe el script en la respuesta
+                    Response.Write(script);
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Archivo invalido');</script>");
+            }
+
         }
     }
 }

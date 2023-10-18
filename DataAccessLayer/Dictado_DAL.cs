@@ -560,7 +560,7 @@ namespace DataAccessLayer
             e.Fecha = DateTime.Parse(reg["fecha"].ToString());
         }
 
-        public void eliminar_material(Actividad_BE actividad)
+        public void eliminar_actividad(Actividad_BE actividad)
         {
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = new SqlParameter();

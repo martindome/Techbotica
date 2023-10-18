@@ -134,5 +134,25 @@ namespace BusinessLayer
         {
             mapper.editar_material(material);
         }
+
+        public void NuevaActividad(Actividad_BE actividad)
+        {
+            mapper.nueva_actividad(actividad);
+        }
+
+        public List<Actividad_BE> ListarActividadesDictado(Dictado_BE dictado)
+        {
+            return mapper.listar_actividades_dictado(dictado);
+        }
+
+        public void EliminarActividad(Actividad_BE actividad)
+        {
+            mapper.eliminar_actividad(actividad);
+        }
+
+        public void EditarActividad(Actividad_BE actividad)
+        {
+            mapper.editar_actividad(actividad);
+        }
     }
 }

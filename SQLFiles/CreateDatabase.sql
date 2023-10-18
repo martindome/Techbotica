@@ -1436,7 +1436,7 @@ CREATE PROCEDURE eliminar_actividad
 @id int
 AS
 BEGIN
-    DELETE FROM Material WHERE id = @id;
+    DELETE FROM Actividad WHERE id = @id;
 END
 GO
 
@@ -1453,7 +1453,7 @@ CREATE procedure [dbo].[editar_actividad]
 @id INT
 as 
 BEGIN
-    UPDATE Material 
+    UPDATE Actividad 
     SET nombre = @nombre,
 		fecha = @fecha,
 		archivo = @archivo,

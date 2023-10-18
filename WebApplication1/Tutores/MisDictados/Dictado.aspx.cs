@@ -48,7 +48,14 @@ namespace WebApplication1.Tutores.MisDictados
 
         private void CargarActividades()
         {
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            //obtener dictado
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
 
+            List<Actividad_BE> materiales = dictadobll.ListarActividadesDictado(dictado);
+            activitiesGrid.DataSource = materiales;
+            activitiesGrid.DataBind();
         }
 
         protected void btnViewMaterial_Click(object sender, EventArgs e)
@@ -85,17 +92,34 @@ namespace WebApplication1.Tutores.MisDictados
 
         protected void btnViewActivity_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idActividad = Convert.ToInt32(activitiesGrid.DataKeys[rowIndex].Value);
+            Session["actividad_view"] = idActividad;
             Response.Redirect("~/Tutores/MisDictados/Actividad/VerActividad.aspx");
         }
 
         protected void btnEditActivity_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idActividad = Convert.ToInt32(activitiesGrid.DataKeys[rowIndex].Value);
+            Session["actividad_view"] = idActividad;
             Response.Redirect("~/Tutores/MisDictados/Actividad/EditarActividad.aspx");
         }
 
         protected void btnDeleteActivity_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
+            Button btn = (Button)sender;
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            int idActividad = Convert.ToInt32(activitiesGrid.DataKeys[rowIndex].Value);
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            //obtener dictado
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+            Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(idActividad.ToString()));
+            dictadobll.EliminarActividad(actividad);
+            CargarActividades();
         }
 
         protected void btnViewDeliveries_Click(object sender, EventArgs e)
