@@ -49,6 +49,16 @@ namespace WebApplication1
                 List<InscripcionCurso_BE> inscripciones = dictadoBll.ListarInscripcionesPorEstudiante(idUsuario);
                 List<int> cursosInscritosIds = inscripciones.Select(i => i.IdCurso).ToList();
 
+               //obtener todas las inscripciones cuyos dictados no hallan finalizado
+               foreach (InscripcionCurso_BE i in inscripciones) {
+                    //obtener dictoad del id de inscripcion a partir de la lista de dictados
+                    Dictado_BE dictado = dictadoBll.ListarDictados().Where(d => d.Id == i.IdDictado).FirstOrDefault();
+                    if (dictado.FechaFin < DateTime.Now)
+                    {
+                        cursosInscritosIds.Remove(i.IdCurso);
+                    }
+                }
+
 
                 string terminoBusquedaNombre = searchName.Text.Trim().ToLower();
                 string terminoBusquedaCarrera = searchCareer.Text.Trim().ToLower();

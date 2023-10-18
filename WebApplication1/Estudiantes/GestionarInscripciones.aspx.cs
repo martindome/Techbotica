@@ -53,6 +53,7 @@ namespace WebApplication1.Estudiantes
                                                    (c, i) => new CarreraInscripcionViewModel
                                                    {
                                                        Id = c.Id,
+                                                       IdInscripcion = i.Id,
                                                        Nombre = c.Nombre,
                                                        FechaInscripcion = i.Fecha
                                                    })
@@ -80,17 +81,19 @@ namespace WebApplication1.Estudiantes
 
             // Preparar los datos para vincular, incluyendo la fecha de inscripción
             var cursosInscriptos = dictados.Join(inscripciones,
-                                         d => d.Id,
-                                         i => i.IdDictado,
-                                         (d, i) => new CursoInscripcionViewModel
-                                         {
-                                             Id = d.Curso.Id, // o d.Id dependiendo de cómo esté estructurado tu Dictado_BE
-                                             Nombre = d.Curso.Nombre,
-                                             FechaInscripcion = i.Fecha,
-                                             FechaInicio = d.FechaInicio, // Asegurándonos de que las fechas se establezcan aquí
-                                             FechaFin = d.FechaFin
-                                         })
-                                   .ToList();
+                                 d => d.Id,
+                                 i => i.IdDictado,
+                                 (d, i) => new CursoInscripcionViewModel
+                                 {
+                                     Id = d.Curso.Id, // o d.Id dependiendo de cómo esté estructurado tu Dictado_BE
+                                     IdInscripcion = i.Id,
+                                     Nombre = d.Curso.Nombre,
+                                     FechaInscripcion = i.Fecha,
+                                     FechaInicio = d.FechaInicio, // Asegurándonos de que las fechas se establezcan aquí
+                                     FechaFin = d.FechaFin
+                                 })
+                           .OrderByDescending(c => c.FechaInicio) // Ordenando aquí por FechaInicio en orden descendente
+                           .ToList();
 
             // Vincular los datos a la grilla
             coursesGrid.DataSource = cursosInscriptos;
@@ -131,6 +134,7 @@ namespace WebApplication1.Estudiantes
                                          {
                                              Id = d.Curso.Id, // o d.Id dependiendo de cómo esté estructurado tu Dictado_BE
                                              Nombre = d.Curso.Nombre,
+                                             IdInscripcion = i.Id,
                                              FechaInscripcion = i.Fecha,
                                              FechaInicio = d.FechaInicio, // Asegurándonos de que las fechas se establezcan aquí
                                              FechaFin = d.FechaFin
@@ -183,6 +187,7 @@ namespace WebApplication1.Estudiantes
         public class CarreraInscripcionViewModel
         {
             public int Id { get; set; }
+            public int IdInscripcion { get; set; }
             public string Nombre { get; set; }
             public DateTime FechaInscripcion { get; set; }
         }
@@ -190,6 +195,7 @@ namespace WebApplication1.Estudiantes
         public class CursoInscripcionViewModel
         {
             public int Id { get; set; }
+            public int IdInscripcion { get; set; }
             public string Nombre { get; set; }
             public DateTime FechaInscripcion { get; set; }
             public DateTime FechaInicio { get; set; } 

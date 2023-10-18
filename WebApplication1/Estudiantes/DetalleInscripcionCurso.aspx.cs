@@ -22,7 +22,6 @@ namespace WebApplication1.Estudiantes
             }
             else
             {
-
                 if (!IsPostBack)
                 {
                     if (Session["id_inscripcion_curso"] == null)
@@ -32,6 +31,10 @@ namespace WebApplication1.Estudiantes
                     int idInscripcion = int.Parse(Session["id_inscripcion_curso"].ToString());
                     InscripcionCurso_BE inscripcion = new Dictado_BLL().ListarInscripciones().SingleOrDefault(i => i.Id == idInscripcion);
                     Dictado_BE dictado = new Dictado_BLL().ListarDictados().SingleOrDefault(d => d.Id == inscripcion.IdDictado);
+                    if (dictado.FechaFin < DateTime.Now)
+                    {
+                        btnUnenroll.Enabled = false;
+                    }
                     //complete the labels
                     lblCourseName.Text = dictado.Curso.Nombre;
                     lblCourseDescription.Text = dictado.Curso.Descripcion;

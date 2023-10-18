@@ -1352,22 +1352,22 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (12, 1,
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (13, 1, 13)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 1, 14)
 --permisos tutor
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (14, 3, 9)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 10)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 11)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (17, 3, 2)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (18, 3, 8)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (15, 3, 9)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (16, 3, 10)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (17, 3, 11)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (18, 3, 2)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (19, 3, 8)
 --permisos estudiante
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (19, 2, 3)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (20, 2, 4)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (21, 2, 12)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (22, 2, 13)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (23, 2, 14)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (20, 2, 3)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (21, 2, 4)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (22, 2, 12)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (23, 2, 13)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (24, 2, 14)
 --permisos administrador
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (24, 4, 1)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (25, 4, 5)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (26, 4, 6)
-INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (27, 4, 7)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (25, 4, 1)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (26, 4, 5)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (27, 4, 6)
+INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (28, 4, 7)
 GO
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
@@ -1392,8 +1392,8 @@ VALUES (1, 'Autodirigido'),
        (2, 'Interactivo');
 
 INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
-VALUES (1, '2023-09-05', '2023-12-12', 'http://enlace1.com', 1, 1, 20), --formato de la fecha aca es anio-mes-dia
-       (2, '2023-09-05', '2023-12-12', 'http://enlace2.com', 1, 2, 12);
+VALUES (1, '2023-09-05', '2023-09-10', 'http://enlace1.com', 1, 1, 20), --formato de la fecha aca es anio-mes-dia
+       (2, '2023-09-05', '2023-09-10', 'http://enlace2.com', 1, 2, 12);
 
 INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
 VALUES (1, 'Lunes', '08:00:00', '10:00:00',2),
@@ -1598,5 +1598,9 @@ INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
 VALUES 
 (17, 17, 4),
 (18, 18, 4);
+
+INSERT INTO Inscripcion_Curso(id, id_curso, id_dictado, id_estudiante, fecha)
+VALUES
+(1,1,2,1, '2023-09-05');
 
 

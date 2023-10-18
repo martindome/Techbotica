@@ -27,7 +27,7 @@ namespace WebApplication1
             if (!IsPostBack)
                 txtSelectedTutor.Text = "";
                 btnSendQuery.Enabled = false;
-                ViewState["tutor"] = null;
+                
         }
 
         private void LoadTutores()
@@ -36,7 +36,7 @@ namespace WebApplication1
             Curso_BLL cursoBll = new Curso_BLL();
             Dictado_BLL dictadoBll = new Dictado_BLL();
             Usuario_BLL usuarioBll = new Usuario_BLL();
-
+            ViewState["tutor"] = null;
             // Obtener todos los tutores del sistema con los que en la propiesdad Familia.familia es Tutor
             List<Usuario_BE> todosLosTutores = usuarioBll.ListarUsuarios().Where(u => u.Familia.familia == "Tutor").ToList();
 

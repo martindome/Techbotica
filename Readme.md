@@ -60,5 +60,5 @@
 3. En Registrarse
   - Permitir realizar una busqueda de empresas y seleccionarla de esa busqueda en lugar de escribir el nombre (Solucionado)
 4. En administracion
-  - Armar una pagina de administracion para las inscripciones
+  - Armar una pagina de administracion para las inscripciones (solucionado)
 

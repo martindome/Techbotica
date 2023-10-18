@@ -108,6 +108,7 @@
     <Content Include="Administracion\Empresas\Dominios.aspx" />
     <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
     <Content Include="Administracion\GestionarEmpresas.aspx" />
+    <Content Include="Administracion\GestionarInscripciones.aspx" />
     <Content Include="Administracion\GestionarUsuarios.aspx" />
     <Content Include="Administracion\GestionarTutores.aspx" />
     <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
@@ -276,6 +277,13 @@
     </Compile>
     <Compile Include="Administracion\GestionarEmpresas.aspx.designer.cs">
       <DependentUpon>GestionarEmpresas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\GestionarInscripciones.aspx.cs">
+      <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarInscripciones.aspx.designer.cs">
+      <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\GestionarUsuarios.aspx.cs">
       <DependentUpon>GestionarUsuarios.aspx</DependentUpon>

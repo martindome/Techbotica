@@ -10,7 +10,7 @@
             <asp:TextBox ID="searchCareerName" CssClass="form-control" runat="server"></asp:TextBox>
         </div>
         <asp:Button ID="btnSearchCareer" CssClass="btn btn-primary" Text="Buscar Carreras" runat="server" />
-        <asp:GridView ID="careersGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="Id">
+        <asp:GridView ID="careersGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdInscripcion">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="FechaInscripcion" HeaderText="Fecha de Inscripción" DataFormatString="{0:d}" HtmlEncode="false" />
@@ -37,7 +37,7 @@
             <asp:TextBox ID="searchEndDate" type="date" CssClass="form-control" runat="server"></asp:TextBox>
         </div>
         <asp:Button ID="btnSearchCourse" CssClass="btn btn-primary" Text="Buscar Cursos" runat="server" onclick="btnSearchCourse_Click"/>
-        <asp:GridView ID="coursesGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="Id">
+        <asp:GridView ID="coursesGrid" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="IdInscripcion">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="FechaInscripcion" HeaderText="Fecha de Inscripción" DataFormatString="{0:d}" HtmlEncode="false" />
