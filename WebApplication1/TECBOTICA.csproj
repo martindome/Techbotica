@@ -683,8 +683,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Estudiantes\MisCursadas\Material.pdf" />
-    <Content Include="Tutores\MisDictados\Actividad\Entrega\Material.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -377,6 +377,7 @@ CREATE TABLE [dbo].[Entrega](
 	[id_estudiante] int NULL,
 	[archivo] varbinary(max),
 	[fecha] datetime null,
+	[comentario] varchar(max)
 	FOREIGN KEY (id_actividad) REFERENCES Actividad(id) ON DELETE CASCADE,
 	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE,
 ) ON [PRIMARY]
@@ -1459,6 +1460,78 @@ BEGIN
 		archivo = @archivo,
 		id_dictado = @id_dictado
     WHERE id = @id;
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[listar_actividades]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_actividades]
+as 
+begin
+select a.id, a.fecha, a.id_dictado, a.archivo, a.nombre
+from Actividad a
+end
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[nueva_entrega]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE nueva_entrega
+@id_actividad INT,
+@id_estudiante INT,
+@fecha datetime,
+@archivo varbinary(max),
+@comentario varchar (MAX)
+AS
+BEGIN
+    DECLARE @id INT
+    SET @id = ISNULL((SELECT MAX(id) FROM Entrega),0 ) +1
+    INSERT INTO Entrega (id, comentario, fecha, archivo, id_actividad, id_estudiante)
+    VALUES (@id, @comentario, @fecha, @archivo, @id_actividad, @id_estudiante);
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[listar_entregas_actividad]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[listar_entregas_actividad]
+@id_actividad int
+as 
+begin
+select a.id, a.fecha, a.id_actividad, a.id_estudiante, a.archivo, a.comentario
+from Entrega a
+where id_actividad = @id_actividad
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[eliminar_entrega]    Script Date: 5/7/2022 03:16:57 ******/
+CREATE PROCEDURE eliminar_entrega
+@id int
+AS
+BEGIN
+    DELETE FROM Entrega WHERE id = @id;
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[editar_comentario]    Script Date: 5/7/2022 03:16:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[editar_comentario]
+@id_entrega INT,
+@comentario varchar(max)
+as 
+BEGIN
+    UPDATE Entrega 
+    SET comentario = @comentario
+    WHERE id = @id_entrega;
 END
 GO
 

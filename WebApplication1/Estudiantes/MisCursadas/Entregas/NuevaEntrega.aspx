@@ -5,15 +5,17 @@
 
         <div class="row">
             <div class="col-md-8">
+                <!-- Sección de edición del nombre del material -->
+
                 <!-- Sección de selección del archivo -->
                 <div class="form-group">
                     <label for="pdfFile">Seleccionar Archivo PDF</label>
                     <asp:FileUpload ID="pdfFile" CssClass="form-control-file" runat="server" />
                 </div>
 
-                <!-- Botón de entrega -->
+                <!-- Botón de actualización -->
                 <div class="form-group">
-                    <asp:Button ID="btnSubmit" CssClass="btn btn-primary" Text="Entregar" runat="server" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="btnUpdate" CssClass="btn btn-primary" Text="Subir" runat="server" OnClick="btnUpdate_Click" />
                     <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
                 </div>
             </div>

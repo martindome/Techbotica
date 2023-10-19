@@ -15,13 +15,22 @@ namespace WebApplication1.Estudiantes.Cursadas
     {
 
         /// <summary>
-        /// Control activityNameLabel.
+        /// Control actividadNameLable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label activityNameLabel;
+        protected global::System.Web.UI.WebControls.Label actividadNameLable;
+
+        /// <summary>
+        /// Control actividadFechaLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label actividadFechaLabel;
 
         /// <summary>
         /// Control pdfViewer.

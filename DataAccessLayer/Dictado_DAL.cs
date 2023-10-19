@@ -551,6 +551,21 @@ namespace DataAccessLayer
             return actividades;
         }
 
+        public List<Actividad_BE> listar_actividades()
+        {
+            List<Actividad_BE> actividades = new List<Actividad_BE>();
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_actividades", null);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Actividad_BE actividadBE = new Actividad_BE();
+                mappear_actividad(reg, actividadBE);
+                actividades.Add(actividadBE);
+            }
+
+            return actividades;
+        }
+
         private void mappear_actividad(DataRow reg, Actividad_BE e)
         {
             e.Id = Convert.ToInt32(reg["id"].ToString());
@@ -598,6 +613,77 @@ namespace DataAccessLayer
             parametros[4].Value = actividad.Id;
 
             DataTable Tabla = ac.ejecutar_stored_procedure("editar_actividad", parametros);
+        }
+
+        public void nueva_entrega(Entrega_BE entrega)
+        {
+            SqlParameter[] parametros = new SqlParameter[5];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_actividad";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = entrega.Actividad.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@id_estudiante";
+            parametros[1].SqlDbType = SqlDbType.Int;
+            parametros[1].Value = entrega.Estudiante.IdUsuario;
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@fecha";
+            parametros[2].SqlDbType = SqlDbType.DateTime;
+            parametros[2].Value = DateTime.Now;
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@archivo";
+            parametros[3].SqlDbType = SqlDbType.VarBinary;
+            parametros[3].Size = -1;
+            parametros[3].Value = entrega.Archivo;
+            parametros[4] = new SqlParameter();
+            parametros[4].ParameterName = "@comentario";
+            parametros[4].SqlDbType = SqlDbType.VarChar;
+            parametros[4].Size = -1;
+            parametros[4].Value = entrega.Comentario;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("nueva_entrega", parametros);
+        }
+
+        public List<Entrega_BE> listar_entregas_actividad(Actividad_BE actividad)
+        {
+            List<Entrega_BE> entregas = new List<Entrega_BE>();
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_actividad";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = actividad.Id;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("listar_entregas_actividad", parametros);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Entrega_BE entregaBE = new Entrega_BE();
+                mappear_entrega(reg, entregaBE);
+                entregas.Add(entregaBE);
+            }
+
+            return entregas;
+        }
+
+        public void eliminar_entrega(Entrega_BE entrega)
+        {
+            SqlParameter[] parametros = new SqlParameter[1];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = entrega.Id;
+
+            ac.ejecutar_stored_procedure("eliminar_entrega", parametros);
+        }
+
+
+        private void mappear_entrega(DataRow reg, Entrega_BE e)
+        {
+            e.Id = Convert.ToInt32(reg["id"].ToString());
+            e.Actividad = listar_actividades().FirstOrDefault(d => d.Id == Convert.ToInt32(reg["id_actividad"].ToString()));
+            e.Estudiante = new Usuario_DAL().listar_usuarios().FirstOrDefault(d => d.IdUsuario == Convert.ToInt32(reg["id_estudiante"].ToString()));
+            e.Comentario = reg["comentario"].ToString();
+            e.Archivo = (byte[])reg["archivo"];
+            e.Fecha = DateTime.Parse(reg["fecha"].ToString());
         }
     }
 }

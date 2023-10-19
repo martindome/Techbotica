@@ -50,7 +50,7 @@
     <Compile Include="Dictado_BE.cs" />
     <Compile Include="Dominio_BE.cs" />
     <Compile Include="Empresa_BE.cs" />
-    <Compile Include="Entrega.cs" />
+    <Compile Include="Entrega_BE.cs" />
     <Compile Include="Especialidad_BE.cs" />
     <Compile Include="Horario_BE.cs" />
     <Compile Include="InscripcionCarrera_BE.cs" />

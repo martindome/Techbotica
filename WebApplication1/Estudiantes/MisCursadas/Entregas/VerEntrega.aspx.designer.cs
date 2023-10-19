@@ -15,6 +15,15 @@ namespace WebApplication1.Estudiantes.MisCursadas.Entregas
     {
 
         /// <summary>
+        /// Control materialFechalabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label materialFechalabel;
+
+        /// <summary>
         /// Control pdfViewer.
         /// </summary>
         /// <remarks>
@@ -33,12 +42,21 @@ namespace WebApplication1.Estudiantes.MisCursadas.Entregas
         protected global::System.Web.UI.WebControls.Button btnDownload;
 
         /// <summary>
-        /// Control Button1.
+        /// Control comentario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.TextBox comentario;
+
+        /// <summary>
+        /// Control btnBack.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }

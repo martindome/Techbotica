@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity;
+using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,35 +14,67 @@ namespace WebApplication1.Estudiantes.MisCursadas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["id_dictado_ver"] == null)
+            {
+                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+            }
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            //if (pdfFile.HasFile)
-            //{
-            //    try
-            //    {
-            //        string fileName = Path.GetFileName(pdfFile.PostedFile.FileName);
-            //        string folderPath = Server.MapPath("~/Uploads/");
+            if (pdfFile.HasFile)
+            {
+                try
+                {
+                    if (pdfFile.PostedFile.ContentType != "application/pdf")
+                    {
+                        Response.Write("<script>alert('Por favor, sube solamente archivos PDF.');</script>");
+                        return;
+                    }
 
-            //        // Crear el directorio si no existe
-            //        if (!Directory.Exists(folderPath))
-            //        {
-            //            Directory.CreateDirectory(folderPath);
-            //        }
+                    int fileSizeLimit = 5 * 1024 * 1024;
+                    if (pdfFile.PostedFile.ContentLength > fileSizeLimit)
+                    {
+                        Response.Write("<script>alert('El tamaño del archivo excede el límite permitido de 5 MB.');</script>");
+                        return;
+                    }
 
-            //        // Guardar el archivo
-            //        pdfFile.PostedFile.SaveAs(folderPath + fileName);
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
 
-            //        // Aquí debes implementar la lógica para guardar la información de la entrega en la base de datos
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        // Manejar la excepción
-            //    }
-            //}
-            Response.Redirect("~/Estudiantes/MisCursadas/Cursada.aspx");
+                    int actividadId = int.Parse(Session["actividad_view"].ToString());
+                    Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == actividadId);
+
+                    Usuario_BE usuario = (Usuario_BE)Session["usuario"];
+
+                    Entrega_BE entrega = new Entrega_BE();
+                    byte[] pdfData = pdfFile.FileBytes;
+                    entrega.Archivo = pdfData;
+                    entrega.Dictado = dictado;
+                    entrega.Actividad = actividad;
+                    entrega.Estudiante = usuario;
+                    entrega.Fecha = DateTime.Now;
+                    entrega.Comentario = "";
+                    dictadobll.NuevaEntrega(entrega);
+                    Response.Redirect("~/Estudiantes/MisCursadas/Cursada.aspx");
+                }
+                catch (Exception ex)
+                {
+                    // Codifica el mensaje de la excepción para uso seguro en JavaScript
+                    string safeMessage = HttpUtility.JavaScriptStringEncode(ex.Message);
+
+                    // Construye el script para mostrar el mensaje
+                    string script = $"<script>alert('Error: {safeMessage}');</script>";
+
+                    // Escribe el script en la respuesta
+                    Response.Write(script);
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Archivo invalido');</script>");
+            }
         }
     }
 }

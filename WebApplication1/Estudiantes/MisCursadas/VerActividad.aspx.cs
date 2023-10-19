@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity;
+using BusinessLayer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,56 +14,126 @@ namespace WebApplication1.Estudiantes.Cursadas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+            {
+                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+            }
             if (!IsPostBack)
             {
-                // Aquí debes reemplazar estos valores por los reales
-                string activityName = "Nombre de la Actividad";
-                string pdfUrl = "Material.pdf";
+                LoadEntregas();
+                Session["entrega_ver"] = null;
+                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                //obtener dictado
+                Dictado_BLL dictadobll = new Dictado_BLL();
+                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
 
-                activityNameLabel.Text = activityName;
+                string pdfUrl = "data:application/pdf;base64," + Convert.ToBase64String(actividad.Archivo);
+
+
+                actividadNameLable.Text = "Nombre: " + actividad.Nombre;
+                actividadFechaLabel.Text = "Fecha: " + actividad.Fecha.ToString("dd/MM/yyyy");
 
                 // Incrustar el visualizador de PDF en HTML
                 pdfViewer.Text = string.Format("<embed src=\"{0}\" type=\"application/pdf\" width=\"800px\" height=\"600px\" />", pdfUrl);
-
-                // Añadir valores de prueba a la lista de entregas
-                deliveriesGrid.DataSource = new List<object>
-        {
-            new { FechaEntrega = DateTime.Now.ToString("dd/MM/yyyy") },
-            new { FechaEntrega = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy") }
-        };
-                deliveriesGrid.DataBind();
             }
+        }
+
+        private void LoadEntregas()
+        {
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+            int actividadId = int.Parse(Session["actividad_view"].ToString());
+            Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == actividadId);
+            List<Entrega_BE> entregas = dictadobll.ListarEntregasActividad(actividad);
+            //filtrar entregas que pertenescan al usuario
+            Usuario_BE usuario = (Usuario_BE)Session["usuario"];
+            int userId = usuario.IdUsuario;
+            List<Entrega_BE> entregasFiltradas = new List<Entrega_BE>();
+            foreach (Entrega_BE entrega in entregas)
+            {
+                if (entrega.Estudiante.IdUsuario == userId)
+                {
+                    entregasFiltradas.Add(entrega);
+                }
+            }
+            deliveriesGrid.DataSource = entregasFiltradas;
+            deliveriesGrid.DataBind();
         }
 
         protected void btnDownload_Click(object sender, EventArgs e)
         {
-            // Aquí debes reemplazar este valor por el real
-            string pdfUrl = "Material.pdf";
+            int actividadId = int.Parse(Session["actividad_view"].ToString());
 
-            // Lógica para descargar el archivo PDF
-            Response.ContentType = "application/pdf";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=Actividad.pdf");
-            Response.TransmitFile(Server.MapPath(pdfUrl));
-            Response.End();
-        }
+            // Aquí asumimos que tienes acceso a tus métodos de negocio o datos para obtener el material.
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
 
-        protected void btnNewDelivery_Click(object sender, EventArgs e)
-        {
-            // Aquí debes reemplazar este valor por el real
-            string activityId = "ID_de_la_Actividad";
+            // Obtener el material específico que quieres.
+            Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == actividadId);
 
-            // Redirigir al usuario a la página de nueva entrega
-            //Response.Redirect(string.Format("NewDelivery.aspx?activityId={0}", activityId));
-            Response.Redirect("~/Estudiantes/MisCursadas/Entregas/NuevaEntrega.aspx");
+            if (actividad != null && actividad.Archivo != null)
+            {
+                // Asumiendo que 'material.Archivo' son los bytes del archivo PDF.
+                byte[] archivoPdf = actividad.Archivo;
+
+                // Limpiar la respuesta actual.
+                Response.Clear();
+
+                // Establecer el tipo de contenido a 'application/pdf' ya que estás sirviendo un archivo PDF.
+                Response.ContentType = "application/pdf";
+
+                // Aquí deberías asegurarte de que el nombre del archivo sea válido y tenga la extensión .pdf.
+                string nombreArchivo = actividad.Nombre + ".pdf"; // por ejemplo
+
+                // Agregar el encabezado 'Content-Disposition' para indicar que se trata de una descarga y proporcionar el nombre del archivo.
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreArchivo);
+
+                // Escribir los bytes del archivo en la respuesta.
+                Response.BinaryWrite(archivoPdf); // Usando BinaryWrite para escribir los bytes directamente en la respuesta.
+
+                // Llamar a End para enviar la respuesta al cliente y detener la ejecución de la página.
+                Response.End();
+            }
+
         }
 
         protected void btnViewDelivery_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            // Recuperando el índice de la fila desde el CommandArgument del botón
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            // Obteniendo el valor de Id del curso usando DataKeys
+            int idEntrega = Convert.ToInt32(deliveriesGrid.DataKeys[rowIndex].Value);
+            // Almacena el ID del curso en una variable de sesión para usarlo en la página de edición
+            Session["entrega_ver"] = idEntrega;
             Response.Redirect("~/Estudiantes/MisCursadas/Entregas/VerEntrega.aspx");
+        }
+
+        protected void btnNewDelivery_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Estudiantes/MisCursadas/Entregas/NuevaEntrega.aspx");
         }
 
         protected void btnDeleteDelivery_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            // Recuperando el índice de la fila desde el CommandArgument del botón
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
+            // Obteniendo el valor de Id del curso usando DataKeys
+            int idEntrega = Convert.ToInt32(deliveriesGrid.DataKeys[rowIndex].Value);
+            // Almacena el ID del curso en una variable de sesión para usarlo en la página de edición
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+            int actividadId = int.Parse(Session["actividad_view"].ToString());
+            Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == actividadId);
+            Entrega_BE entrega = dictadobll.ListarEntregasActividad(actividad).FirstOrDefault(item => item.Id == idEntrega);
+            dictadobll.EliminarEntrega(entrega);
+            LoadEntregas();
+
 
         }
     }

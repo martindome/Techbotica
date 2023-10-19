@@ -12,58 +12,44 @@
                 </asp:Label>
             </div>
         </div>
-        
-        <!-- Información adicional -->
-        <div class="row">
-            <div class="col-md-12">
-                <br />
-                <asp:Label ID="startDateLabel" runat="server">
-                    Fecha de inicio: <asp:Label ID="startDate" runat="server"></asp:Label>
-                </asp:Label>
-                <br />
-                <asp:Label ID="endDateLabel" runat="server">
-                    Fecha de fin: <asp:Label ID="endDate" runat="server"></asp:Label>
-                </asp:Label>
-                <br />
-                <asp:Label ID="scheduleLabel" runat="server">
-                    Horario: <asp:Label ID="schedule" runat="server"></asp:Label>
-                </asp:Label>
-                <br />
-                <asp:Label ID="tutorsLabel" runat="server">
-                    Tutores: <asp:Label ID="tutors" runat="server"></asp:Label>
-                </asp:Label>
-            </div>
-        </div>
+
 
         <div class="row">
             <div class="col-md-8">
                 <!-- Lista de Materiales -->
                 <h3 class="mt-4">Materiales</h3>
-                <asp:GridView ID="materialsGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre del Material" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnViewMaterial" CssClass="btn btn-secondary" Text="Ver" runat="server" onclick="btnViewMaterial_Click"/>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div class="table-responsive mt-4">
+                    <asp:GridView ID="materialsGrid" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre del Material" />
+                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnViewMaterial" CssClass="btn btn-info" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewMaterial_Click" />                               
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+                
 
                 <!-- Lista de Actividades -->
                 <h3 class="mt-4">Actividades</h3>
-                <asp:GridView ID="activitiesGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre de la Actividad" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnViewActivity" CssClass="btn btn-secondary" Text="Ver" runat="server" OnClick="btnViewActivity_Click" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div class="table-responsive mt-4">
+                    <asp:GridView ID="activitiesGrid" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <Columns>
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre de la Actividad" />
+                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnViewActivity" CssClass="btn btn-info" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewActivity_Click" />                          
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+               
             </div>
         </div>
-        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
     </div>
 </asp:Content>

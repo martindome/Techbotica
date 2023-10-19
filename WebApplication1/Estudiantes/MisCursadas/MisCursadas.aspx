@@ -6,30 +6,49 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- Sección de búsqueda -->
+                <h2 class="mt-4">Buscar Dictados</h2>
                 <div class="form-group">
-                    <label for="searchCourseName">Buscar por Nombre del Curso</label>
-                    <asp:TextBox ID="searchCourseName" CssClass="form-control" runat="server"></asp:TextBox>
+                    <label for="searchDictationName">Buscar por Nombre del Curso</label>
+                    <asp:TextBox ID="searchDictationName" CssClass="form-control" runat="server"></asp:TextBox>
+                    
+                    <div class="form-group">
+                        <label for="searchStartDate">Fecha de Inicio</label>
+                        <asp:TextBox ID="searchStartDate" type="date" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="searchEndDate">Fecha de Fin</label>
+                        <asp:TextBox ID="searchEndDate" type="date" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
                 </div>
 
                 <!-- Botón de búsqueda -->
                 <div class="form-group">
-                    <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Buscar" runat="server" />
+                    <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Buscar" runat="server" OnClick="btnSearch_Click" />
                 </div>
 
-                <!-- GridView para listar las cursadas -->
-                <asp:GridView ID="coursesGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre del Curso" />
-                        <asp:BoundField DataField="Horario" HeaderText="Horario" />
-                        <asp:BoundField DataField="FechadeInicio" HeaderText="Fecha de Inicio" />
-                        <asp:BoundField DataField="FechadeFin" HeaderText="Fecha de Fin" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Button ID="btnSelect" OnClick="btnSelect_Click" CssClass="btn btn-secondary" CommandArgument='<%# Eval("Nombre") %>' Text="Seleccionar" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <!-- GridView para listar los dictados -->
+                <h2 class="mt-4">Lista de Dictados</h2>
+                <!-- Sección de inscripciones a cursos -->
+                <div class="table-responsive mt-4"> 
+                    <asp:GridView ID="UserCoursesGrid" runat="server"  CssClass="table" AutoGenerateColumns="false" DataKeyNames="Id" >
+                        <Columns>
+                            <asp:TemplateField HeaderText="Especialidad">
+                                <ItemTemplate>
+                                    <%# Eval("Curso.Nombre") %>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Inicio" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:BoundField DataField="FechaFin" HeaderText="Fecha de Finalizacion" DataFormatString="{0:d}" HtmlEncode="false" />
+                            <asp:BoundField DataField="TipoDictado" HeaderText="Tipo de dictado"/>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnSelect" runat="server" Text="Ingresar" CssClass="btn btn-primary" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnSelect_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
         </div>
     </div>

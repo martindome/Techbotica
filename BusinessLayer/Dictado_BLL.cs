@@ -154,5 +154,20 @@ namespace BusinessLayer
         {
             mapper.editar_actividad(actividad);
         }
+
+        public void NuevaEntrega(Entrega_BE entrega)
+        {
+            mapper.nueva_entrega(entrega);
+        }
+
+        public List<Entrega_BE> ListarEntregasActividad(Actividad_BE actividad)
+        {
+            return mapper.listar_entregas_actividad(actividad);
+        }
+
+        public void EliminarEntrega(Entrega_BE entrega)
+        {
+            mapper.eliminar_entrega(entrega);
+        }
     }
 }

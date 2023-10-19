@@ -5,10 +5,14 @@
 
         <div class="row">
             <div class="col-md-8">
-                <!-- Nombre del Material -->
-                <asp:Label ID="materialNameLabel" runat="server"></asp:Label>
+                <!-- Nombre del Material -->     
+                <asp:Label ID="materialNameLabel" runat="server" CssClass="form-control-plaintext"></asp:Label>
                 <br />
-                
+                <hr />
+                <asp:Label ID="materialFechalabel" runat="server" CssClass="form-control-plaintext"></asp:Label>
+                <br />
+                <hr />
+                <h3>Documento</h3>
                 <!-- Visualizador de PDF -->
                 <asp:Literal ID="pdfViewer" runat="server"></asp:Literal>
                 <br />
