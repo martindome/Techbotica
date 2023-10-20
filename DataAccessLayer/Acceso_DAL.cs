@@ -12,8 +12,15 @@ namespace DataAccessLayer
 {
     public class Acceso_DAL
     {
-        SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+        SqlConnection conexion;
+        //SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
         SqlTransaction transaccion;
+
+        public Acceso_DAL()
+        {
+            //conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+            conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["techbotica"].ToString());
+        }
 
         public void abrir()
         {

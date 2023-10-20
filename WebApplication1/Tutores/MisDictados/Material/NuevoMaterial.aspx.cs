@@ -84,7 +84,7 @@ namespace WebApplication1.Tutores.MisDictados.Material
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Tutores/MisDictados/MisDictados.aspx");
+            Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
         }
     }
 }
