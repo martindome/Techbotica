@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections;
@@ -14,29 +15,39 @@ namespace WebApplication1.Estudiantes.Cursadas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Dictados")))
             {
-                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
             }
-            if (!IsPostBack)
+            else
             {
-                LoadEntregas();
-                Session["entrega_ver"] = null;
-                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
-                //obtener dictado
-                Dictado_BLL dictadobll = new Dictado_BLL();
-                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
-                Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
+                if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+                {
+                    Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                }
+                if (!IsPostBack)
+                {
+                    LoadEntregas();
+                    Session["entrega_ver"] = null;
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    //obtener dictado
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                    Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
 
-                string pdfUrl = "data:application/pdf;base64," + Convert.ToBase64String(actividad.Archivo);
+                    string pdfUrl = "data:application/pdf;base64," + Convert.ToBase64String(actividad.Archivo);
 
 
-                actividadNameLable.Text = "Nombre: " + actividad.Nombre;
-                actividadFechaLabel.Text = "Fecha: " + actividad.Fecha.ToString("dd/MM/yyyy");
+                    actividadNameLable.Text = "Nombre: " + actividad.Nombre;
+                    actividadFechaLabel.Text = "Fecha: " + actividad.Fecha.ToString("dd/MM/yyyy");
 
-                // Incrustar el visualizador de PDF en HTML
-                pdfViewer.Text = string.Format("<embed src=\"{0}\" type=\"application/pdf\" width=\"800px\" height=\"600px\" />", pdfUrl);
+                    // Incrustar el visualizador de PDF en HTML
+                    pdfViewer.Text = string.Format("<embed src=\"{0}\" type=\"application/pdf\" width=\"800px\" height=\"600px\" />", pdfUrl);
+                }
             }
+
+            
         }
 
         private void LoadEntregas()
@@ -135,6 +146,11 @@ namespace WebApplication1.Estudiantes.Cursadas
             LoadEntregas();
 
 
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Estudiantes/MisCursadas/Cursada.aspx");
         }
     }
 }

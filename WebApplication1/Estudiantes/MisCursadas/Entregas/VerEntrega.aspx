@@ -20,13 +20,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <asp:TextBox runat="server" ID="comentario" CssClass="form-control w-100" Rows="10" style="height:150px;" TextMode="MultiLine"> </asp:TextBox>
+                            <asp:TextBox runat="server" Enabled="false" ID="comentario" CssClass="form-control w-100" Rows="10" style="height:150px;" TextMode="MultiLine"> </asp:TextBox>
                         </div>
                     </div>
                 </div>                    
             </div>
         </div>
         <br />
-        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
+        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" onclick="btnBack_Click" />
     </div>
 </asp:Content>

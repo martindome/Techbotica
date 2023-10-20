@@ -227,7 +227,6 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Tutores\MisDictados\Actividad\EditarActividad.aspx" />
-    <Content Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx" />
     <Content Include="Tutores\MisDictados\Actividad\NuevaActividad.aspx" />
     <Content Include="Tutores\MisDictados\Actividad\VerActividad.aspx" />
     <Content Include="Tutores\MisDictados\Actividad\Entrega\VerEntrega.aspx" />
@@ -604,13 +603,6 @@
     </Compile>
     <Compile Include="Tutores\MisDictados\Actividad\EditarActividad.aspx.designer.cs">
       <DependentUpon>EditarActividad.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx.cs">
-      <DependentUpon>Entregas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Tutores\MisDictados\Actividad\Entrega\Entregas.aspx.designer.cs">
-      <DependentUpon>Entregas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutores\MisDictados\Actividad\NuevaActividad.aspx.cs">
       <DependentUpon>NuevaActividad.aspx</DependentUpon>

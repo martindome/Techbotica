@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,19 @@ namespace WebApplication1.Tutores.MisDictados.Material
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["id_dictado_ver"] == null)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/MisDictados")))
             {
-                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
             }
+            else
+            {
+                if (Session["id_dictado_ver"] == null)
+                {
+                    Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                }
+            }
+            
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -70,6 +80,11 @@ namespace WebApplication1.Tutores.MisDictados.Material
                 Response.Write("<script>alert('Archivo invalido');</script>");
             }
             
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutores/MisDictados/MisDictados.aspx");
         }
     }
 }

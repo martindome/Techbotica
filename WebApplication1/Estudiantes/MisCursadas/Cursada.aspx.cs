@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -14,25 +15,34 @@ namespace WebApplication1.Estudiantes.Cursadas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Dictados")))
             {
-                Session["material_view"] = null;
-                Session["actividad_view"] = null;
-                if (Session["id_dictado_ver"] == null)
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (!IsPostBack)
                 {
-                    Response.Write("<script>alert('No se encuentra el dictado');window.location.href = '/Default.aspx';</script>");
+                    Session["material_view"] = null;
+                    Session["actividad_view"] = null;
+                    if (Session["id_dictado_ver"] == null)
+                    {
+                        Response.Write("<script>alert('No se encuentra el dictado');window.location.href = '/Default.aspx';</script>");
+                    }
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    //obtener dictado
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                    ViewState["dictado"] = dictado;
+                    string linkText = "Enlace a videollamada";
+                    courseLinkLabel.Text = "Aula: <a href='" + dictado.Enlace + "' target='_blank'>" + linkText + "</a>";
+                    CargarMateriales();
+                    CargarActividades();
+
+
                 }
-                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
-                //obtener dictado
-                Dictado_BLL dictadobll = new Dictado_BLL();
-                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
-                ViewState["dictado"] = dictado;
-                string linkText = "Enlace a videollamada";
-                courseLinkLabel.Text = "Aula: <a href='" + dictado.Enlace + "' target='_blank'>" + linkText + "</a>";
-                CargarMateriales();
-                CargarActividades();
-
-
             }
         }
 

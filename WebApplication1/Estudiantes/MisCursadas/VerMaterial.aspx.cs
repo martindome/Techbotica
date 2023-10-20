@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -13,26 +14,34 @@ namespace WebApplication1.Estudiantes.Cursadas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["material_view"] == null || Session["id_dictado_ver"] == null)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Dictados")))
             {
-                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
             }
-            if (!IsPostBack)
+            else
             {
-                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
-                //obtener dictado
-                Dictado_BLL dictadobll = new Dictado_BLL();
-                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
-                Material_BE material = dictadobll.ListarMaterialesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["material_view"].ToString()));
+                if (Session["material_view"] == null || Session["id_dictado_ver"] == null)
+                {
+                    Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                }
+                if (!IsPostBack)
+                {
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    //obtener dictado
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                    Material_BE material = dictadobll.ListarMaterialesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["material_view"].ToString()));
 
-                string pdfUrl = "data:application/pdf;base64," + Convert.ToBase64String(material.Archivo);
+                    string pdfUrl = "data:application/pdf;base64," + Convert.ToBase64String(material.Archivo);
 
 
-                materialNameLabel.Text = "Nombre: " + material.Nombre;
-                materialFechalabel.Text = "Fecha: " + material.Fecha.ToString("dd/MM/yyyy");
+                    materialNameLabel.Text = "Nombre: " + material.Nombre;
+                    materialFechalabel.Text = "Fecha: " + material.Fecha.ToString("dd/MM/yyyy");
 
-                // Incrustar el visualizador de PDF en HTML
-                pdfViewer.Text = string.Format("<embed src=\"{0}\" type=\"application/pdf\" width=\"800px\" height=\"600px\" />", pdfUrl);
+                    // Incrustar el visualizador de PDF en HTML
+                    pdfViewer.Text = string.Format("<embed src=\"{0}\" type=\"application/pdf\" width=\"800px\" height=\"600px\" />", pdfUrl);
+                }
             }
         }
 
@@ -72,6 +81,11 @@ namespace WebApplication1.Estudiantes.Cursadas
                 Response.End();
             }
 
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Estudiantes/MisCursadas/Cursada.aspx");
         }
     }
 }

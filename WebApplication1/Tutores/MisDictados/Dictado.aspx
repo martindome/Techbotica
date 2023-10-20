@@ -47,7 +47,6 @@
                                     <asp:Button ID="btnViewActivity" CssClass="btn btn-info" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewActivity_Click" />
                                     <asp:Button ID="btnEditActivity" CssClass="btn btn-primary" Text="Editar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnEditActivity_Click" />
                                     <asp:Button ID="btnDeleteActivity" CssClass="btn btn-danger"  Text="Eliminar" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnDeleteActivity_Click"/>
-                                    <asp:Button ID="btnViewDeliveries" CssClass="btn btn-secondary" Text="Ver Entregas" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewDeliveries_Click" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

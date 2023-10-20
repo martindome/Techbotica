@@ -169,5 +169,10 @@ namespace BusinessLayer
         {
             mapper.eliminar_entrega(entrega);
         }
+
+        public void EditarComentario (Entrega_BE entrega)
+        {
+            mapper.editar_comentario(entrega);
+        }
     }
 }

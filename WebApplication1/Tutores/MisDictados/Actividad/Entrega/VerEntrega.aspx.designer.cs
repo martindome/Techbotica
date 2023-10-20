@@ -15,13 +15,13 @@ namespace WebApplication1.Tutores.MisDictados.Actividad
     {
 
         /// <summary>
-        /// Control activityNameLabel.
+        /// Control materialFechalabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label activityNameLabel;
+        protected global::System.Web.UI.WebControls.Label materialFechalabel;
 
         /// <summary>
         /// Control pdfViewer.
@@ -40,6 +40,42 @@ namespace WebApplication1.Tutores.MisDictados.Actividad
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDownload;
+
+        /// <summary>
+        /// Control comentario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox comentario;
+
+        /// <summary>
+        /// Control ButtonComment.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonComment;
+
+        /// <summary>
+        /// Control RegularExpressionValidatorNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorNombre;
+
+        /// <summary>
+        /// Control valSummary.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummary;
 
         /// <summary>
         /// Control btnBack.

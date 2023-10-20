@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,28 @@ namespace WebApplication1.Tutores.MisDictados.Actividad
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/MisDictados")))
             {
-                Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
             }
-            if (!IsPostBack)
+            else
             {
-                int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
-                //obtener dictado
-                Dictado_BLL dictadobll = new Dictado_BLL();
-                Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
-                Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
-                actividadName.Text = actividad.Nombre;
+                if (Session["actividad_view"] == null || Session["id_dictado_ver"] == null)
+                {
+                    Response.Write("<script>alert('No se encuentra el material');window.location.href = '/Default.aspx';</script>");
+                }
+                if (!IsPostBack)
+                {
+                    int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+                    //obtener dictado
+                    Dictado_BLL dictadobll = new Dictado_BLL();
+                    Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+                    Actividad_BE actividad = dictadobll.ListarActividadesDictado(dictado).FirstOrDefault(item => item.Id == int.Parse(Session["actividad_view"].ToString()));
+                    actividadName.Text = actividad.Nombre;
+                }
             }
+            
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -79,6 +89,11 @@ namespace WebApplication1.Tutores.MisDictados.Actividad
                 Response.Write("<script>alert('Archivo invalido');</script>");
             }
 
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutores/MisDictados/Dictado.aspx");
         }
     }
 }

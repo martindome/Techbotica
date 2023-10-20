@@ -26,6 +26,7 @@ namespace WebApplication1.Login
                 Session["carrito"] = null;
                 Session["PaginaProductos"] = null;
                 Session["BusquedaProductos"] = null;
+                Session.Abandon();
                 //ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Sesion cerrada correctamente');", true);
                 //System.Threading.Thread.Sleep(5);
                 //Response.Redirect("../Stilo.aspx");

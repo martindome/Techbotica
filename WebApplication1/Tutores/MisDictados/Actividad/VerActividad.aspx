@@ -18,9 +18,26 @@
                 <br />
                 <!-- Botón de Descarga -->
                 <asp:Button ID="btnDownload" CssClass="btn btn-primary" Text="Descargar" runat="server" OnClick="btnDownload_Click"/>
+                <!-- Lista de Entregas -->
+                <h3 class="mt-4">Entregas</h3>
+                <asp:GridView ID="deliveriesGrid" CssClass="table mt-4" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
+                    <Columns>
+                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:d}" HtmlEncode="false" />
+                        <asp:TemplateField HeaderText="Estudiante">
+                            <ItemTemplate>
+                                <%# Eval("Estudiante.Email") %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Button ID="btnViewDelivery" CssClass="btn btn-secondary" Text="Ver" runat="server" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' OnClick="btnViewDelivery_Click" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
         <br />
-        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
+        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" onclick="btnBack_Click"/>
     </div>
 </asp:Content>

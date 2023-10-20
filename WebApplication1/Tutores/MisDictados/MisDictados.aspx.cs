@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessEntity.Composite;
 using BusinessLayer;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,21 @@ namespace WebApplication1.Tutores.MisDictados
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Tutores/MisDictados")))
             {
-                Session["id_dictado_ver"] = null;
-                CargarDictados();            }
+                //Sacamos controles de navegacion
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+            }
+            else
+            {
+                if (!IsPostBack)
+                {
+                    Session["id_dictado_ver"] = null;
+                    CargarDictados();
+                }
+            }
+
+            
         }
 
         private void CargarDictados()

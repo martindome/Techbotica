@@ -685,5 +685,22 @@ namespace DataAccessLayer
             e.Archivo = (byte[])reg["archivo"];
             e.Fecha = DateTime.Parse(reg["fecha"].ToString());
         }
+
+
+        public void editar_comentario(Entrega_BE entrega)
+        {
+            SqlParameter[] parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id_entrega";
+            parametros[0].SqlDbType = SqlDbType.Int;
+            parametros[0].Value = entrega.Id;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@comentario";
+            parametros[1].SqlDbType = SqlDbType.VarChar;
+            parametros[1].Size = -1;
+            parametros[1].Value = entrega.Comentario;
+
+            DataTable Tabla = ac.ejecutar_stored_procedure("editar_comentario", parametros);
+        }
     }
 }
