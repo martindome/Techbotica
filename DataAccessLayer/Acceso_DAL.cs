@@ -18,8 +18,16 @@ namespace DataAccessLayer
 
         public Acceso_DAL()
         {
-            conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
-            //conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["techbotica"].ToString());
+            string environment = ConfigurationManager.AppSettings["Environment"];
+
+            if (environment == "Azure")
+            {
+                conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["techbotica"].ToString());
+            }
+            else
+            {
+                conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+            }
         }
 
         public void abrir()
