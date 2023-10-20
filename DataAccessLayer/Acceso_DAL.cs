@@ -18,8 +18,8 @@ namespace DataAccessLayer
 
         public Acceso_DAL()
         {
-            //conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
-            conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["techbotica"].ToString());
+            conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+            //conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["techbotica"].ToString());
         }
 
         public void abrir()
