@@ -112,5 +112,6 @@
   - Permitir realizar una busqueda de empresas y seleccionarla de esa busqueda en lugar de escribir el nombre (Solucionado)
 4. En administracion
   - Armar una pagina de administracion para las inscripciones (solucionado)
-5. En administracion, crear una pagina que permita crear familias y modificar patentes (y borrar si no tiene ningun usuario asignado y no son Estudiantes, Web Master, Administrador ni Tutor)
+  - Solucionar en GestionarInscripciones que cuando se selecciona un alumno no ay un textbox qu diga que aluno esta seleccionado
+  - En administracion, crear una pagina que permita crear familias y modificar patentes (y borrar si no tiene ningun usuario asignado y no son Estudiantes, Web Master, Administrador ni Tutor)
 
