@@ -22,6 +22,11 @@ namespace BusinessLayer
             return mapper.listar_acciones();
         }
 
+        public List<Patente_BE> ListarPatentesFamilia(int familia)
+        {
+            return mapper.listar_familia_patente(familia);
+        }
+
         public void AgregarPatenteFamilia(int permiso, int accion)
         {
             mapper.agregar_patente_familia(permiso, accion);
@@ -35,6 +40,11 @@ namespace BusinessLayer
         public void AgregarFamilia(string nombre)
         {
             mapper.agregar_familia(nombre);
+        }
+
+        public void EliminarFamilia(Familia_BE familia)
+        {
+            mapper.eliminar_familia(familia);
         }
     }
 }

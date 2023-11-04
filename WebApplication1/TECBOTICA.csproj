@@ -109,8 +109,10 @@
     <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
     <Content Include="Administracion\GestionarEmpresas.aspx" />
     <Content Include="Administracion\GestionarInscripciones.aspx" />
+    <Content Include="Administracion\GestionarPermisos.aspx" />
     <Content Include="Administracion\GestionarUsuarios-old.aspx" />
     <Content Include="Administracion\GestionarUsuarios.aspx" />
+    <Content Include="Administracion\Permisos\EditarFamilia.aspx" />
     <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
     <Content Include="Administracion\Usuarios\GestionarUsuario.aspx" />
     <Content Include="Carreras\BuscarCarreras.aspx" />
@@ -151,6 +153,9 @@
     <Content Include="Estudiantes\GestionarInscripciones.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\imagen1.jpg" />
+    <Content Include="Imagenes\imagen2.jpg" />
+    <Content Include="Imagenes\imagen3.jpg" />
     <Content Include="Login\CambiarPassword.aspx" />
     <Content Include="Login\ConfirmarcionRecuperacion.aspx" />
     <Content Include="Login\Login.aspx" />
@@ -285,6 +290,13 @@
     <Compile Include="Administracion\GestionarInscripciones.aspx.designer.cs">
       <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administracion\GestionarPermisos.aspx.cs">
+      <DependentUpon>GestionarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarPermisos.aspx.designer.cs">
+      <DependentUpon>GestionarPermisos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\GestionarUsuarios-old.aspx.cs">
       <DependentUpon>GestionarUsuarios-old.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -298,6 +310,13 @@
     </Compile>
     <Compile Include="Administracion\GestionarUsuarios.aspx.designer.cs">
       <DependentUpon>GestionarUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Permisos\EditarFamilia.aspx.cs">
+      <DependentUpon>EditarFamilia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Permisos\EditarFamilia.aspx.designer.cs">
+      <DependentUpon>EditarFamilia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\Usuarios\CrearUsuario.aspx.cs">
       <DependentUpon>CrearUsuario.aspx</DependentUpon>

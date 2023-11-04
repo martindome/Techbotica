@@ -66,7 +66,7 @@
 
                 <!-- Botones de acción -->
                 <div class="form-group mt-4">
-                    <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" OnClientClick="JavaScript:window.history.back(1); return false;" />
+                    <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" onclick="btnBack_Click" />
                 </div>
             </div>
         </div>

@@ -61,5 +61,10 @@ namespace WebApplication1.Estudiantes
         {
             Response.Redirect("~/Estudiantes/MisCursadas/Cursada.aspx");
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Estudiantes/GestionarInscripciones.aspx");
+        }
     }
 }

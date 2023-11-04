@@ -102,16 +102,15 @@
 
 1. En gestion de usuarios
     - Poder cambiar la password desde el panel  (o actualizacion y envio por email)
-    - Poder cambiar la empresa desde el panel
     - Agregar un filtro para visualizar empleados por empresa
     - Chequear usuarios eliminados como en registrar
     - Refactoriong de la pagina, una para seleccion de usuarios y otra para las modificaciones de datos, empresa y familia
-2. En insripciones
+2. En inscripciones
   - Verificar que los dictados mostrados tengan fecha de inicio superior a la de hoy (Solucionado)
 3. En Registrarse
   - Permitir realizar una busqueda de empresas y seleccionarla de esa busqueda en lugar de escribir el nombre (Solucionado)
 4. En administracion
   - Armar una pagina de administracion para las inscripciones (solucionado)
-  - Solucionar en GestionarInscripciones que cuando se selecciona un alumno no ay un textbox qu diga que aluno esta seleccionado
-  - En administracion, crear una pagina que permita crear familias y modificar patentes (y borrar si no tiene ningun usuario asignado y no son Estudiantes, Web Master, Administrador ni Tutor)
+  - Solucionar en GestionarInscripciones que cuando se selecciona un alumno no ay un textbox qu diga que aluno esta seleccionado (solucionado)
+  - En administracion, crear una pagina que permita crear familias y modificar patentes (y borrar si no tiene ningun usuario asignado y no son Estudiantes, Web Master, Administrador ni Tutor) (solucionado)
 

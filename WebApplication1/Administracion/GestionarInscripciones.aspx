@@ -17,6 +17,7 @@
         <asp:TextBox ID="SearchUserByNameTextBox" runat="server" CssClass="form-control" Placeholder="Buscar usuarios por nombre"></asp:TextBox>
         <asp:TextBox ID="SearchUserByEmailTextBox" runat="server" CssClass="form-control mt-2" Placeholder="Buscar usuarios por nombre de usuario"></asp:TextBox>
         <asp:Button ID="SearchUserButton" runat="server" Text="Buscar" CssClass="btn btn-primary mt-2 mb-2" OnClick="SearchUserButton_Click" />
+        
 
         <!-- GridView para usuarios -->
         <div class="table-responsive mt-4">
@@ -32,6 +33,7 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            Usuario seleccionado: <asp:TextBox ID="TextBoxUsuarioSeleccioado" runat="server" CssClass="form-control mt-2" enabled="false"></asp:TextBox>
         </div>
         
         

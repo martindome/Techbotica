@@ -128,5 +128,10 @@ namespace WebApplication1.Cursos
                 Response.Write("<script>alert('Error en la inscripcion');</script>");
             }
         }
+
+        protected void btnBack_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Cursos/DetalleCurso.aspx");
+        }
     }
 }

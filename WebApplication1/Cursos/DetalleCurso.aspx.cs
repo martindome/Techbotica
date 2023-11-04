@@ -119,5 +119,10 @@ namespace WebApplication1.Cursos
         {
             CargarDictados();
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Cursos/BuscarCursos.aspx");
+        }
     }
 }

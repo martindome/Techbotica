@@ -34,10 +34,17 @@ namespace WebApplication1.Administracion
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
             int idUsuario = Convert.ToInt32(UsersGrid.DataKeys[rowIndex].Value);
             Session["usuario_modificar"] = idUsuario;
-           
 
-
-            Response.Redirect("~/Administracion/Usuarios/GestionarUsuario.aspx");
+            Usuario_BE usuariobe = (Usuario_BE)mapperUsuarios.ListarUsuarios().FirstOrDefault(item => item.IdUsuario == int.Parse(Session["usuario_modificar"].ToString()));
+            if (usuariobe.Usuario == "web.master@techbotica.ar")
+            {
+                Response.Write("<script>alert('No se puede modificar el usuario'); </script>");
+            }
+            else
+            {
+                Response.Redirect("~/Administracion/Usuarios/GestionarUsuario.aspx");
+            }
+            
         }
 
         protected void SearchUserButton_Click(object sender, EventArgs e)

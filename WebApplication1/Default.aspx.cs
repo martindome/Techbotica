@@ -16,7 +16,12 @@ namespace WebApplication1
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
-            Response.Redirect("BuscarCursos.aspx");
+            Response.Redirect("Cursos/BuscarCursos.aspx");
+        }
+
+        protected void Unnamed_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("Carreras/BuscarCarreras.aspx");
         }
     }
 }

@@ -78,5 +78,9 @@ namespace WebApplication1.Estudiantes
             }
         }
 
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Estudiantes/GestionarInscripciones.aspx");
+        }
     }
 }

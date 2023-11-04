@@ -19,8 +19,7 @@ namespace WebApplication1
             Session["id_carrera_inscribir"] = null;
             if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).Familia.listaPatentes.Any(x => ((Patente_BE)x).detalle == "/Estudiante/Inscripciones")))
             {
-                //Sacamos controles de navegacion
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No tiene permisos para acceder');window.location.href = '/Default.aspx'", true);
+                Response.Redirect("~/Login/Login.aspx");
             }
             else
             {

@@ -103,14 +103,19 @@ namespace DataAccessLayer
             DataTable Tabla = ac.ejecutar_stored_procedure("agregar_familia", parametros);
         }
 
-        public void eliminar_familia(string nombre)
+        public void eliminar_familia(Familia_BE familia)
         {
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = new SqlParameter();
-            parametros[0].ParameterName = "@detalle";
-            parametros[0].DbType = DbType.String;
-            parametros[0].Value = nombre;
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.Int32;
+            parametros[0].Value = familia.id;
             DataTable Tabla = ac.ejecutar_stored_procedure("eliminar_familia", parametros);
+        }
+
+        public List<Patente_BE> listar_familia_patente(int familia)
+        {
+            throw new NotImplementedException();
         }
 
         #region private functions

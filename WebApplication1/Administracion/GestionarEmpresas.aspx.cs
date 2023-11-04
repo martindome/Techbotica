@@ -94,6 +94,11 @@ namespace WebApplication1.Administracion
             }
             else
             {
+                List<Usuario_BE> usuarios = mapper.ObtenerUsuariosEmpresa(int.Parse(idEmpresa.ToString()));
+                if (usuarios.Count > 0)
+                {
+                    Response.Write("<script>alert('La empresa tiene usuarios');</script>");
+                }
                 Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
 
                 mapper.EliminarEmpresa(empresabe);

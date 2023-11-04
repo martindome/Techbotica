@@ -45,5 +45,22 @@ namespace BusinessLayer
         {
             mapper.eliminar_empresa(empresabe);
         }
+
+        public List<Usuario_BE> ObtenerUsuariosEmpresa(int id)
+        {
+            Usuario_BLL userBLL = new Usuario_BLL();
+            List<Usuario_BE> usuarios = userBLL.ListarUsuarios();
+
+            // for usuarios if empresa.id == id then add to list
+            List<Usuario_BE> usuariosEmpresa = new List<Usuario_BE>();
+            foreach (Usuario_BE usuario in usuarios)
+            {
+                if (usuario.Empresa == id && usuario.Borrado == "No")
+                {
+                    usuariosEmpresa.Add(usuario);
+                }
+            }
+            return usuariosEmpresa;
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace WebApplication1.Administracion
             usuarios = usuarios.Where(u => u.Nombre.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Apellido.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Email.ToLower().Contains(SearchUserByEmailTextBox.Text.ToLower())).ToList();
             UsersGrid.DataSource = usuarios;
             UsersGrid.DataBind();
+            TextBoxUsuarioSeleccioado.Text = "";
 
         }
 
@@ -65,6 +66,8 @@ namespace WebApplication1.Administracion
             Button btn = (Button)sender;
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
             int idInscripcion = Convert.ToInt32(UsersGrid.DataKeys[rowIndex].Value);
+            Usuario_BE usuario = new Usuario_BLL().ListarUsuarios().FirstOrDefault(item => item.IdUsuario == idInscripcion);
+            TextBoxUsuarioSeleccioado.Text = usuario.Email;
             ViewState["usuario"] = idInscripcion;
             LoadInscripcionesCursos();
             LoadInscripcionesCarreras();
