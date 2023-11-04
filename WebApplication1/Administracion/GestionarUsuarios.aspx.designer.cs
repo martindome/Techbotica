@@ -11,107 +11,26 @@ namespace WebApplication1.Administracion
 {
 
 
-    public partial class GestionarEstudiantes
+    public partial class GestionUsuarios
     {
 
         /// <summary>
-        /// Control TextBoxUsuarioFiltro.
+        /// Control SearchUserByNameTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuarioFiltro;
+        protected global::System.Web.UI.WebControls.TextBox SearchUserByNameTextBox;
 
         /// <summary>
-        /// Control CheckBoxBloqueadoFiltro.
+        /// Control SearchUserByEmailTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxBloqueadoFiltro;
-
-        /// <summary>
-        /// Control CheckBoxBorradoFiltro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxBorradoFiltro;
-
-        /// <summary>
-        /// Control ButtonFiltrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFiltrar;
-
-        /// <summary>
-        /// Control ListBoxUsuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxUsuarios;
-
-        /// <summary>
-        /// Control ButtonSeleccionarUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSeleccionarUsuario;
-
-        /// <summary>
-        /// Control LabelUsuarioSeleccionado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelUsuarioSeleccionado;
-
-        /// <summary>
-        /// Control TextBoxNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNombre;
-
-        /// <summary>
-        /// Control TextBoxApellido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxApellido;
-
-        /// <summary>
-        /// Control TextBoxEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxEmail;
-
-        /// <summary>
-        /// Control TextBoxTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxTelefono;
+        protected global::System.Web.UI.WebControls.TextBox SearchUserByEmailTextBox;
 
         /// <summary>
         /// Control CheckBoxBloqueado.
@@ -123,39 +42,21 @@ namespace WebApplication1.Administracion
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxBloqueado;
 
         /// <summary>
-        /// Control CheckBoxBorrado.
+        /// Control SearchUserButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxBorrado;
+        protected global::System.Web.UI.WebControls.Button SearchUserButton;
 
         /// <summary>
-        /// Control ButtonAplicar.
+        /// Control UsersGrid.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAplicar;
-
-        /// <summary>
-        /// Control ButtonNuevoUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonNuevoUsuario;
-
-        /// <summary>
-        /// Control ButtonSalir.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSalir;
+        protected global::System.Web.UI.WebControls.GridView UsersGrid;
     }
 }

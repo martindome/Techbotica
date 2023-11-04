@@ -109,8 +109,10 @@
     <Content Include="Administracion\Empresas\NuevaEmpresa.aspx" />
     <Content Include="Administracion\GestionarEmpresas.aspx" />
     <Content Include="Administracion\GestionarInscripciones.aspx" />
+    <Content Include="Administracion\GestionarUsuarios-old.aspx" />
     <Content Include="Administracion\GestionarUsuarios.aspx" />
     <Content Include="Administracion\Usuarios\CrearUsuario.aspx" />
+    <Content Include="Administracion\Usuarios\GestionarUsuario.aspx" />
     <Content Include="Carreras\BuscarCarreras.aspx" />
     <Content Include="Cursos\BuscarCursos.aspx" />
     <Content Include="Carreras\ConfirmacionInscripcionCarrera.aspx" />
@@ -283,6 +285,13 @@
     <Compile Include="Administracion\GestionarInscripciones.aspx.designer.cs">
       <DependentUpon>GestionarInscripciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administracion\GestionarUsuarios-old.aspx.cs">
+      <DependentUpon>GestionarUsuarios-old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\GestionarUsuarios-old.aspx.designer.cs">
+      <DependentUpon>GestionarUsuarios-old.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\GestionarUsuarios.aspx.cs">
       <DependentUpon>GestionarUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,6 +305,13 @@
     </Compile>
     <Compile Include="Administracion\Usuarios\CrearUsuario.aspx.designer.cs">
       <DependentUpon>CrearUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\GestionarUsuario.aspx.cs">
+      <DependentUpon>GestionarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\GestionarUsuario.aspx.designer.cs">
+      <DependentUpon>GestionarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
