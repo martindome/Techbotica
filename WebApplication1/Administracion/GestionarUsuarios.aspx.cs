@@ -62,5 +62,10 @@ namespace WebApplication1.Administracion
             UsersGrid.DataSource = usuarios;
             UsersGrid.DataBind();
         }
+
+        protected void ButtonNuevoUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Administracion/Usuarios/CrearUsuario.aspx");
+        }
     }
 }

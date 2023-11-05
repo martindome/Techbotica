@@ -27,5 +27,8 @@
                 </Columns>
             </asp:GridView>
         </div>
+        <div>
+            <asp:Button ID="ButtonNuevoUsuario" runat="server" Text="Nuevo Usuario" OnClick="ButtonNuevoUsuario_Click" CssClass="btn btn-primary" />
+        </div>
     </div>
 </asp:Content>
