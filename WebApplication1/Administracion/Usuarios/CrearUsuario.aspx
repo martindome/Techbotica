@@ -59,6 +59,7 @@
             <asp:Label ID="Label1" runat="server" Text="" Class="text-danger"></asp:Label>
             <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
         </div>
+
     </div>
 
     <asp:RequiredFieldValidator 

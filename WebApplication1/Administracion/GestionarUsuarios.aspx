@@ -1,4 +1,4 @@
-﻿<%@ Page Title="GestionarUsuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarUsuarios.aspx.cs" Inherits="WebApplication1.Administracion.GestionUsuarios" %>
+﻿<%@ Page Title="Gestionar Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarUsuarios.aspx.cs" Inherits="WebApplication1.Administracion.GestionUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <h2>Gestión de Usuarios e Inscripciones</h2>
@@ -30,5 +30,6 @@
         <div>
             <asp:Button ID="ButtonNuevoUsuario" runat="server" Text="Nuevo Usuario" OnClick="ButtonNuevoUsuario_Click" CssClass="btn btn-primary" />
         </div>
+        
     </div>
 </asp:Content>

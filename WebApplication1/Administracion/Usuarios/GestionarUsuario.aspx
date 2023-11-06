@@ -42,6 +42,9 @@
     <div class="form-group">
         <asp:Button ID="btnConfirmar" CssClass="btn btn-primary" Text="Confirmar" runat="server" OnClick="btnConfirmar_Click"/>
     </div>
+    <div class="form-group mt-4">
+        <asp:Button ID="btnBack" CssClass="btn btn-secondary" Text="Atrás" runat="server" onclick="btnBack_Click" CausesValidation="false" />
+    </div>
     <div>
         <asp:Label ID="Label1" runat="server" Text="" Class="text-danger"></asp:Label>
         <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>

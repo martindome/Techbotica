@@ -81,5 +81,10 @@ namespace WebApplication1.Administracion.Usuarios
                 Response.Redirect("~/Administracion/GestionarUsuarios.aspx");
             }
         }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Administracion/GestionarUsuarios.aspx");
+        }
     }
 }
