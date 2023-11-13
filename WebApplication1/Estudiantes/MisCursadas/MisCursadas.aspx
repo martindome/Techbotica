@@ -33,7 +33,7 @@
                 <div class="table-responsive mt-4"> 
                     <asp:GridView ID="UserCoursesGrid" runat="server"  CssClass="table" AutoGenerateColumns="false" DataKeyNames="Id" >
                         <Columns>
-                            <asp:TemplateField HeaderText="Especialidad">
+                            <asp:TemplateField HeaderText="Curso">
                                 <ItemTemplate>
                                     <%# Eval("Curso.Nombre") %>
                                 </ItemTemplate>

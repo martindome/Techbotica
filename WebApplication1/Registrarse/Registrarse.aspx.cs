@@ -4,6 +4,7 @@ using Servicio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -70,7 +71,9 @@ namespace WebApplication1.Registarse
                         usuarioBE = usuarioBLL.VerificarUsuarioSinPassword(correoElectronico.Text);
                         if ((int)empresas.FirstOrDefault(item => item.Nombre == ddlEmpresa.SelectedItem.Text)?.IdEmpresa == 1)
                         {
-                            Response.Write("<script>alert('No se puede crear un usuario en esa Empresa'); </script>");
+                            Label1.Text = "No se puede crear un usuario en la Empresa TECHBOTICA";
+                            Label1.Visible = true;
+                            return;
                         }
                         if (string.IsNullOrEmpty(usuarioBE.Usuario))
                         {

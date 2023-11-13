@@ -60,7 +60,7 @@
     - Descripcion: Este es un curso de Matematica
     - Carreras disponibles: Carrera en Matematica
 
-4. Navegar a `Menu Tutores` > `Nuevo Dictado`.
+4. Navegar a `Tutores` > `Nuevo Dictado`.
 
 5. Buscar el curso creado, seleccionarlo y completar la primera pantalla con "Tipo de Dictado" > `Interactivo`. Luego, presionar `Siguiente`.
     - Curso seleccionado: Matematica -02
@@ -81,6 +81,8 @@
 
 8. Verificar el dictado creado en `Gestionar Dictado`.
 
+---
+
 ### Caso de uso 2: Anotarse a oferta academica
 
 **Pasos a seguir:**
@@ -98,9 +100,57 @@
 
 5. Revisar los datos y seleccionar `Inscribirse`
 
-6. Verificar la inscripcion en `Mis Inscripciones`.
+6. Verificar la inscripcion en `Mis Inscripciones` o en Ir a `Estudiantes` > `Gestionar Inscripciones`.
 
-### Soluciones Técnicas para Ejecutar en Laboratorio Universidad UAI
+---
+
+### Caso de uso 3: Agregar materiales
+
+**Pasos a seguir:**
+
+1. **Iniciar sesión:** 
+   - Usuario: `carlos.rodriguez@techbotica.ar`
+   - Contraseña: `Password1234!`
+   
+2. Ir a `Tutores` > `Mis Dictados`.
+
+3. Buscar el curso creado en el caso de uso 1 y seleccionar `Ingresar`
+    - Nombre: Matematica-02
+
+4. Seleccionar `Nuevo Material` 
+
+5. Buscar un archivo pdf, ponerle un nombre y seleccionar `Subir`
+    - Nombre: Material 1
+
+4. Seleccionar `Nueva Actividad` 
+
+6. Buscar un archivo pdf, ponerle un nombre y seleccionar `Subir`
+    - Nombre: Actividad 1
+
+---
+
+### Caso de uso 4: Entregar resolucion
+
+**Pasos a seguir:**
+
+1. **Iniciar sesión:** 
+   - Usuario: `maria.gonzalez@example.com`
+   - Contraseña: `Password1234!`
+   
+2. Ir a `Estudiantes` > `Mis Cursadas`.
+
+3. Buscar el dictado inscripto en el caso de uso 1 y seleccionar `Ingresar`
+    - Nombre: Matematica-02
+
+4. Seleccionar `Ver` en la Actividad 1 
+
+5. Seleccionar `Nueva Entrega`
+
+6. Buscar un archivo pdf y seleccionar `Subir`
+
+---
+
+## Soluciones Técnicas para Ejecutar en Laboratorio Universidad UAI
 
 - **Arreglar error de certificado:** 
   - Consulta [aquí](https://stackoverflow.com/questions/44066709/your-connection-is-not-private-neterr-cert-common-name-invalid).

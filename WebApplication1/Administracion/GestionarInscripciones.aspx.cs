@@ -39,7 +39,7 @@ namespace WebApplication1.Administracion
         {
             Button btn = (Button)sender;
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
-            int idInscripcion = Convert.ToInt32(UsersGrid.DataKeys[rowIndex].Value);
+            int idInscripcion = Convert.ToInt32(UserCoursesGrid.DataKeys[rowIndex].Value);
 
             InscripcionCurso_BE inscripcion = new Dictado_BLL().ListarInscripciones().SingleOrDefault(i => i.Id == idInscripcion);
             Dictado_BLL dictadoblll = new Dictado_BLL();
@@ -52,7 +52,7 @@ namespace WebApplication1.Administracion
         {
             Button btn = (Button)sender;
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
-            int idInscripcion = Convert.ToInt32(UsersGrid.DataKeys[rowIndex].Value);
+            int idInscripcion = Convert.ToInt32(UserCareersGrid.DataKeys[rowIndex].Value);
 
             InscripcionCarrera_BE inscripcion = new Carrera_BLL().ListarInscripciones().SingleOrDefault(i => i.Id == idInscripcion);
             Carrera_BLL carrerabll = new Carrera_BLL();

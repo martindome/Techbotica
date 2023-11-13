@@ -83,6 +83,7 @@
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/Cursos/BuscarCursos.aspx">Buscar cursos</a>
                         <a class="dropdown-item" href="/Carreras/BuscarCarreras.aspx">Buscar carreras</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Estudiantes/ConsultarTutores.aspx">Consultar Tutores</a>
                       </div>
                     </li>
@@ -92,7 +93,8 @@
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/Estudiantes/GestionarInscripciones.aspx">Gestionar Inscripciones</a>
-                          <a class="dropdown-item" href="/Estudiantes/MisCursadas/MisCursadas.aspx">Mis Cursadas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Estudiantes/MisCursadas/MisCursadas.aspx">Mis Cursadas</a>
                       </div>
                     </li>
 
@@ -114,7 +116,7 @@
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion</a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="/Administracion/GestionarUsuarios.aspx">Gestionar Usuarios </a>
-                          <a class="dropdown-item" href="/Administracion/GestionarPermisos.aspx">Gestionar Permisos </a>
+                        <a class="dropdown-item" href="/Administracion/GestionarPermisos.aspx">Gestionar Permisos </a>
                         <a class="dropdown-item" href="/Administracion/GestionarEmpresas.aspx">Gestionar Empresas</a>
                         <a class="dropdown-item" href="/Administracion/GestionarInscripciones.aspx">Gestionar Inscripciones</a>
                         <%--<a class="dropdown-item" href="/Administracion/GestionarHorarios.aspx">Gestionar Horarios</a>--%>
