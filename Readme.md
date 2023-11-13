@@ -42,6 +42,14 @@
 | laura.garcia@example.com      | Password1234! | Laura   | Garcia     |
 | david.alvarez@example.com     | Password1234! | David   | Alvarez    |
 
+### Empresas
+
+| Nombres             | Dominios    |
+|-------------------------------|---------------|
+| TECHBOTICA    | techbotica.ar / gmail.com |
+| Metalurgica Argentina SA      | example.com / alumnos.uai.edu.ar |
+| Aceros Buenos Aires SRL     | - |
+| Universidad Abierta Interamericana       | alumnos.uai.edu.ar / gmail.com |
 
 ## Casos de uso
 
