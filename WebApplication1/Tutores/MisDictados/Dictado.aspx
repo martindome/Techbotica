@@ -6,10 +6,7 @@
         <!-- Agregar div con Label para el enlace del curso -->
         <div class="row">
             <div class="col-md-12">
-                <asp:Label ID="courseLinkLabel" runat="server">
-                    Aula: 
-                    <a href='https://meet.google.com/' runat="server" id="courseLink">Enlace a videollamada</a>
-                </asp:Label>
+                <asp:Button ID="irAlCurso" CssClass="btn btn-info" Text="Ir a la Videollamada" runat="server" OnClick="irAlCurso_Click"/>
             </div>
         </div>
 

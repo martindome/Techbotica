@@ -35,8 +35,6 @@ namespace WebApplication1.Tutores.MisDictados
                     Dictado_BLL dictadobll = new Dictado_BLL();
                     Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
                     ViewState["dictado"] = dictado;
-                    string linkText = "Enlace a videollamada";
-                    courseLinkLabel.Text = "Aula: <a href='" + dictado.Enlace + "' target='_blank'>" + linkText + "</a>";
                     CargarMateriales();
                     CargarActividades();
                 }
@@ -146,6 +144,15 @@ namespace WebApplication1.Tutores.MisDictados
         protected void btnNewActivity_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Tutores/MisDictados/Actividad/NuevaActividad.aspx");
+        }
+
+        protected void irAlCurso_Click(object sender, EventArgs e)
+        {
+            int idCurso = int.Parse(Session["id_dictado_ver"].ToString());
+            //obtener dictado
+            Dictado_BLL dictadobll = new Dictado_BLL();
+            Dictado_BE dictado = dictadobll.ListarDictados().FirstOrDefault(item => item.Id == idCurso);
+            Response.Redirect(dictado.Enlace);
         }
     }
 }

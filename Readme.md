@@ -1,5 +1,48 @@
 # Software de Inscripción a Cursos de TECHBOTICA
 
+## Informacion de usuarios
+
+### Web Masters
+
+| Nombre de Usuario               | Contraseña    | Nombre  | Apellido  |
+|---------------------------------|---------------|---------|-----------|
+| web.master@techbotica.ar        | Password1234! | Web     | Master    |
+
+### Administradores
+
+| Nombre de Usuario               | Contraseña    | Nombre  | Apellido  |
+|---------------------------------|---------------|---------|-----------|
+| marlon.ruiz@techbotica.ar       | Password1234! | Marlon  | Ruiz      |
+
+### Tutores
+
+| Nombre de Usuario               | Contraseña    | Nombre  | Apellido  |
+|---------------------------------|---------------|---------|-----------|
+| carlos.rodriguez@techbotica.ar  | Password1234! | Carlos  | Rodriguez |
+| laura.martinez@techbotica.ar    | Password1234! | Laura   | Martinez  |
+| jorge.hernandez@techbotica.ar   | Password1234! | Jorge   | Hernandez |
+| ana.gomez@techbotica.ar         | Password1234! | Ana     | Gomez     |
+| daniel.lopez@techbotica.ar      | Password1234! | Daniel  | Lopez     |
+| carmen.sanchez@techbotica.ar    | Password1234! | Carmen  | Sanchez   |
+
+
+### Estudiantes
+
+| Nombre de Usuario             | Contraseña    | Nombre  | Apellido   |
+|-------------------------------|---------------|---------|------------|
+| maria.gonzalez@example.com    | Password1234! | Maria   | Gonzalez   |
+| ana.martinez@example.com      | Password1234! | Ana     | Martinez   |
+| luis.gonzalez@example.com     | Password1234! | Luis    | Gonzalez   |
+| sofia.lopez@example.com       | Password1234! | Sofia   | Lopez      |
+| carlos.diaz@example.com       | Password1234! | Carlos  | Diaz       |
+| maria.fernandez@example.com   | Password1234! | Maria   | Fernandez  |
+| juan.perez@example.com        | Password1234! | Juan    | Perez      |
+| carmen.jimenez@example.com    | Password1234! | Carmen  | Jimenez    |
+| jose.ruiz@example.com         | Password1234! | Jose    | Ruiz       |
+| laura.garcia@example.com      | Password1234! | Laura   | Garcia     |
+| david.alvarez@example.com     | Password1234! | David   | Alvarez    |
+
+
 ## Casos de uso
 
 ### Caso de uso 1: Creación de oferta académica
@@ -7,23 +50,55 @@
 **Pasos a seguir:**
 
 1. **Iniciar sesión:** 
-   - Usuario: `web.master@techbotica.ar`
+   - Usuario: `carlos.rodriguez@techbotica.ar`
    - Contraseña: `Password1234!`
    
 2. Ir a `Menu Tutores` > `Nuevo Curso`.
 
-3. Seleccionar `nuevo curso` y crearlo.
+3. Llenar los datos y seleccionar `Crear Curso`
+    - Nombre: Matematica-02
+    - Descripcion: Este es un curso de Matematica
+    - Carreras disponibles: Carrera en Matematica
 
 4. Navegar a `Menu Tutores` > `Nuevo Dictado`.
 
 5. Buscar el curso creado, seleccionarlo y completar la primera pantalla con "Tipo de Dictado" > `Interactivo`. Luego, presionar `Siguiente`.
+    - Curso seleccionado: Matematica -02
+    - Enlace: https://google.meet.com
+    - Cupo: 1
+    - Tipo de dictado: Intaractivo
+    - Fecha de Inicio: 4/12/2023
+    - Fecha de Fin: 25/12/2023
 
-6. **Asignar horarios a la cursada:** 
-   - Nota: El único tutor disponible "Carlos" está en dictados interactivos los días Lunes de 8 a 10 y los Martes de 10 a 12 desde el 2023-09-05 hasta 2023-12-12. Luego, presionar `Siguiente`.
+6. **Asignar horarios a la cursada:**. Luego, presionar `Siguiente`.
+   - Nota: El único tutor disponible "Carlos" está en dictados interactivos los días Lunes de 8 a 10 y los Martes de 10 a 12 desde el 2023-09-05 hasta 2023-12-12.
+   - Dia Martes
+   - Hora de Inicio: 19:00
+   - Hora de Fin: 22:00
 
 7. Agregar un `Tutor` teniendo en cuenta los horarios y, luego, seleccionar `Completar`.
+    - Tutor: Carlos Rodriguez
 
 8. Verificar el dictado creado en `Gestionar Dictado`.
+
+### Caso de uso 2: Anotarse a oferta academica
+
+**Pasos a seguir:**
+
+1. **Iniciar sesión:** 
+   - Usuario: `maria.gonzalez@example.com`
+   - Contraseña: `Password1234!`
+   
+2. Ir a `Buscar...` > `Buscar Cursos`.
+
+3. Seleccionar el curso a anotarse y selecionar `Ver Dictados`
+    - Nombre: Matematica-02
+
+4. Buscar dictado creado y seleccionar `Inscribir` 
+
+5. Revisar los datos y seleccionar `Inscribirse`
+
+6. Verificar la inscripcion en `Mis Inscripciones`.
 
 ### Soluciones Técnicas para Ejecutar en Laboratorio Universidad UAI
 

@@ -25,7 +25,7 @@ namespace Servicio
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("techboticalearning@gmail.com", "fkbhnuklnlsggkeq");
+                smtp.Credentials = new NetworkCredential("techboticalearning@gmail.com", "todi zmxd wuib ffug");
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
 

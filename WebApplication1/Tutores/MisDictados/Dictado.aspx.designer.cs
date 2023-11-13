@@ -15,22 +15,13 @@ namespace WebApplication1.Tutores.MisDictados
     {
 
         /// <summary>
-        /// Control courseLinkLabel.
+        /// Control irAlCurso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label courseLinkLabel;
-
-        /// <summary>
-        /// Control courseLink.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor courseLink;
+        protected global::System.Web.UI.WebControls.Button irAlCurso;
 
         /// <summary>
         /// Control materialsGrid.

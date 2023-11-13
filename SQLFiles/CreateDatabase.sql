@@ -1606,13 +1606,18 @@ INSERT [dbo].[Familia] ([id], [familia]) VALUES (4, N'Administrador')
 GO
 INSERT INTO [dbo].[Empresa] (id, [nombre], [descripcion], [email], [telefono], [borrado]) VALUES  
 (1, 'TECHBOTICA', 'Empresa TECHBOTICA', 'contacto@techbotica.com', '555-1234', 'No'),
-(2, 'Metalurgica de peuba', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No')
+(2, 'Metalurgica Argentina SA', 'Esta es una empresa de ejemplo 1', 'contacto@example.com', '555-1234', 'No'),
+(3, 'Aceros Buenos Aires SRL', 'Esta es una empresa de ejemplo 2', 'contacto@example2.com', '555-1234', 'No'),
+(4, 'Universidad Abierta Interamericana', 'Universidad', 'contacto@uai.edu.ar', '555-1234', 'No')
 GO
+
+-- Insertando administradores
 INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
-(1,'web.master@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Web', 'Master', '555-1234', 'web.master@techbotica.ar', 0, 'No', 1),
-(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 2),
-(3,'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'martindome96@gmail.com', 0, 'No', 1);
+(1,'web.master@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Web', 'Master', '555-1234', 'web.master@techbotica.ar', 0, 'No', 1)
 GO
+
+INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
+
 --Administracion
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (1, N'MenuAdministracion')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (5, N'/Administracion/GestionarEmpresas')
@@ -1632,10 +1637,6 @@ INSERT [dbo].[Patente] ([id], [detalle]) VALUES (4, N'MenuBusqueda')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (13, N'/Estudiante/Inscripciones')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (14, N'/Estudiante/Consultas')
 INSERT [dbo].[Patente] ([id], [detalle]) VALUES (15, N'/Estudiante/Dictados')
-GO
-INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (1, 1, 1)
-INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
-INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (3, 3, 3)
 GO
 --permisos web master
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (1, 1, 1)
@@ -1674,11 +1675,14 @@ INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (31, 4,
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (32, 4, 8)
 INSERT [dbo].[Familia_Patente] ([id], [id_familia], [id_patente]) VALUES (33, 4, 16)
 GO
+
 INSERT INTO  [dbo].[Dominio] (id, sufijo, id_empresa, borrado) VALUES 
 (1, 'techbotica.ar', 1, 'No'),
 (2, 'gmail.com', 1, 'No'),
 (3, 'example.com', 2, 'No'),
-(4, 'alumnos.uai.edu.ar', 2, 'No')
+(4, 'alumnos.uai.edu.ar', 2, 'No'),
+(5, 'alumnos.uai.edu.ar', 4, 'No'),
+(6, 'gmail.com', 4, 'No')
 INSERT into Especialidad (id, nombre, descripcion) VALUES
 (1, 'Robotica', 'Especialista en Robotica'),
 (2, 'Matematica', 'Especialista en Matematica')
@@ -1691,35 +1695,27 @@ INSERT into Curso (id, nombre, descripcion, id_especialidad) VALUES
 INSERT into Curso_Carrera (id, id_carrera, id_curso) VALUES
 (1, 1, 1),
 (2, 2, 2)
-
 INSERT INTO [dbo].[Tipo_Dictado] (id, tipo_dictado)
 VALUES (1, 'Autodirigido'),
        (2, 'Interactivo');
 
-INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
-VALUES (1, '2023-09-05', '2023-09-10', 'http://enlace1.com', 1, 1, 20), --formato de la fecha aca es anio-mes-dia
-       (2, '2023-09-05', '2023-09-10', 'http://enlace2.com', 1, 2, 12);
-
-INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
-VALUES (1, 'Lunes', '08:00:00', '10:00:00',2),
-       (2, 'Martes', '10:00:00', '12:00:00',2); --debe tener al menos un horario cada dictado interactivo
-
-INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
-VALUES (1,1,3),
-       (2,2,3); --debe tener al menos un horario cada dictado interactivo
 
 -- INSERT INTO [dbo].[Horario_Dictado] (id, id_horario, id_dictado)
 -- VALUES (1, 1, 1),
 --        (2, 2, 2);
-
+GO
 
 -- Insertando tutores
-INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
-(4,'tutor1@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor1', 'Apellido', '555-0001', 'tutor1@techbotica.ar', 0, 'No', 1),
-(5,'tutor2@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor2', 'Apellido', '555-0002', 'tutor2@techbotica.ar', 0, 'No', 1),
-(6,'tutor3@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor3', 'Apellido', '555-0003', 'tutor3@techbotica.ar', 0, 'No', 1),
-(7,'tutor4@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor4', 'Apellido', '555-0004', 'tutor4@techbotica.ar', 0, 'No', 1),
-(8,'tutor5@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Tutor5', 'Apellido', '555-0005', 'tutor5@techbotica.ar', 0, 'No', 1);
+INSERT INTO [dbo].[Usuario] 
+    (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) 
+VALUES 
+    (3, 'carlos.rodriguez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Rodriguez', '555-9101', 'carlos.rodriguez@techbotica.ar', 0, 'No', 1),
+    (4, 'laura.martinez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Laura', 'Martinez', '555-0001', 'laura.martinez@techbotica.ar', 0, 'No', 1),
+    (5, 'jorge.hernandez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Jorge', 'Hernandez', '555-0002', 'jorge.hernandez@techbotica.ar', 0, 'No', 1),
+    (6, 'ana.gomez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Ana', 'Gomez', '555-0003', 'ana.gomez@techbotica.ar', 0, 'No', 1),
+    (7, 'daniel.lopez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Daniel', 'Lopez', '555-0004', 'daniel.lopez@techbotica.ar', 0, 'No', 1),
+    (8, 'carmen.sanchez@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carmen', 'Sanchez', '555-0005', 'carmen.sanchez@techbotica.ar', 0, 'No', 1);
+
 
 -- Asignando la familia de tutores a los usuarios nuevos
 INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES 
@@ -1728,19 +1724,24 @@ INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES
 (6, 3, 6),
 (7, 3, 7),
 (8, 3, 8);
+INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (3, 3, 3)
 
 -- Insertando estudiantes
-INSERT INTO [dbo].[Usuario] (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) VALUES 
-(9, 'estudiante1@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante1', 'Apellido', '555-1001', 'estudiante1@example.com', 0, 'No', 2),
-(10, 'estudiante2@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante2', 'Apellido', '555-1002', 'estudiante2@example.com', 0, 'No', 2),
-(11, 'estudiante3@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante3', 'Apellido', '555-1003', 'estudiante3@example.com', 0, 'No', 2),
-(12, 'estudiante4@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante4', 'Apellido', '555-1004', 'estudiante4@example.com', 0, 'No', 2),
-(13, 'estudiante5@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante5', 'Apellido', '555-1005', 'estudiante5@example.com', 0, 'No', 2),
-(14, 'estudiante6@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante6', 'Apellido', '555-1006', 'estudiante6@example.com', 0, 'No', 2),
-(15, 'estudiante7@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante7', 'Apellido', '555-1007', 'estudiante7@example.com', 0, 'No', 2),
-(16, 'estudiante8@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante8', 'Apellido', '555-1008', 'estudiante8@example.com', 0, 'No', 2),
-(17, 'estudiante9@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante9', 'Apellido', '555-1009', 'estudiante9@example.com', 0, 'No', 2),
-(18, 'estudiante10@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Estudiante10', 'Apellido', '555-1010', 'estudiante10@example.com', 0, 'No', 2);
+INSERT INTO [dbo].[Usuario] 
+    (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) 
+VALUES 
+(2,'maria.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Gonzalez', '555-5678', 'maria.gonzalez@example.com', 0, 'No', 2),
+    (9, 'ana.martinez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Ana', 'Martinez', '555-1001', 'ana.martinez@example.com', 0, 'No', 2),
+    (10, 'luis.gonzalez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Luis', 'Gonzalez', '555-1002', 'luis.gonzalez@example.com', 0, 'No', 2),
+    (11, 'sofia.lopez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Sofia', 'Lopez', '555-1003', 'sofia.lopez@example.com', 0, 'No', 2),
+    (12, 'carlos.diaz@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carlos', 'Diaz', '555-1004', 'carlos.diaz@example.com', 0, 'No', 2),
+    (13, 'maria.fernandez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Maria', 'Fernandez', '555-1005', 'maria.fernandez@example.com', 0, 'No', 2),
+    (14, 'juan.perez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Juan', 'Perez', '555-1006', 'juan.perez@example.com', 0, 'No', 2),
+    (15, 'carmen.jimenez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Carmen', 'Jimenez', '555-1007', 'carmen.jimenez@example.com', 0, 'No', 2),
+    (16, 'jose.ruiz@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Jose', 'Ruiz', '555-1008', 'jose.ruiz@example.com', 0, 'No', 2),
+    (17, 'laura.garcia@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Laura', 'Garcia', '555-1009', 'laura.garcia@example.com', 0, 'No', 2),
+    (18, 'david.alvarez@example.com', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'David', 'Alvarez', '555-1010', 'david.alvarez@example.com', 0, 'No', 2);
+GO
 
 -- Asignando la familia de estudiantes a los usuarios nuevos
 INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES 
@@ -1754,7 +1755,28 @@ INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES
 (16, 2, 16),
 (17, 2, 17),
 (18, 2, 18);
+INSERT [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES (2, 2, 2)
 
+-- Administradores
+INSERT INTO [dbo].[Usuario] 
+    (id, [usuario], [contraseña], [nombre], [apellido], [telefono], [email], [bloqueado], [borrado], [id_empresa]) 
+VALUES 
+	(19,'marlon.ruiz@techbotica.ar', '13004D8331D779808A2336D46B3553D1594229E2BB696A8E9E14554D82A648DA', 'Marlon', 'Luis', '555-5678', 'marlon.ruiz@techbotica.ar', 0, 'No', 2)
+
+INSERT INTO [dbo].[Familia_Usuario] ([id], [id_familia], [id_usuario]) VALUES 
+(19, 4, 19)
+
+INSERT INTO [dbo].[Dictado] (id, fecha_inicio, fecha_fin, enlace, id_curso, id_tipo_dictado, cupo)
+VALUES (1, '2023-09-05', '2023-09-10', 'http://enlace1.com', 1, 1, 20), --formato de la fecha aca es anio-mes-dia
+       (2, '2023-09-05', '2023-09-10', 'http://enlace2.com', 1, 2, 12);
+
+INSERT INTO [dbo].[Horario] (id, dia, hora_inicio, hora_fin, id_dictado)
+VALUES (1, 'Lunes', '08:00:00', '10:00:00',2),
+       (2, 'Martes', '10:00:00', '12:00:00',2); --debe tener al menos un horario cada dictado interactivo
+
+INSERT INTO [dbo].[Usuario_Dictado] (id, id_dictado, id_usuario)
+VALUES (1,1,3),
+       (2,2,3); --debe tener al menos un horario cada dictado interactivo
 
 -- Creación de Dictados de Octubre 2023 a Enero 2024
 -- Asumiendo que los cursos y los tipos de dictado ya están definidos como en tus ejemplos.
@@ -1907,5 +1929,3 @@ VALUES
 INSERT INTO Inscripcion_Curso(id, id_curso, id_dictado, id_estudiante, fecha)
 VALUES
 (1,1,2,1, '2023-09-05');
-
-

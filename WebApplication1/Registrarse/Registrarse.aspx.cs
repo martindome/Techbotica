@@ -68,6 +68,10 @@ namespace WebApplication1.Registarse
                     {
                         List<Empresa_BE> empresas = empresaBLL.ListarEmpresas();
                         usuarioBE = usuarioBLL.VerificarUsuarioSinPassword(correoElectronico.Text);
+                        if ((int)empresas.FirstOrDefault(item => item.Nombre == ddlEmpresa.SelectedItem.Text)?.IdEmpresa == 1)
+                        {
+                            Response.Write("<script>alert('No se puede crear un usuario en esa Empresa'); </script>");
+                        }
                         if (string.IsNullOrEmpty(usuarioBE.Usuario))
                         {
                             
