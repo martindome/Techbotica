@@ -24,14 +24,31 @@ namespace WebApplication1.Administracion
 
         protected void SearchUserButton_Click(object sender, EventArgs e)
         {
+            ////filter and fill user grid
+            //Usuario_BLL usuariobll = new Usuario_BLL();
+            //List<Usuario_BE> usuarios = usuariobll.ListarUsuarios();
+            ////filter users by name (name and surname together) and email textboxes
+            //usuarios = usuarios.Where(u => u.Nombre.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Apellido.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Email.ToLower().Contains(SearchUserByEmailTextBox.Text.ToLower())).ToList();
+            //UsersGrid.DataSource = usuarios;
+            //UsersGrid.DataBind();
+            //TextBoxUsuarioSeleccioado.Text = "";
+
             //filter and fill user grid
             Usuario_BLL usuariobll = new Usuario_BLL();
             List<Usuario_BE> usuarios = usuariobll.ListarUsuarios();
             //filter users by name (name and surname together) and email textboxes
-            usuarios = usuarios.Where(u => u.Nombre.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Apellido.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Email.ToLower().Contains(SearchUserByEmailTextBox.Text.ToLower())).ToList();
+            if (SearchUserByNameTextBox.Text.Length != 0)
+            {
+                usuarios = usuarios.Where(u => (u.Nombre.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) || SearchUserByNameTextBox.Text.ToLower().Contains(u.Nombre.ToLower())) || (u.Apellido.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) || SearchUserByNameTextBox.Text.ToLower().Contains(u.Apellido.ToLower()))).ToList();
+            }
+
+            if (SearchUserByEmailTextBox.Text.Length != 0)
+            {
+                usuarios = usuarios.Where(u => u.Email.ToLower().Contains(SearchUserByEmailTextBox.Text.ToLower()) || SearchUserByEmailTextBox.Text.ToLower().Contains(u.Email.ToLower())).ToList();
+            }
+            //usuarios = usuarios.Where(u => u.Nombre.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Apellido.ToLower().Contains(SearchUserByNameTextBox.Text.ToLower()) && u.Email.ToLower().Contains(SearchUserByEmailTextBox.Text.ToLower())).ToList();
             UsersGrid.DataSource = usuarios;
             UsersGrid.DataBind();
-            TextBoxUsuarioSeleccioado.Text = "";
 
         }
 
