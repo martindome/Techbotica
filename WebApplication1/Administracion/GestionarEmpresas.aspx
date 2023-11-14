@@ -22,7 +22,7 @@
 
                 <asp:TemplateField>
                     <ItemTemplate>
-                       <asp:Button runat="server" id="botoneliminar" ButtonType="Button" CommandName="Delete" Text="Eliminar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' ControlStyle-CssClass="btn btn-danger" OnClick="botoneliminar_Click"/>
+                       <asp:Button runat="server" id="botoneliminar" ButtonType="Button" Text="Eliminar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' ControlStyle-CssClass="btn btn-danger" OnClick="botoneliminar_Click"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

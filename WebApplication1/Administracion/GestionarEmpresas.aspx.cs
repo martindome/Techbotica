@@ -99,13 +99,17 @@ namespace WebApplication1.Administracion
                 {
                     Response.Write("<script>alert('La empresa tiene usuarios');</script>");
                 }
-                Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
+                else
+                {
+                    Empresa_BE empresabe = (Empresa_BE)mapper.ListarEmpresas().FirstOrDefault(item => item.IdEmpresa == int.Parse(idEmpresa.ToString()));
 
                 mapper.EliminarEmpresa(empresabe);
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Empresa eliminada con exito')", true);
 
                 actualizar_grid();
+                }
+                
             }
 
             
