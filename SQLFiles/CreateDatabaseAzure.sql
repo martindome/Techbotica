@@ -253,11 +253,9 @@ CREATE TABLE [dbo].[Inscripcion_Curso](
 	[id] [int] PRIMARY KEY,
 	[fecha] datetime NULL,
 	[id_estudiante] int NULL,
-	[id_curso] int NULL,
 	[id_dictado] int NULL,
-	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE NO ACTION,
+	FOREIGN KEY (id_dictado) REFERENCES Dictado(id) ON DELETE CASCADE,
 	FOREIGN KEY (id_estudiante) REFERENCES Usuario(id) ON DELETE CASCADE,
-	FOREIGN KEY (id_curso) REFERENCES Curso(id) ON DELETE CASCADE
 ) ON [PRIMARY]
 GO
 
@@ -1145,8 +1143,10 @@ GO
 Create procedure [dbo].[listar_inscripciones_curso]
 as 
 begin
-select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, d.id_curso
 from Inscripcion_Curso a
+inner join Dictado d
+on d.id = a.id_dictado
 end
 GO
 
@@ -1160,8 +1160,10 @@ Create procedure [dbo].[listar_inscripciones_curso_estudiante]
 @id_usuario int
 as 
 begin
-select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, d.id_curso
 from Inscripcion_Curso a
+inner join Dictado d
+on d.id = a.id_dictado
 where id_estudiante = @id_usuario
 end
 GO
@@ -1175,8 +1177,10 @@ Create procedure [dbo].[listar_inscripciones_curso_dictado]
 @id_dictado int
 as 
 begin
-select a.id, a.fecha, a.id_estudiante, a.id_dictado, a.id_curso
+select a.id, a.fecha, a.id_estudiante, a.id_dictado, d.id_curso
 from Inscripcion_Curso a
+inner join Dictado d
+on d.id = a.id_dictado
 where id_dictado = @id_dictado
 end
 GO
@@ -1197,13 +1201,15 @@ BEGIN
     SET @id = ISNULL((SELECT MAX(id) FROM Inscripcion_Curso),0 ) +1
     
     -- Insertando la fecha actual en la columna 'fecha'
-    INSERT INTO Inscripcion_Curso (id, fecha, id_dictado, id_estudiante, id_curso)
-    VALUES (@id, GETDATE(), @id_dictado, @id_usuario, @id_curso);
+    INSERT INTO Inscripcion_Curso (id, fecha, id_dictado, id_estudiante)
+    VALUES (@id, GETDATE(), @id_dictado, @id_usuario);
     
     
 END
-SELECT a.id, a.id_estudiante, a.id_dictado, a.fecha , a.id_curso
+SELECT a.id, a.id_estudiante, a.id_dictado, a.fecha , d.id_curso
     FROM Inscripcion_Curso a
+    inner join Dictado d
+    on d.id = a.id_dictado
 GO
 
 /****** Object:  StoredProcedure [dbo].[eliminar_inscripcion]    Script Date: 5/7/2022 03:16:57 ******/
@@ -1866,6 +1872,6 @@ VALUES
 (17, 17, 4),
 (18, 18, 4);
 
-INSERT INTO Inscripcion_Curso(id, id_curso, id_dictado, id_estudiante, fecha)
+INSERT INTO Inscripcion_Curso(id, id_dictado, id_estudiante, fecha)
 VALUES
-(1,1,2,1, '2023-09-05');
+(1,2,1, '2023-09-05');

@@ -22,7 +22,7 @@
                         <div class="col">
                             <asp:TextBox runat="server" ID="comentario" CssClass="form-control w-100" Rows="10" style="height:150px;" TextMode="MultiLine"> </asp:TextBox>
                             <asp:Button ID="ButtonComment" CssClass="btn btn-primary" Text="Comentar" runat="server" OnClick="ButtonComment_Click" />
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" Display="None" runat="server" ControlToValidate="comentario" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^[a-zA-Z0-9 ]{1,50}$"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidatorNombre" Display="None" runat="server" ControlToValidate="comentario" CssClass="text-danger" ErrorMessage="Debe ingresar un nombre valido" ValidationExpression="^.{0,500}$"></asp:RegularExpressionValidator>
                             <asp:ValidationSummary ID="valSummary" runat="server" DisplayMode="BulletList" cssclass="text-bg-danger" HeaderText="Errores:"/>
                         </div>
                     </div>
