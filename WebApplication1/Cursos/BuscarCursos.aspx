@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Busqueda Cursos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BuscarCursos.aspx.cs" Inherits="WebApplication1.BuscarCursos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
-        <h2 class="mt-4">Gestión de Cursos</h2>
+        <h2 class="mt-4">Buscar Cursos</h2>
 
         <div class="row">
             <div class="col-md-8">
